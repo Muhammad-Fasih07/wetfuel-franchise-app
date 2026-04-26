@@ -13,57 +13,68 @@ interface PageHeaderProps {
 export function PageHeader({ title, subtitle, action, eyebrow }: PageHeaderProps) {
   return (
     <div
+      className="animate-slide-up"
       style={{
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-between",
-        gap: "16px",
+        gap: "20px",
         flexWrap: "wrap",
         position: "relative",
-        paddingLeft: "16px",
+        paddingLeft: "20px",
       }}
     >
       <span
         aria-hidden
+        className="animate-glow"
         style={{
           position: "absolute",
           left: 0,
-          top: "4px",
-          width: "4px",
-          height: "44px",
-          borderRadius: "3px",
+          top: "6px",
+          width: "5px",
+          height: "48px",
+          borderRadius: "4px",
           background:
             "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-          boxShadow: "0 0 14px rgba(206,28,26,0.45)",
+          boxShadow: "0 0 16px rgba(206,28,26,0.5), 0 0 8px rgba(206,28,26,0.3)",
         }}
       />
 
       <div style={{ minWidth: 0 }}>
         {eyebrow && (
           <p
+            className="animate-fade-in"
             style={{
               fontSize: "10px",
               fontWeight: 700,
               color: "#ce1c1a",
               textTransform: "uppercase",
-              letterSpacing: "1.4px",
-              margin: "0 0 6px 0",
+              letterSpacing: "1.6px",
+              margin: "0 0 8px 0",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
             }}
           >
+            <span
+              style={{
+                width: "4px",
+                height: "4px",
+                borderRadius: "50%",
+                background: "#ce1c1a",
+                boxShadow: "0 0 6px rgba(206,28,26,0.6)",
+              }}
+            />
             {eyebrow}
           </p>
         )}
         <h1
+          className="text-gradient-primary"
           style={{
-            fontSize: "24px",
+            fontSize: "28px",
             fontWeight: 700,
             margin: 0,
-            letterSpacing: "-0.4px",
-            background:
-              "linear-gradient(135deg, #2b2b2b 0%, #2b2b2b 60%, #5a5a5a 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
+            letterSpacing: "-0.6px",
             lineHeight: 1.15,
           }}
         >
@@ -71,11 +82,14 @@ export function PageHeader({ title, subtitle, action, eyebrow }: PageHeaderProps
         </h1>
         {subtitle && (
           <p
+            className="animate-fade-in"
             style={{
               fontSize: "14px",
               color: "#887b6a",
-              margin: "4px 0 0 0",
-              lineHeight: 1.5,
+              margin: "6px 0 0 0",
+              lineHeight: 1.6,
+              fontWeight: 400,
+              animationDelay: "0.1s",
             }}
           >
             {subtitle}
@@ -83,7 +97,11 @@ export function PageHeader({ title, subtitle, action, eyebrow }: PageHeaderProps
         )}
       </div>
 
-      {action && <div style={{ flexShrink: 0 }}>{action}</div>}
+      {action && (
+        <div className="animate-fade-in" style={{ flexShrink: 0, animationDelay: "0.2s" }}>
+          {action}
+        </div>
+      )}
     </div>
   );
 }

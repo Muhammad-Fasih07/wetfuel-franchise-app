@@ -1,3 +1,5 @@
+"use client";
+
 export type StatusChipKind =
   | "active"
   | "frozen"
@@ -64,28 +66,39 @@ export function StatusChip({ status, label }: StatusChipProps) {
       style={{
         display: "inline-flex",
         alignItems: "center",
-        gap: "6px",
+        gap: "7px",
         background: bg,
         color: color,
         fontSize: "11px",
         fontWeight: 600,
-        padding: "3px 10px 3px 8px",
-        borderRadius: "20px",
+        padding: "4px 12px 4px 10px",
+        borderRadius: "24px",
         whiteSpace: "nowrap",
-        border: `1px solid ${border}`,
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.5)",
-        letterSpacing: "0.2px",
+        border: `1.5px solid ${border}`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px ${border}30`,
+        letterSpacing: "0.3px",
+        transition: "all 200ms ease",
+        cursor: "default",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "scale(1.05)";
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.7), 0 4px 10px ${border}40`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px ${border}30`;
       }}
     >
       <span
         aria-hidden
         style={{
-          width: "6px",
-          height: "6px",
+          width: "7px",
+          height: "7px",
           borderRadius: "50%",
           background: dot,
-          boxShadow: `0 0 0 2px ${dot}22`,
+          boxShadow: `0 0 0 2px ${dot}25, 0 0 6px ${dot}40`,
           flexShrink: 0,
+          animation: status === "active" || status === "completed" ? "pulse 2s ease-in-out infinite" : "none",
         }}
       />
       {label ?? defaultLabel}

@@ -1,15 +1,14 @@
-import Link from "next/link";
+"use client";
+
 import { Grid, LinearProgress } from "@mui/material";
 import {
-  AddBusiness as AddBusinessIcon,
-  Assessment as AssessmentIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
+  EmojiEvents as TrophyIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
-  Notifications as NotificationsIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
-  QrCode as QrCodeIcon,
   Refresh as RefreshIcon,
   Store as StoreIcon,
+  TrendingUp as TrendingUpIcon,
 } from "@mui/icons-material";
 
 import { Button } from "@/components/ui/Button";
@@ -57,55 +56,32 @@ const TOP_FRANCHISEES: Array<{
   { rank: 5, name: "WestEnd Fuel", volume: "2,600 gal", percent: 32 },
 ];
 
-const QUICK_ACTIONS = [
-  {
-    icon: <AddBusinessIcon sx={{ fontSize: 20 }} />,
-    label: "Add Franchisee",
-    sub: "Register new partner",
-    href: "/franchisees/new",
-  },
-  {
-    icon: <AssessmentIcon sx={{ fontSize: 20 }} />,
-    label: "View Reports",
-    sub: "Network reporting",
-    href: "/reporting",
-  },
-  {
-    icon: <QrCodeIcon sx={{ fontSize: 20 }} />,
-    label: "Generate QR",
-    sub: "Bulk QR codes",
-    href: "/qr-codes",
-  },
-  {
-    icon: <NotificationsIcon sx={{ fontSize: 20 }} />,
-    label: "Notifications",
-    sub: "2 unread alerts",
-    href: "/notifications",
-  },
-];
 
 const CARD_BASE: React.CSSProperties = {
-  background: "#ffffff",
-  border: "1px solid #e5e5e5",
-  borderRadius: "12px",
-  padding: "24px",
-  boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+  background: "linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #fafafa 100%)",
+  border: "1.5px solid #ececec",
+  borderRadius: "14px",
+  padding: "26px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)",
+  transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
 };
 
 const CARD_TITLE: React.CSSProperties = {
-  fontSize: "16px",
+  fontSize: "17px",
   fontWeight: 600,
   color: "#2b2b2b",
   margin: 0,
+  letterSpacing: "-0.2px",
 };
 
 export default function DashboardOverviewPage() {
   return (
     <div
+      className="animate-fade-in"
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "24px",
+        gap: "28px",
       }}
     >
       <PageHeader
@@ -275,153 +251,265 @@ export default function DashboardOverviewPage() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={6}>
-          <section style={CARD_BASE}>
-            <h2 style={{ ...CARD_TITLE, marginBottom: "20px" }}>
-              Top Franchisees by Fuel Volume
-            </h2>
+        <Grid item xs={12}>
+          <section
+            style={{
+              ...CARD_BASE,
+              position: "relative",
+              overflow: "visible",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 16px rgba(0,0,0,0.06), 0 12px 32px -16px rgba(206,28,26,0.25), inset 0 1px 0 rgba(255,255,255,0.9)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
+            }}
+          >
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                top: "-20px",
+                right: "-20px",
+                width: "140px",
+                height: "140px",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, rgba(206,28,26,0.08) 0%, transparent 70%)",
+                pointerEvents: "none",
+              }}
+            />
 
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {TOP_FRANCHISEES.map((row) => (
-                <li
-                  key={row.rank}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "24px",
+                flexWrap: "wrap",
+                gap: "12px",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <span
                   style={{
-                    display: "flex",
+                    width: "42px",
+                    height: "42px",
+                    borderRadius: "12px",
+                    background:
+                      "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
+                    color: "#ce1c1a",
+                    display: "inline-flex",
                     alignItems: "center",
-                    gap: "12px",
-                    padding: "8px 0",
+                    justifyContent: "center",
+                    boxShadow:
+                      "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
                   }}
                 >
-                  <span
+                  <TrophyIcon sx={{ fontSize: 24 }} />
+                </span>
+                <div>
+                  <h2 style={{ ...CARD_TITLE, marginBottom: "4px" }}>
+                    Top Franchisees by Fuel Volume
+                  </h2>
+                  <p
                     style={{
-                      width: "24px",
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      color: row.rank === 1 ? "#ce1c1a" : "#887b6a",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {row.rank}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 500,
-                      color: "#2b2b2b",
-                      flex: 1,
-                      minWidth: 0,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {row.name}
-                  </span>
-                  <div style={{ flex: 1.5 }}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={row.percent}
-                      sx={{
-                        height: 6,
-                        borderRadius: 4,
-                        backgroundColor: "#f5f5f5",
-                        "& .MuiLinearProgress-bar": {
-                          background:
-                            "linear-gradient(90deg, #f0797a 0%, #ce1c1a 60%, #8b1816 100%)",
-                          borderRadius: 4,
-                        },
-                      }}
-                    />
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "13px",
+                      fontSize: "12px",
                       color: "#887b6a",
-                      minWidth: "80px",
-                      textAlign: "right",
-                      flexShrink: 0,
+                      margin: 0,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
                     }}
                   >
-                    {row.volume}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </Grid>
+                    <TrendingUpIcon sx={{ fontSize: 14, color: "#15803d" }} />
+                    Monthly performance leaders
+                  </p>
+                </div>
+              </div>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  color: "#ce1c1a",
+                  background:
+                    "linear-gradient(135deg, rgba(206,28,26,0.12) 0%, rgba(240,121,122,0.12) 100%)",
+                  padding: "6px 12px",
+                  borderRadius: "24px",
+                  border: "1px solid rgba(206,28,26,0.25)",
+                  letterSpacing: "0.3px",
+                  textTransform: "uppercase",
+                }}
+              >
+                This Month
+              </span>
+            </div>
 
-        <Grid item xs={12} lg={6}>
-          <section style={CARD_BASE}>
-            <h2 style={{ ...CARD_TITLE, marginBottom: "20px" }}>
-              Quick Actions
-            </h2>
-
-            <Grid container spacing={2}>
-              {QUICK_ACTIONS.map((action) => (
-                <Grid item xs={6} key={action.label}>
-                  <Link
-                    href={action.href}
-                    style={{ textDecoration: "none" }}
-                    className="quick-action-card"
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {TOP_FRANCHISEES.map((row, idx) => {
+                const isTop3 = row.rank <= 3;
+                const isFirst = row.rank === 1;
+                return (
+                  <li
+                    key={row.rank}
+                    className="franchisee-rank-row"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      padding: "16px 18px",
+                      marginBottom: idx === TOP_FRANCHISEES.length - 1 ? 0 : "8px",
+                      borderRadius: "12px",
+                      border: isFirst
+                        ? "1.5px solid rgba(206,28,26,0.2)"
+                        : "1.5px solid transparent",
+                      background: isFirst
+                        ? "linear-gradient(90deg, rgba(206,28,26,0.04) 0%, rgba(255,255,255,0) 100%)"
+                        : "transparent",
+                      transition: "all 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+                      cursor: "pointer",
+                      position: "relative",
+                    }}
                   >
-                    <div
+                    {isFirst && (
+                      <span
+                        aria-hidden
+                        style={{
+                          position: "absolute",
+                          left: "-26px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          width: "4px",
+                          height: "50%",
+                          borderRadius: "0 4px 4px 0",
+                          background:
+                            "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
+                          boxShadow: "0 0 12px rgba(206,28,26,0.6)",
+                        }}
+                      />
+                    )}
+
+                    <span
                       style={{
-                        border: "1px solid #e5e5e5",
-                        borderRadius: "8px",
-                        padding: "16px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                        gap: "8px",
-                        cursor: "pointer",
-                        transition: "all 150ms ease",
-                        background: "#ffffff",
+                        minWidth: "36px",
+                        height: "36px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "14px",
+                        fontWeight: 700,
+                        color: isFirst ? "#ffffff" : isTop3 ? "#ce1c1a" : "#887b6a",
+                        background: isFirst
+                          ? "linear-gradient(135deg, #ce1c1a 0%, #8b1816 100%)"
+                          : isTop3
+                            ? "linear-gradient(135deg, rgba(206,28,26,0.15) 0%, rgba(206,28,26,0.08) 100%)"
+                            : "#f5f5f5",
+                        borderRadius: "10px",
+                        flexShrink: 0,
+                        boxShadow: isFirst
+                          ? "0 4px 12px rgba(206,28,26,0.35), inset 0 1px 0 rgba(255,255,255,0.2)"
+                          : isTop3
+                            ? "0 2px 6px rgba(206,28,26,0.15)"
+                            : "none",
+                        border: isTop3 ? "1.5px solid rgba(206,28,26,0.2)" : "none",
                       }}
                     >
-                      <span
+                      {row.rank}
+                    </span>
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div
                         style={{
-                          width: "38px",
-                          height: "38px",
-                          borderRadius: "10px",
-                          background:
-                            "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
-                          color: "#ce1c1a",
-                          display: "inline-flex",
+                          display: "flex",
                           alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow:
-                            "0 4px 10px rgba(206,28,26,0.18), inset 0 1px 0 rgba(255,255,255,0.6)",
+                          justifyContent: "space-between",
+                          marginBottom: "8px",
                         }}
                       >
-                        {action.icon}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: 500,
-                          color: "#2b2b2b",
-                        }}
-                      >
-                        {action.label}
-                      </span>
-                      <span style={{ fontSize: "11px", color: "#887b6a" }}>
-                        {action.sub}
-                      </span>
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: isTop3 ? 600 : 500,
+                            color: "#2b2b2b",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            letterSpacing: "-0.1px",
+                          }}
+                        >
+                          {row.name}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            color: isTop3 ? "#ce1c1a" : "#887b6a",
+                            marginLeft: "16px",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {row.volume}
+                        </span>
+                      </div>
+
+                      <div style={{ position: "relative" }}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={row.percent}
+                          sx={{
+                            height: 8,
+                            borderRadius: 6,
+                            backgroundColor: "#f5f5f5",
+                            border: "1px solid #ececec",
+                            overflow: "hidden",
+                            "& .MuiLinearProgress-bar": {
+                              background: isFirst
+                                ? "linear-gradient(90deg, #f0797a 0%, #ce1c1a 60%, #8b1816 100%)"
+                                : isTop3
+                                  ? "linear-gradient(90deg, #fca5a5 0%, #f87171 50%, #dc2626 100%)"
+                                  : "linear-gradient(90deg, #d4d4d4 0%, #a3a3a3 100%)",
+                              borderRadius: 6,
+                              boxShadow: isTop3
+                                ? "inset 0 1px 2px rgba(0,0,0,0.1)"
+                                : "none",
+                              transition: "transform 300ms ease",
+                            },
+                          }}
+                        />
+                        <span
+                          style={{
+                            position: "absolute",
+                            right: "6px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            fontSize: "10px",
+                            fontWeight: 700,
+                            color: row.percent > 50 ? "#ffffff" : "#887b6a",
+                            letterSpacing: "0.3px",
+                          }}
+                        >
+                          {row.percent}%
+                        </span>
+                      </div>
                     </div>
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
+                  </li>
+                );
+              })}
+            </ul>
           </section>
         </Grid>
       </Grid>
 
       <style>{`
-        .quick-action-card > div:hover {
-          border-color: #ce1c1a !important;
-          background: linear-gradient(135deg, #fff5f5 0%, #ffffff 80%) !important;
-          box-shadow: 0 6px 18px -10px rgba(206,28,26,0.4) !important;
-          transform: translateY(-1px);
+        .franchisee-rank-row:hover {
+          background: linear-gradient(90deg, rgba(206,28,26,0.06) 0%, rgba(255,255,255,0.5) 100%) !important;
+          border-color: rgba(206,28,26,0.25) !important;
+          transform: translateX(4px);
+          box-shadow: 0 4px 12px rgba(206,28,26,0.12) !important;
         }
       `}</style>
     </div>

@@ -47,38 +47,45 @@ export function Input({
         endAdornment,
         notched: true,
         sx: {
-          height: "44px",
-          borderRadius: "8px",
+          height: "46px",
+          borderRadius: "10px",
           backgroundColor: "#ffffff",
           color: "#2b2b2b",
           fontSize: "15px",
           outline: "none",
-          transition: "border-color 100ms ease, box-shadow 150ms ease",
+          transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+          position: "relative",
           "& input": {
-            padding: "10px 12px",
+            padding: "10px 14px",
           },
           "& input:-webkit-autofill": {
             WebkitBoxShadow: "0 0 0 1000px #ffffff inset",
             WebkitTextFillColor: "#2b2b2b",
-            caretColor: "#2b2b2b",
-            borderRadius: "8px",
+            caretColor: "#ce1c1a",
+            borderRadius: "10px",
           },
           "& input::placeholder": {
             color: "#887b6a",
-            opacity: 1,
+            opacity: 0.7,
           },
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "#e0e0e0",
+            borderColor: error ? "#f0797a" : "#e5e5e5",
+            borderWidth: "1.5px",
+            transition: "all 200ms ease",
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "#cfcfcf",
+            borderColor: error ? "#f0797a" : "#d0d0d0",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "#ce1c1a",
-            borderWidth: "1px",
+            borderWidth: "1.5px",
           },
           "&.Mui-focused": {
-            boxShadow: "0 0 0 3px rgba(206, 28, 26, 0.12)",
+            boxShadow: "0 0 0 4px rgba(206, 28, 26, 0.1), 0 4px 12px rgba(206, 28, 26, 0.08)",
+            transform: "translateY(-1px)",
+          },
+          "&.Mui-error.Mui-focused": {
+            boxShadow: "0 0 0 4px rgba(240, 121, 122, 0.15), 0 4px 12px rgba(240, 121, 122, 0.12)",
           },
         },
       }}

@@ -34,6 +34,7 @@ export function AuthCard({ children }: AuthCardProps) {
     >
       <div
         aria-hidden
+        className="animate-fade-in"
         style={{
           position: "absolute",
           inset: 0,
@@ -51,6 +52,7 @@ export function AuthCard({ children }: AuthCardProps) {
 
       <span
         aria-hidden
+        className="animate-fade-in"
         style={{
           position: "absolute",
           top: 0,
@@ -66,6 +68,7 @@ export function AuthCard({ children }: AuthCardProps) {
 
       <div
         aria-hidden
+        className="animate-glow"
         style={{
           position: "absolute",
           width: "560px",
@@ -74,13 +77,14 @@ export function AuthCard({ children }: AuthCardProps) {
           left: "calc(50% - 360px)",
           top: "calc(50% - 360px)",
           background:
-            "radial-gradient(closest-side, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0) 70%)",
-          filter: "blur(20px)",
+            "radial-gradient(closest-side, rgba(206,28,26,0.22) 0%, rgba(206,28,26,0) 70%)",
+          filter: "blur(24px)",
           pointerEvents: "none",
         }}
       />
       <div
         aria-hidden
+        className="animate-glow"
         style={{
           position: "absolute",
           width: "520px",
@@ -89,35 +93,38 @@ export function AuthCard({ children }: AuthCardProps) {
           right: "calc(50% - 360px)",
           bottom: "calc(50% - 360px)",
           background:
-            "radial-gradient(closest-side, rgba(240,121,122,0.18) 0%, rgba(240,121,122,0) 70%)",
-          filter: "blur(20px)",
+            "radial-gradient(closest-side, rgba(240,121,122,0.22) 0%, rgba(240,121,122,0) 70%)",
+          filter: "blur(24px)",
           pointerEvents: "none",
+          animationDelay: "1.5s",
         }}
       />
 
       <div
+        className="animate-scale-in"
         style={{
           position: "relative",
           width: "100%",
           maxWidth: "460px",
-          padding: "1px",
-          borderRadius: "16px",
+          padding: "1.5px",
+          borderRadius: "18px",
           background: gradientBorder,
           boxShadow:
-            "0 1px 4px rgba(0,0,0,0.4), 0 30px 80px -20px rgba(206,28,26,0.45), 0 12px 40px rgba(0,0,0,0.5)",
+            "0 2px 8px rgba(0,0,0,0.4), 0 30px 80px -20px rgba(206,28,26,0.5), 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15)",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}
       >
         <div
           style={{
             position: "relative",
-            borderRadius: "15px",
+            borderRadius: "16.5px",
             background: cardSurface,
             padding: "44px 40px 36px 40px",
             width: "100%",
             boxSizing: "border-box",
             overflow: "hidden",
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
           }}
         >
           <div
@@ -130,11 +137,13 @@ export function AuthCard({ children }: AuthCardProps) {
               height: "3px",
               background:
                 "linear-gradient(90deg, #ce1c1a 0%, #f0797a 50%, #bf2524 100%)",
+              boxShadow: "0 2px 12px rgba(206,28,26,0.4)",
             }}
           />
 
           <div
             aria-hidden
+            className="animate-float"
             style={{
               position: "absolute",
               top: "-80px",
@@ -143,8 +152,25 @@ export function AuthCard({ children }: AuthCardProps) {
               height: "220px",
               borderRadius: "50%",
               background:
-                "radial-gradient(closest-side, rgba(206,28,26,0.10) 0%, rgba(206,28,26,0) 70%)",
+                "radial-gradient(closest-side, rgba(206,28,26,0.12) 0%, rgba(206,28,26,0) 70%)",
               pointerEvents: "none",
+            }}
+          />
+
+          <div
+            aria-hidden
+            className="animate-float"
+            style={{
+              position: "absolute",
+              bottom: "-60px",
+              left: "-60px",
+              width: "180px",
+              height: "180px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(closest-side, rgba(240,121,122,0.08) 0%, rgba(240,121,122,0) 70%)",
+              pointerEvents: "none",
+              animationDelay: "2s",
             }}
           />
 

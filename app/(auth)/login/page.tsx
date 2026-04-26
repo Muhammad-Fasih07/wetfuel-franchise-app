@@ -60,62 +60,65 @@ export default function LoginPage() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginBottom: "20px",
+          marginBottom: "24px",
         }}
       >
         <BrandMark align="center" />
       </div>
 
       <div
+        className="animate-slide-up"
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "10px",
-          marginBottom: "24px",
+          gap: "12px",
+          marginBottom: "32px",
+          animationDelay: "0.1s",
         }}
       >
         <span
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "6px",
+            gap: "7px",
             fontSize: "10px",
             fontWeight: 700,
-            letterSpacing: "1.4px",
+            letterSpacing: "1.5px",
             textTransform: "uppercase",
             color: "#ce1c1a",
-            padding: "4px 10px",
-            borderRadius: "20px",
+            padding: "5px 12px",
+            borderRadius: "24px",
             background:
-              "linear-gradient(135deg, rgba(206,28,26,0.10) 0%, rgba(240,121,122,0.10) 100%)",
-            border: "1px solid rgba(206,28,26,0.20)",
+              "linear-gradient(135deg, rgba(206,28,26,0.12) 0%, rgba(240,121,122,0.12) 100%)",
+            border: "1px solid rgba(206,28,26,0.25)",
+            boxShadow: "0 2px 8px rgba(206,28,26,0.1), inset 0 1px 0 rgba(255,255,255,0.5)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
           }}
         >
           <span
             aria-hidden
+            className="animate-glow"
             style={{
               width: "6px",
               height: "6px",
               borderRadius: "50%",
               background: "#ce1c1a",
-              boxShadow: "0 0 8px rgba(206,28,26,0.6)",
+              boxShadow: "0 0 10px rgba(206,28,26,0.7), 0 0 4px rgba(206,28,26,0.5)",
+              animation: "pulse 2s ease-in-out infinite",
             }}
           />
           Sign in
         </span>
 
         <h1
+          className="text-gradient-primary"
           style={{
-            fontSize: "26px",
+            fontSize: "30px",
             fontWeight: 700,
             margin: 0,
-            letterSpacing: "-0.5px",
-            background:
-              "linear-gradient(135deg, #2b2b2b 0%, #2b2b2b 55%, #5a5a5a 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
+            letterSpacing: "-0.8px",
             textAlign: "center",
             lineHeight: 1.15,
           }}
@@ -127,9 +130,10 @@ export default function LoginPage() {
             fontSize: "14px",
             color: "#887b6a",
             margin: 0,
-            lineHeight: 1.55,
+            lineHeight: 1.6,
             textAlign: "center",
-            maxWidth: "320px",
+            maxWidth: "340px",
+            fontWeight: 400,
           }}
         >
           Sign in to your franchise account to continue.
@@ -137,7 +141,15 @@ export default function LoginPage() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div 
+          className="animate-slide-up"
+          style={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            gap: "18px",
+            animationDelay: "0.2s",
+          }}
+        >
           <Input
             name="email"
             label="Email address"
@@ -161,7 +173,14 @@ export default function LoginPage() {
                   tabIndex={-1}
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => setShowPassword((prev) => !prev)}
-                  sx={{ color: "#887b6a", "&:hover": { color: "#2b2b2b" } }}
+                  sx={{ 
+                    color: "#887b6a", 
+                    "&:hover": { 
+                      color: "#ce1c1a",
+                      backgroundColor: "rgba(206,28,26,0.05)",
+                    },
+                    transition: "all 200ms ease",
+                  }}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -175,6 +194,7 @@ export default function LoginPage() {
               justifyContent: "space-between",
               alignItems: "center",
               gap: "8px",
+              marginTop: "4px",
             }}
           >
             <Controller
@@ -189,8 +209,14 @@ export default function LoginPage() {
                       onBlur={field.onBlur}
                       inputRef={field.ref}
                       sx={{
-                        color: "#887b6a",
-                        "&.Mui-checked": { color: "#ce1c1a" },
+                        color: "#d0d0d0",
+                        "&.Mui-checked": { 
+                          color: "#ce1c1a",
+                        },
+                        "&:hover": {
+                          backgroundColor: "rgba(206,28,26,0.04)",
+                        },
+                        transition: "all 200ms ease",
                       }}
                     />
                   }
@@ -200,6 +226,7 @@ export default function LoginPage() {
                     "& .MuiFormControlLabel-label": {
                       fontSize: "14px",
                       color: "#2b2b2b",
+                      fontWeight: 500,
                     },
                   }}
                 />
@@ -211,10 +238,17 @@ export default function LoginPage() {
               style={{
                 color: "#ce1c1a",
                 fontSize: "14px",
-                fontWeight: 500,
+                fontWeight: 600,
                 textDecoration: "none",
+                transition: "all 200ms ease",
+                position: "relative",
               }}
-              className="hover:underline"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#bf2524";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "#ce1c1a";
+              }}
             >
               Forgot password?
             </Link>
@@ -227,15 +261,17 @@ export default function LoginPage() {
       </form>
 
       <div
+        className="animate-fade-in"
         style={{
-          marginTop: "24px",
-          paddingTop: "16px",
+          marginTop: "28px",
+          paddingTop: "20px",
           borderTop:
             "1px solid transparent",
           backgroundImage:
             "linear-gradient(#fff, #fff), linear-gradient(90deg, transparent 0%, #e5e5e5 50%, transparent 100%)",
           backgroundOrigin: "border-box",
           backgroundClip: "padding-box, border-box",
+          animationDelay: "0.4s",
         }}
       >
         <p
@@ -244,12 +280,26 @@ export default function LoginPage() {
             color: "#887b6a",
             textAlign: "center",
             margin: 0,
-            letterSpacing: "0.1px",
+            letterSpacing: "0.2px",
+            lineHeight: 1.5,
           }}
         >
           Having trouble? Contact your WetFuel administrator.
         </p>
       </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(0.95);
+          }
+        }
+      `}</style>
     </AuthCard>
   );
 }

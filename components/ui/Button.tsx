@@ -41,12 +41,15 @@ export function Button({
       disabled={isDisabled}
       sx={{
         height: "44px",
-        borderRadius: "8px",
-        fontWeight: 500,
+        borderRadius: "10px",
+        fontWeight: 600,
         fontSize: "14px",
         textTransform: "none",
+        letterSpacing: "0.2px",
         boxShadow: "none",
-        transition: "background 180ms ease, opacity 180ms ease, transform 150ms ease",
+        position: "relative",
+        overflow: "hidden",
+        transition: "all 250ms cubic-bezier(0.4, 0, 0.2, 1)",
         ...(variant === "primary"
           ? {
               background: primaryGradient,
@@ -54,15 +57,31 @@ export function Button({
               backgroundPosition: "40% 50%",
               color: "#ffffff",
               border: "none",
+              boxShadow: "0 4px 14px rgba(206,28,26,0.35), 0 2px 6px rgba(206,28,26,0.2), inset 0 1px 0 rgba(255,255,255,0.15)",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: "-100%",
+                width: "100%",
+                height: "100%",
+                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+                transition: "left 0.6s ease",
+              },
               "&:hover": {
                 background: primaryGradientHover,
                 backgroundSize: "120% 120%",
                 backgroundPosition: "60% 50%",
-                boxShadow: "none",
+                boxShadow: "0 6px 20px rgba(206,28,26,0.45), 0 3px 8px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
+                transform: "translateY(-1px)",
+                "&::before": {
+                  left: "100%",
+                },
               },
               "&:active": {
                 background: primaryGradientActive,
-                transform: "scale(0.995)",
+                transform: "translateY(0px) scale(0.98)",
+                boxShadow: "0 2px 8px rgba(206,28,26,0.4), inset 0 2px 4px rgba(0,0,0,0.1)",
               },
             }
           : {
@@ -76,11 +95,13 @@ export function Button({
               "&:hover": {
                 backgroundImage:
                   "linear-gradient(#fff5f5, #fff5f5), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
-                boxShadow: "none",
+                boxShadow: "0 4px 12px rgba(206,28,26,0.15)",
+                transform: "translateY(-1px)",
               },
               "&:active": {
                 backgroundImage:
                   "linear-gradient(#fff0f0, #fff0f0), linear-gradient(135deg, #bf2524 0%, #ce1c1a 50%, #cd171a 100%)",
+                transform: "translateY(0px)",
               },
             }),
         "&.Mui-disabled": {
@@ -89,6 +110,8 @@ export function Button({
           color: variant === "primary" ? "#ffffff" : "#ce1c1a",
           background: variant === "primary" ? "#ce1c1a" : "transparent",
           backgroundImage: variant === "ghost" ? "none" : undefined,
+          transform: "none",
+          boxShadow: "none",
         },
       }}
     >

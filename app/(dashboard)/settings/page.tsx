@@ -6,14 +6,12 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { ProfilePanel } from "./_panels/ProfilePanel";
 import { SecurityPanel } from "./_panels/SecurityPanel";
 import { NotificationsPanel } from "./_panels/NotificationsPanel";
-import { IntegrationsPanel } from "./_panels/IntegrationsPanel";
 import { DangerPanel } from "./_panels/DangerPanel";
 
 type SettingsSection =
   | "profile"
   | "security"
   | "notifications"
-  | "integrations"
   | "danger";
 
 interface NavSection {
@@ -33,7 +31,6 @@ const NAV_SECTIONS: NavSection[] = [
     label: "SYSTEM",
     items: [
       { id: "notifications", label: "Notifications" },
-      { id: "integrations", label: "Integrations" },
     ],
   },
   {
@@ -210,7 +207,6 @@ export default function SettingsPage() {
           {active === "profile" && <ProfilePanel />}
           {active === "security" && <SecurityPanel />}
           {active === "notifications" && <NotificationsPanel />}
-          {active === "integrations" && <IntegrationsPanel />}
           {active === "danger" && <DangerPanel />}
         </div>
       </div>

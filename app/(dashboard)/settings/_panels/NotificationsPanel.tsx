@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Alert, Grid, Snackbar, Switch } from "@mui/material";
+import { Alert, Snackbar, Switch } from "@mui/material";
 
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
@@ -21,12 +21,6 @@ const EMAIL_ROWS: NotifRow[] = [
   { key: "low_inventory", label: "Low inventory alert", sub: "Storage below threshold", defaultOn: true },
   { key: "data_sync", label: "Data sync failure", sub: "QuickBooks / OPIS sync issues", defaultOn: true },
 ];
-
-const IN_APP_ROWS: NotifRow[] = EMAIL_ROWS.map((r) => ({
-  ...r,
-  key: `inapp_${r.key}`,
-  defaultOn: true,
-}));
 
 const SWITCH_SX = {
   "& .MuiSwitch-switchBase.Mui-checked": { color: "#ce1c1a" },
@@ -112,12 +106,8 @@ export function NotificationsPanel() {
   const initialEmail = Object.fromEntries(
     EMAIL_ROWS.map((r) => [r.key, r.defaultOn]),
   );
-  const initialInApp = Object.fromEntries(
-    IN_APP_ROWS.map((r) => [r.key, r.defaultOn]),
-  );
 
   const [emailState, setEmailState] = useState<Record<string, boolean>>(initialEmail);
-  const [inAppState, setInAppState] = useState<Record<string, boolean>>(initialInApp);
 
   return (
     <SectionCard
@@ -142,31 +132,17 @@ export function NotificationsPanel() {
           margin: "0 0 24px",
         }}
       >
-        Choose which events trigger notifications for your account.
+        Choose which events trigger email notifications for your account.
       </p>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <ToggleColumn
-            title="Email Notifications"
-            rows={EMAIL_ROWS}
-            state={emailState}
-            onToggle={(key, next) =>
-              setEmailState((prev) => ({ ...prev, [key]: next }))
-            }
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <ToggleColumn
-            title="In-App Notifications"
-            rows={IN_APP_ROWS}
-            state={inAppState}
-            onToggle={(key, next) =>
-              setInAppState((prev) => ({ ...prev, [key]: next }))
-            }
-          />
-        </Grid>
-      </Grid>
+      <ToggleColumn
+        title="Email Notifications"
+        rows={EMAIL_ROWS}
+        state={emailState}
+        onToggle={(key, next) =>
+          setEmailState((prev) => ({ ...prev, [key]: next }))
+        }
+      />
 
       <Snackbar
         open={toastOpen}

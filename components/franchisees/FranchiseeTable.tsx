@@ -47,41 +47,69 @@ const STUB_ROWS: FranchiseeRow[] = [
 ];
 
 const HEADER_CELL_SX = {
-  background: "#fafafa",
+  background: "linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)",
   fontSize: "11px",
-  fontWeight: 600,
+  fontWeight: 700,
   color: "#887b6a",
-  letterSpacing: "0.5px",
+  letterSpacing: "0.7px",
   textTransform: "uppercase",
-  borderBottom: "1px solid #f0f0f0",
-  padding: "12px 16px",
+  borderBottom: "1.5px solid #ececec",
+  padding: "14px 18px",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
   color: "#2b2b2b",
-  borderBottom: "1px solid #f5f5f5",
-  padding: "14px 16px",
+  borderBottom: "1px solid #f8f8f8",
+  padding: "16px 18px",
+  transition: "all 200ms ease",
 };
 
 function StatusChip({ status }: { status: FranchiseeStatus }) {
   const styles =
     status === "Active"
-      ? { bg: "#f0fdf4", color: "#15803d" }
-      : { bg: "#fef2f2", color: "#dc2626" };
+      ? {
+          bg: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+          color: "#15803d",
+          dot: "#22c55e",
+          border: "rgba(34,197,94,0.3)",
+        }
+      : {
+          bg: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
+          color: "#dc2626",
+          dot: "#ef4444",
+          border: "rgba(239,68,68,0.3)",
+        };
 
   return (
     <span
       style={{
-        display: "inline-block",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "6px",
         background: styles.bg,
         color: styles.color,
-        borderRadius: "20px",
+        borderRadius: "24px",
         fontSize: "11px",
-        fontWeight: 500,
-        padding: "2px 10px",
+        fontWeight: 600,
+        padding: "4px 12px 4px 10px",
+        border: `1.5px solid ${styles.border}`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px ${styles.border}30`,
+        letterSpacing: "0.3px",
       }}
     >
+      <span
+        aria-hidden
+        style={{
+          width: "6px",
+          height: "6px",
+          borderRadius: "50%",
+          background: styles.dot,
+          boxShadow: `0 0 0 2px ${styles.dot}25, 0 0 6px ${styles.dot}40`,
+          flexShrink: 0,
+          animation: status === "Active" ? "pulse 2s ease-in-out infinite" : "none",
+        }}
+      />
       {status}
     </span>
   );
@@ -144,34 +172,68 @@ export function FranchiseeTable() {
 
   return (
     <div
+      className="animate-fade-in"
       style={{
-        background: "#ffffff",
-        border: "1px solid #e5e5e5",
-        borderRadius: "12px",
+        background: "linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #fafafa 100%)",
+        border: "1.5px solid #ececec",
+        borderRadius: "14px",
         padding: 0,
         overflow: "hidden",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)",
+        position: "relative",
       }}
     >
+      <span
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(206,28,26,0.6) 50%, transparent 100%)",
+          opacity: 0.8,
+          boxShadow: "0 2px 8px rgba(206,28,26,0.2)",
+        }}
+      />
+
       <div
         style={{
-          padding: "20px 24px",
-          borderBottom: "1px solid #f0f0f0",
+          padding: "22px 26px",
+          borderBottom: "1.5px solid #f5f5f5",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "12px",
+          gap: "16px",
           flexWrap: "wrap",
+          background:
+            "linear-gradient(180deg, rgba(255,245,245,0.4) 0%, rgba(255,255,255,0) 100%)",
         }}
       >
         <h2
           style={{
-            fontSize: "16px",
+            fontSize: "17px",
             fontWeight: 600,
             color: "#2b2b2b",
             margin: 0,
+            letterSpacing: "-0.2px",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
+          <span
+            aria-hidden
+            style={{
+              width: "4px",
+              height: "16px",
+              borderRadius: "2px",
+              background:
+                "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
+              boxShadow: "0 0 8px rgba(206,28,26,0.4)",
+            }}
+          />
           Franchisee Overview
         </h2>
 
@@ -184,11 +246,20 @@ export function FranchiseeTable() {
           }
           SelectProps={{ native: true }}
           sx={{
-            width: "140px",
+            width: "150px",
             "& .MuiOutlinedInput-root": {
-              borderRadius: "8px",
+              borderRadius: "10px",
               fontSize: "13px",
-              height: "36px",
+              height: "38px",
+              border: "1.5px solid #ececec",
+              transition: "all 200ms ease",
+              "&:hover": {
+                borderColor: "#d0d0d0",
+              },
+              "&.Mui-focused": {
+                borderColor: "#ce1c1a",
+                boxShadow: "0 0 0 3px rgba(206,28,26,0.1)",
+              },
             },
           }}
         >
@@ -219,7 +290,11 @@ export function FranchiseeTable() {
                 onClick={() => router.push(`/franchisees/${row.id}`)}
                 sx={{
                   cursor: "pointer",
-                  "&:hover": { background: "#fafafa" },
+                  transition: "all 200ms ease",
+                  "&:hover": {
+                    background: "linear-gradient(90deg, rgba(206,28,26,0.02) 0%, rgba(255,255,255,0) 100%)",
+                    transform: "scale(1.005)",
+                  },
                   "&:last-child td": { borderBottom: 0 },
                 }}
               >

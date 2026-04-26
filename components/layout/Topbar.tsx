@@ -167,24 +167,24 @@ export function Topbar() {
             gap: "8px",
             background: searchFocus ? "#ffffff" : "#f7f7f7",
             border: searchFocus
-              ? "1px solid #ce1c1a"
-              : "1px solid #ececec",
+              ? "1.5px solid #ce1c1a"
+              : "1.5px solid #ececec",
             borderRadius: "10px",
-            padding: "0 10px",
-            height: "36px",
-            width: "320px",
+            padding: "0 12px",
+            height: "38px",
+            width: "340px",
             maxWidth: "40vw",
-            transition: "all 140ms ease",
+            transition: "all 250ms cubic-bezier(0.4, 0, 0.2, 1)",
             boxShadow: searchFocus
-              ? "0 0 0 3px rgba(206,28,26,0.10)"
-              : "none",
+              ? "0 0 0 4px rgba(206,28,26,0.1), 0 4px 12px rgba(206,28,26,0.08)"
+              : "0 1px 2px rgba(0,0,0,0.04)",
           }}
         >
           <SearchIcon
             sx={{
-              fontSize: 18,
+              fontSize: 19,
               color: searchFocus ? "#ce1c1a" : "#887b6a",
-              transition: "color 140ms ease",
+              transition: "all 250ms ease",
             }}
           />
           <input
@@ -198,9 +198,10 @@ export function Topbar() {
               border: "none",
               outline: "none",
               background: "transparent",
-              fontSize: "13px",
+              fontSize: "14px",
               color: "#2b2b2b",
               fontFamily: "inherit",
+              fontWeight: 400,
             }}
           />
           <span
@@ -214,11 +215,12 @@ export function Topbar() {
               color: "#887b6a",
               background: "#ffffff",
               border: "1px solid #e5e5e5",
-              borderRadius: "5px",
-              padding: "2px 6px",
+              borderRadius: "6px",
+              padding: "3px 7px",
               fontFamily: "inherit",
               letterSpacing: "0.4px",
               flexShrink: 0,
+              boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
             }}
           >
             ⌘K
