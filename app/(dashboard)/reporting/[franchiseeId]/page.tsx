@@ -486,147 +486,146 @@ export default function FranchiseeReportPage() {
         </div>
       </SectionCard>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} lg={4}>
-          <SectionCard 
-            title="Customers" 
-            bodyPadding={0}
-            style={{
-              height: "100%",
-              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-              border: "1px solid #e5e5e5",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-            }}
-          >
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={HEADER_CELL_SX}>Name</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="right">Avg Fuel</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {CUSTOMER_ROWS.map((c) => (
-                    <TableRow
-                      key={c.name}
-                      sx={{
-                        "&:hover": { background: "#fafafa" },
-                        "&:last-child td": { borderBottom: 0 },
-                      }}
-                    >
-                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                        {c.name}
-                      </TableCell>
-                      <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="right">{c.avgFuel}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </SectionCard>
-        </Grid>
+      <SectionCard 
+        title="Customers" 
+        bodyPadding={0}
+        style={{
+          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+          border: "1px solid #e5e5e5",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        }}
+      >
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={HEADER_CELL_SX}>Customer Name</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Margin</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="center">Equipment Count</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="right">Avg Fuel/Month</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {CUSTOMER_ROWS.map((c) => (
+                <TableRow
+                  key={c.name}
+                  sx={{
+                    "&:hover": { background: "#fafafa" },
+                    "&:last-child td": { borderBottom: 0 },
+                  }}
+                >
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
+                    {c.name}
+                  </TableCell>
+                  <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>{c.margin}</TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="center">{c.equipment}</TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="right">{c.avgFuel}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </SectionCard>
 
-        <Grid item xs={12} lg={4}>
-          <SectionCard 
-            title="Drivers" 
-            bodyPadding={0}
-            style={{
-              height: "100%",
-              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-              border: "1px solid #e5e5e5",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-            }}
-          >
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={HEADER_CELL_SX}>Name</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Jobs</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {DRIVER_ROWS.map((d) => (
-                    <TableRow
-                      key={d.name}
-                      sx={{
-                        "&:hover": { background: "#fafafa" },
-                        "&:last-child td": { borderBottom: 0 },
-                      }}
-                    >
-                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                        {d.name}
-                      </TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">{d.jobs}</TableCell>
-                      <TableCell sx={BODY_CELL_SX}>
-                        <StatusChip status={d.status} />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </SectionCard>
-        </Grid>
+      <SectionCard 
+        title="Drivers" 
+        bodyPadding={0}
+        style={{
+          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+          border: "1px solid #e5e5e5",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        }}
+      >
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={HEADER_CELL_SX}>Driver Name</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="center">Jobs Completed</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="right">Total Hours</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {DRIVER_ROWS.map((d) => (
+                <TableRow
+                  key={d.name}
+                  sx={{
+                    "&:hover": { background: "#fafafa" },
+                    "&:last-child td": { borderBottom: 0 },
+                  }}
+                >
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
+                    {d.name}
+                  </TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="center">{d.jobs}</TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="right">{d.hours}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>
+                    <StatusChip status={d.status} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </SectionCard>
 
-        <Grid item xs={12} lg={4}>
-          <SectionCard 
-            title="Inventory" 
-            bodyPadding={0}
-            style={{
-              height: "100%",
-              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-              border: "1px solid #e5e5e5",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-            }}
-          >
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={HEADER_CELL_SX}>Product</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Stock</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {INVENTORY_ROWS.map((item) => (
-                    <TableRow
-                      key={item.product}
-                      sx={{
-                        "&:hover": { background: "#fafafa" },
-                        "&:last-child td": { borderBottom: 0 },
-                      }}
-                    >
-                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                        {item.product}
-                      </TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">
-                        {item.stock} {item.unit}
-                      </TableCell>
-                      <TableCell sx={BODY_CELL_SX}>
-                        <StatusChip
-                          status={
-                            item.status === "in-stock"
-                              ? "active"
-                              : item.status === "low-stock"
-                                ? "flagged"
-                                : "frozen"
-                          }
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </SectionCard>
-        </Grid>
-      </Grid>
+      <SectionCard 
+        title="Inventory" 
+        bodyPadding={0}
+        style={{
+          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+          border: "1px solid #e5e5e5",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        }}
+      >
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={HEADER_CELL_SX}>Product Name</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Category</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="center">Current Stock</TableCell>
+                <TableCell sx={HEADER_CELL_SX} align="right">Unit Price</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Stock Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {INVENTORY_ROWS.map((item) => (
+                <TableRow
+                  key={item.product}
+                  sx={{
+                    "&:hover": { background: "#fafafa" },
+                    "&:last-child td": { borderBottom: 0 },
+                  }}
+                >
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
+                    {item.product}
+                  </TableCell>
+                  <TableCell sx={BODY_CELL_SX}>{item.category}</TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="center">
+                    {item.stock} {item.unit}
+                  </TableCell>
+                  <TableCell sx={BODY_CELL_SX} align="right">{item.price}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>
+                    <StatusChip
+                      status={
+                        item.status === "in-stock"
+                          ? "active"
+                          : item.status === "low-stock"
+                            ? "flagged"
+                            : "frozen"
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </SectionCard>
     </div>
   );
 }
