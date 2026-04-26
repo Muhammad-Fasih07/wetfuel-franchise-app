@@ -290,11 +290,7 @@ export function FranchiseeTable() {
                 onClick={() => router.push(`/franchisees/${row.id}`)}
                 sx={{
                   cursor: "pointer",
-                  transition: "all 200ms ease",
-                  "&:hover": {
-                    background: "linear-gradient(90deg, rgba(206,28,26,0.02) 0%, rgba(255,255,255,0) 100%)",
-                    transform: "scale(1.005)",
-                  },
+                  "&:hover": { background: "#fafafa" },
                   "&:last-child td": { borderBottom: 0 },
                 }}
               >
