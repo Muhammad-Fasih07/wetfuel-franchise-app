@@ -14,9 +14,17 @@ import {
   AccessTimeOutlined as AccessTimeOutlinedIcon,
   ArrowBack as ArrowBackIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
+  Edit as EditIcon,
+  Email as EmailIcon,
   Inventory as InventoryIcon,
+  AcUnit as FreezeIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
+  LocationOn as LocationIcon,
+  Person as PersonIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
+  Phone as PhoneIcon,
+  Store as StoreIcon,
+  CalendarToday as CalendarIcon,
   Warning as WarningIcon,
 } from "@mui/icons-material";
 
@@ -185,6 +193,298 @@ export default function FranchiseeReportPage() {
           />
         </Grid>
       </Grid>
+
+      <SectionCard
+        bodyPadding="28px 32px"
+        style={{
+          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: "-40px",
+            right: "-40px",
+            width: "180px",
+            height: "180px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(206,28,26,0.06) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+        
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}>
+          <div style={{ flex: 1, minWidth: "300px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "24px" }}>
+              <div
+                style={{
+                  width: "64px",
+                  height: "64px",
+                  borderRadius: "16px",
+                  background: "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
+                  color: "#ce1c1a",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 8px 20px rgba(206,28,26,0.25), inset 0 1px 0 rgba(255,255,255,0.7)",
+                  border: "2px solid rgba(206,28,26,0.2)",
+                }}
+              >
+                <StoreIcon sx={{ fontSize: 32 }} />
+              </div>
+              <div>
+                <h2
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    color: "#2b2b2b",
+                    margin: "0 0 4px 0",
+                    letterSpacing: "-0.5px",
+                  }}
+                >
+                  {row.name}
+                </h2>
+                <StatusChip status={row.status} />
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                gap: "16px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "14px 16px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)",
+                  border: "1.5px solid rgba(59,130,246,0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "rgba(59,130,246,0.15)",
+                    color: "#3b82f6",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <LocationIcon sx={{ fontSize: 20 }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    Location
+                  </div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    Houston, TX
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "14px 16px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+                  border: "1.5px solid rgba(34,197,94,0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "rgba(34,197,94,0.15)",
+                    color: "#22c55e",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <PersonIcon sx={{ fontSize: 20 }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    Admin
+                  </div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    John Martinez
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "14px 16px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
+                  border: "1.5px solid rgba(245,158,11,0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "rgba(245,158,11,0.15)",
+                    color: "#f59e0b",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <EmailIcon sx={{ fontSize: 20 }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    Email
+                  </div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    admin@alphafuel.com
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "14px 16px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)",
+                  border: "1.5px solid rgba(139,92,246,0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "rgba(139,92,246,0.15)",
+                    color: "#8b5cf6",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <PhoneIcon sx={{ fontSize: 20 }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    Phone
+                  </div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    (713) 555-0142
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "14px 16px",
+                  borderRadius: "10px",
+                  background: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
+                  border: "1.5px solid rgba(239,68,68,0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "10px",
+                    background: "rgba(239,68,68,0.15)",
+                    color: "#ef4444",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <CalendarIcon sx={{ fontSize: 20 }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    Registered
+                  </div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    Jan 15, 2024
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", minWidth: "200px" }}>
+            <Button
+              fullWidth
+              startIcon={<EditIcon sx={{ fontSize: 18 }} />}
+              onClick={() => router.push(`/franchisees/${row.id}/edit`)}
+            >
+              Edit Details
+            </Button>
+            <div
+              style={{
+                background: row.status === "active" 
+                  ? "linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(220,38,38,0.05) 100%)"
+                  : "linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(21,128,61,0.05) 100%)",
+                borderRadius: "10px",
+                border: row.status === "active" 
+                  ? "1.5px solid rgba(239,68,68,0.3)"
+                  : "1.5px solid rgba(34,197,94,0.3)",
+                padding: "12px 20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                cursor: "pointer",
+                transition: "all 200ms ease",
+                color: row.status === "active" ? "#dc2626" : "#15803d",
+                fontWeight: 600,
+                fontSize: "14px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = row.status === "active"
+                  ? "0 4px 12px rgba(239,68,68,0.25)"
+                  : "0 4px 12px rgba(34,197,94,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <FreezeIcon sx={{ fontSize: 18 }} />
+              {row.status === "active" ? "Freeze Account" : "Unfreeze Account"}
+            </div>
+          </div>
+        </div>
+      </SectionCard>
 
       <Grid container spacing={3}>
         <Grid item xs={12}>
