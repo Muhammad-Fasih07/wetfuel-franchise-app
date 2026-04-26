@@ -243,9 +243,10 @@ export default function ReportingPage() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12}>
           <SectionCard
             title="Franchisee Performance"
+            subtitle="Detailed performance metrics and analytics for all franchisees"
             action={
               <TextField
                 select
@@ -256,17 +257,26 @@ export default function ReportingPage() {
                 }
                 SelectProps={{ native: true }}
                 sx={{
-                  width: 140,
+                  width: 150,
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "8px",
+                    borderRadius: "10px",
                     fontSize: "13px",
-                    height: "36px",
+                    height: "38px",
+                    border: "1.5px solid #ececec",
+                    transition: "all 200ms ease",
+                    "&:hover": {
+                      borderColor: "#d0d0d0",
+                    },
+                    "&.Mui-focused": {
+                      borderColor: "#ce1c1a",
+                      boxShadow: "0 0 0 3px rgba(206,28,26,0.1)",
+                    },
                   },
                 }}
               >
-                <option value="all">All</option>
-                <option value="active">Active</option>
-                <option value="frozen">Frozen</option>
+                <option value="all">All Franchisees</option>
+                <option value="active">Active Only</option>
+                <option value="frozen">Frozen Only</option>
               </TextField>
             }
             bodyPadding={0}
@@ -275,14 +285,14 @@ export default function ReportingPage() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={HEADER_CELL_SX}>Franchisee</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Customers</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Drivers</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="right">Fuel Delivered</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Jobs Done</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Avg Job Time</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="right">Driver Hrs</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "180px" }}>Franchisee</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "100px" }} align="center">Customers</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "90px" }} align="center">Drivers</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "130px" }} align="right">Fuel Delivered</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "100px" }} align="center">Jobs Done</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "110px" }}>Avg Job Time</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "110px" }} align="right">Driver Hrs</TableCell>
+                    <TableCell sx={{ ...HEADER_CELL_SX, minWidth: "100px" }}>Status</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -301,15 +311,63 @@ export default function ReportingPage() {
                         "&:last-child td": { borderBottom: 0 },
                       }}
                     >
-                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
+                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 600, color: "#2b2b2b" }}>
                         {r.name}
                       </TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">{r.customers}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">{r.drivers}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="right">{r.fuel}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">{r.jobs}</TableCell>
-                      <TableCell sx={BODY_CELL_SX}>{r.avgJobTime}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="right">{r.driverHrs}</TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="center">
+                        <span style={{ 
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          minWidth: "40px",
+                          height: "32px",
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          color: "#3b82f6",
+                          background: "rgba(59,130,246,0.1)",
+                          borderRadius: "8px",
+                          padding: "0 10px"
+                        }}>
+                          {r.customers}
+                        </span>
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="center">
+                        <span style={{ 
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          minWidth: "40px",
+                          height: "32px",
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          color: "#f59e0b",
+                          background: "rgba(245,158,11,0.1)",
+                          borderRadius: "8px",
+                          padding: "0 10px"
+                        }}>
+                          {r.drivers}
+                        </span>
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="right">
+                        <span style={{ fontSize: "14px", fontWeight: 600, color: "#ce1c1a" }}>
+                          {r.fuel}
+                        </span>
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="center">
+                        <span style={{ fontSize: "14px", fontWeight: 600, color: "#15803d" }}>
+                          {r.jobs}
+                        </span>
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX}>
+                        <span style={{ fontSize: "13px", color: "#887b6a", fontWeight: 500 }}>
+                          {r.avgJobTime}
+                        </span>
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="right">
+                        <span style={{ fontSize: "13px", fontWeight: 500, color: "#2b2b2b" }}>
+                          {r.driverHrs}
+                        </span>
+                      </TableCell>
                       <TableCell sx={BODY_CELL_SX}>
                         <StatusChip status={r.status} />
                       </TableCell>
@@ -335,7 +393,9 @@ export default function ReportingPage() {
             </TableContainer>
           </SectionCard>
         </Grid>
+      </Grid>
 
+      <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <SectionCard
             bodyPadding="24px 26px 26px"
