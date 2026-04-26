@@ -43,15 +43,16 @@ const HEADER_CELL_SX = {
   color: "#887b6a",
   letterSpacing: "0.5px",
   textTransform: "uppercase",
-  borderBottom: "1px solid #f0f0f0",
-  padding: "12px 16px",
+  borderBottom: "2px solid #e5e5e5",
+  padding: "14px 20px",
+  whiteSpace: "nowrap",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
   color: "#2b2b2b",
   borderBottom: "1px solid #f5f5f5",
-  padding: "12px 16px",
+  padding: "14px 20px",
 };
 
 // TODO: replace with real customer data scoped to the franchisee
@@ -496,14 +497,14 @@ export default function FranchiseeReportPage() {
         }}
       >
         <TableContainer>
-          <Table>
+          <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={HEADER_CELL_SX}>Customer Name</TableCell>
-                <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
-                <TableCell sx={HEADER_CELL_SX}>Margin</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="center">Equipment Count</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="right">Avg Fuel/Month</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "30%" }}>Customer Name</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%" }}>Location</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%" }}>Margin</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%", textAlign: "center" }}>Equipment Count</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%", textAlign: "right" }}>Avg Fuel/Month</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -511,7 +512,7 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={c.name}
                   sx={{
-                    "&:hover": { background: "#fafafa" },
+                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
@@ -520,8 +521,8 @@ export default function FranchiseeReportPage() {
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>{c.margin}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">{c.equipment}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="right">{c.avgFuel}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>{c.equipment}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{c.avgFuel}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -539,13 +540,13 @@ export default function FranchiseeReportPage() {
         }}
       >
         <TableContainer>
-          <Table>
+          <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={HEADER_CELL_SX}>Driver Name</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="center">Jobs Completed</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="right">Total Hours</TableCell>
-                <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "30%" }}>Driver Name</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%", textAlign: "center" }}>Jobs Completed</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%", textAlign: "right" }}>Total Hours</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "26%" }}>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -553,15 +554,15 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={d.name}
                   sx={{
-                    "&:hover": { background: "#fafafa" },
+                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
                   <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
                     {d.name}
                   </TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">{d.jobs}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="right">{d.hours}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>{d.jobs}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{d.hours}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>
                     <StatusChip status={d.status} />
                   </TableCell>
@@ -582,14 +583,14 @@ export default function FranchiseeReportPage() {
         }}
       >
         <TableContainer>
-          <Table>
+          <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={HEADER_CELL_SX}>Product Name</TableCell>
-                <TableCell sx={HEADER_CELL_SX}>Category</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="center">Current Stock</TableCell>
-                <TableCell sx={HEADER_CELL_SX} align="right">Unit Price</TableCell>
-                <TableCell sx={HEADER_CELL_SX}>Stock Status</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "30%" }}>Product Name</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "20%" }}>Category</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "18%", textAlign: "center" }}>Current Stock</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%", textAlign: "right" }}>Unit Price</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%" }}>Stock Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -597,7 +598,7 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={item.product}
                   sx={{
-                    "&:hover": { background: "#fafafa" },
+                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
@@ -605,10 +606,10 @@ export default function FranchiseeReportPage() {
                     {item.product}
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>{item.category}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>
                     {item.stock} {item.unit}
                   </TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="right">{item.price}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{item.price}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>
                     <StatusChip
                       status={
