@@ -68,13 +68,22 @@ const DRIVER_ROWS: Array<{
 ];
 
 // TODO: replace with real inventory data scoped to the franchisee
-const INVENTORY_METRICS: Array<{ label: string; value: string; color?: string }> = [
-  { label: "Total fuel in main storage", value: "12,000 gal" },
-  { label: "Total fuel on trucks", value: "2,800 gal" },
-  { label: "Low inventory alerts", value: "0", color: "#15803d" },
-  { label: "Packaged goods SKUs", value: "8" },
-  { label: "3rd party fuel purchases", value: "2 this mo." },
-  { label: "Avg daily consumption", value: "450 gal" },
+const INVENTORY_ROWS: Array<{
+  product: string;
+  category: string;
+  stock: number;
+  unit: string;
+  price: string;
+  status: "in-stock" | "low-stock" | "out-of-stock";
+}> = [
+  { product: "Engine Oil 5W-30", category: "Lubricants", stock: 45, unit: "bottles", price: "$8.99", status: "in-stock" },
+  { product: "Gear Oil 80W-90", category: "Lubricants", stock: 12, unit: "bottles", price: "$12.50", status: "low-stock" },
+  { product: "Mobile Phone Charger", category: "Accessories", stock: 28, unit: "units", price: "$15.99", status: "in-stock" },
+  { product: "Coolant/Antifreeze", category: "Fluids", stock: 34, unit: "gallons", price: "$19.99", status: "in-stock" },
+  { product: "Brake Fluid DOT 4", category: "Fluids", stock: 8, unit: "bottles", price: "$6.99", status: "low-stock" },
+  { product: "Windshield Washer Fluid", category: "Fluids", stock: 52, unit: "gallons", price: "$4.99", status: "in-stock" },
+  { product: "Air Fresheners", category: "Accessories", stock: 0, unit: "packs", price: "$2.99", status: "out-of-stock" },
+  { product: "Motor Oil 10W-40", category: "Lubricants", stock: 38, unit: "bottles", price: "$9.99", status: "in-stock" },
 ];
 
 export default function FranchiseeReportPage() {
@@ -257,89 +266,51 @@ export default function FranchiseeReportPage() {
 
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <SectionCard
-            bodyPadding="24px 26px 26px"
-            style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-              <span
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "14px",
-                  background:
-                    "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%, #bbf7d0 100%)",
-                  color: "#15803d",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow:
-                    "0 6px 16px rgba(21,128,61,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
-                }}
-              >
-                <InventoryIcon sx={{ fontSize: 26 }} />
-              </span>
-              <div>
-                <h2
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: 600,
-                    color: "#2b2b2b",
-                    margin: "0 0 2px",
-                    letterSpacing: "-0.2px",
-                  }}
-                >
-                  Inventory Analytics
-                </h2>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#887b6a",
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <WarningIcon sx={{ fontSize: 14, color: "#f59e0b" }} />
-                  Current inventory status
-                </p>
-              </div>
-            </div>
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {INVENTORY_METRICS.map((m, idx) => (
-                <li
-                  key={m.label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "12px 14px",
-                    marginBottom: idx === INVENTORY_METRICS.length - 1 ? 0 : "6px",
-                    borderRadius: "8px",
-                    background: m.color ? "rgba(21,128,61,0.03)" : "transparent",
-                    border: m.color ? "1px solid rgba(21,128,61,0.1)" : "1px solid transparent",
-                    transition: "all 200ms ease",
-                  }}
-                >
-                  <span style={{ fontSize: "13px", color: "#887b6a", fontWeight: 500 }}>
-                    {m.label}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      color: m.color ?? "#2b2b2b",
-                      letterSpacing: "-0.1px",
-                    }}
-                  >
-                    {m.value}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <SectionCard title="Inventory" bodyPadding={0}>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={HEADER_CELL_SX}>Product</TableCell>
+                    <TableCell sx={HEADER_CELL_SX}>Category</TableCell>
+                    <TableCell sx={HEADER_CELL_SX} align="center">Stock</TableCell>
+                    <TableCell sx={HEADER_CELL_SX} align="right">Price</TableCell>
+                    <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {INVENTORY_ROWS.map((item) => (
+                    <TableRow
+                      key={item.product}
+                      sx={{
+                        "&:hover": { background: "#fafafa" },
+                        "&:last-child td": { borderBottom: 0 },
+                      }}
+                    >
+                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
+                        {item.product}
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX}>{item.category}</TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="center">
+                        {item.stock} {item.unit}
+                      </TableCell>
+                      <TableCell sx={BODY_CELL_SX} align="right">{item.price}</TableCell>
+                      <TableCell sx={BODY_CELL_SX}>
+                        <StatusChip
+                          status={
+                            item.status === "in-stock"
+                              ? "active"
+                              : item.status === "low-stock"
+                                ? "flagged"
+                                : "frozen"
+                          }
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </SectionCard>
         </Grid>
       </Grid>
