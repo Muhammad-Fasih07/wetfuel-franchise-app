@@ -487,16 +487,23 @@ export default function FranchiseeReportPage() {
       </SectionCard>
 
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <SectionCard title="Customers" bodyPadding={0}>
+        <Grid item xs={12} lg={4}>
+          <SectionCard 
+            title="Customers" 
+            bodyPadding={0}
+            style={{
+              height: "100%",
+              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+              border: "1px solid #e5e5e5",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            }}
+          >
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell sx={HEADER_CELL_SX}>Name</TableCell>
                     <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Margin</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="center">Equipment</TableCell>
                     <TableCell sx={HEADER_CELL_SX} align="right">Avg Fuel</TableCell>
                   </TableRow>
                 </TableHead>
@@ -513,8 +520,6 @@ export default function FranchiseeReportPage() {
                         {c.name}
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
-                      <TableCell sx={BODY_CELL_SX}>{c.margin}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="center">{c.equipment}</TableCell>
                       <TableCell sx={BODY_CELL_SX} align="right">{c.avgFuel}</TableCell>
                     </TableRow>
                   ))}
@@ -523,18 +528,24 @@ export default function FranchiseeReportPage() {
             </TableContainer>
           </SectionCard>
         </Grid>
-      </Grid>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <SectionCard title="Drivers" bodyPadding={0}>
+        <Grid item xs={12} lg={4}>
+          <SectionCard 
+            title="Drivers" 
+            bodyPadding={0}
+            style={{
+              height: "100%",
+              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+              border: "1px solid #e5e5e5",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            }}
+          >
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell sx={HEADER_CELL_SX}>Name</TableCell>
                     <TableCell sx={HEADER_CELL_SX} align="center">Jobs</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="right">Hours</TableCell>
                     <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
                   </TableRow>
                 </TableHead>
@@ -551,7 +562,6 @@ export default function FranchiseeReportPage() {
                         {d.name}
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX} align="center">{d.jobs}</TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="right">{d.hours}</TableCell>
                       <TableCell sx={BODY_CELL_SX}>
                         <StatusChip status={d.status} />
                       </TableCell>
@@ -562,19 +572,24 @@ export default function FranchiseeReportPage() {
             </TableContainer>
           </SectionCard>
         </Grid>
-      </Grid>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <SectionCard title="Inventory" bodyPadding={0}>
+        <Grid item xs={12} lg={4}>
+          <SectionCard 
+            title="Inventory" 
+            bodyPadding={0}
+            style={{
+              height: "100%",
+              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+              border: "1px solid #e5e5e5",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            }}
+          >
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
                     <TableCell sx={HEADER_CELL_SX}>Product</TableCell>
-                    <TableCell sx={HEADER_CELL_SX}>Category</TableCell>
                     <TableCell sx={HEADER_CELL_SX} align="center">Stock</TableCell>
-                    <TableCell sx={HEADER_CELL_SX} align="right">Price</TableCell>
                     <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
                   </TableRow>
                 </TableHead>
@@ -590,11 +605,9 @@ export default function FranchiseeReportPage() {
                       <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
                         {item.product}
                       </TableCell>
-                      <TableCell sx={BODY_CELL_SX}>{item.category}</TableCell>
                       <TableCell sx={BODY_CELL_SX} align="center">
                         {item.stock} {item.unit}
                       </TableCell>
-                      <TableCell sx={BODY_CELL_SX} align="right">{item.price}</TableCell>
                       <TableCell sx={BODY_CELL_SX}>
                         <StatusChip
                           status={
