@@ -22,8 +22,6 @@ import {
   PeopleAltOutlined as PeopleAltOutlinedIcon,
   PersonOutline as PersonOutlineIcon,
   ShoppingCart as ShoppingCartIcon,
-  TrendingUp as TrendingUpIcon,
-  Warning as WarningIcon,
 } from "@mui/icons-material";
 
 import { Button } from "@/components/ui/Button";
@@ -31,8 +29,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { StatCard } from "@/components/ui/StatCard";
 import { StatusChip } from "@/components/ui/StatusChip";
-import { DriverDataTable } from "@/components/reporting/DriverDataTable";
-import { CustomerDataTable } from "@/components/reporting/CustomerDataTable";
 import { PERFORMANCE_ROWS } from "./_data";
 
 const HEADER_CELL_SX = {
@@ -146,8 +142,6 @@ export default function ReportingPage() {
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "frozen">(
     "all",
   );
-  const [expandedSection, setExpandedSection] = useState<"drivers" | "customers" | "inventory" | null>(null);
-
   const filteredPerformance = useMemo(() => {
     if (statusFilter === "all") return PERFORMANCE_ROWS;
     return PERFORMANCE_ROWS.filter((r) => r.status === statusFilter);
@@ -386,20 +380,10 @@ export default function ReportingPage() {
             bodyPadding="24px 26px 26px"
             style={{
               background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
-              cursor: "pointer",
-              transition: "all 250ms ease",
+              cursor: "default",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(59,130,246,0.15), 0 12px 32px -16px rgba(59,130,246,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
-            }}
-            onClick={() => setExpandedSection(expandedSection === "customers" ? null : "customers")}
+            onMouseEnter={() => undefined}
+            onMouseLeave={() => undefined}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <span
@@ -425,25 +409,12 @@ export default function ReportingPage() {
                     fontSize: "17px",
                     fontWeight: 600,
                     color: "#2b2b2b",
-                    margin: "0 0 2px",
+                    margin: 0,
                     letterSpacing: "-0.2px",
                   }}
                 >
                   Customer Analytics
                 </h2>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#887b6a",
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <TrendingUpIcon sx={{ fontSize: 14, color: "#15803d" }} />
-                  Click to view all customers
-                </p>
               </div>
             </div>
             <MetricList rows={CUSTOMER_METRICS} />
@@ -454,20 +425,10 @@ export default function ReportingPage() {
             bodyPadding="24px 26px 26px"
             style={{
               background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
-              cursor: "pointer",
-              transition: "all 250ms ease",
+              cursor: "default",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(245,158,11,0.15), 0 12px 32px -16px rgba(245,158,11,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
-            }}
-            onClick={() => setExpandedSection(expandedSection === "drivers" ? null : "drivers")}
+            onMouseEnter={() => undefined}
+            onMouseLeave={() => undefined}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <span
@@ -493,25 +454,12 @@ export default function ReportingPage() {
                     fontSize: "17px",
                     fontWeight: 600,
                     color: "#2b2b2b",
-                    margin: "0 0 2px",
+                    margin: 0,
                     letterSpacing: "-0.2px",
                   }}
                 >
                   Driver Analytics
                 </h2>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#887b6a",
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <TrendingUpIcon sx={{ fontSize: 14, color: "#15803d" }} />
-                  Click to view all drivers
-                </p>
               </div>
             </div>
             <MetricList rows={DRIVER_METRICS} />
@@ -522,20 +470,10 @@ export default function ReportingPage() {
             bodyPadding="24px 26px 26px"
             style={{
               background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
-              cursor: "pointer",
-              transition: "all 250ms ease",
+              cursor: "default",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow =
-                "0 8px 24px rgba(21,128,61,0.15), 0 12px 32px -16px rgba(21,128,61,0.25)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
-            }}
-            onClick={() => setExpandedSection(expandedSection === "inventory" ? null : "inventory")}
+            onMouseEnter={() => undefined}
+            onMouseLeave={() => undefined}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <span
@@ -561,104 +499,18 @@ export default function ReportingPage() {
                     fontSize: "17px",
                     fontWeight: 600,
                     color: "#2b2b2b",
-                    margin: "0 0 2px",
+                    margin: 0,
                     letterSpacing: "-0.2px",
                   }}
                 >
                   Inventory Analytics
                 </h2>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#887b6a",
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <WarningIcon sx={{ fontSize: 14, color: "#f59e0b" }} />
-                  Click to view details
-                </p>
               </div>
             </div>
             <MetricList rows={INVENTORY_METRICS} />
           </SectionCard>
         </Grid>
       </Grid>
-
-      {expandedSection === "drivers" && (
-        <Grid container spacing={3} className="animate-slide-up">
-          <Grid item xs={12}>
-            <SectionCard
-              title="All Network Drivers"
-              subtitle="Comprehensive driver list with performance metrics"
-              bodyPadding={0}
-            >
-              <DriverDataTable />
-            </SectionCard>
-          </Grid>
-        </Grid>
-      )}
-
-      {expandedSection === "customers" && (
-        <Grid container spacing={3} className="animate-slide-up">
-          <Grid item xs={12}>
-            <SectionCard
-              title="All Network Customers"
-              subtitle="Complete customer database across all franchisees"
-              bodyPadding={0}
-            >
-              <CustomerDataTable />
-            </SectionCard>
-          </Grid>
-        </Grid>
-      )}
-
-      {expandedSection === "inventory" && (
-        <Grid container spacing={3} className="animate-slide-up">
-          <Grid item xs={12}>
-            <SectionCard
-              title="Inventory Details"
-              subtitle="Detailed inventory breakdown and analytics"
-              bodyPadding="28px 32px"
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <div
-                    style={{
-                      padding: "20px",
-                      borderRadius: "12px",
-                      background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-                      border: "1.5px solid rgba(21,128,61,0.2)",
-                    }}
-                  >
-                    <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#15803d", margin: "0 0 16px" }}>
-                      Fuel Storage Overview
-                    </h3>
-                    <MetricList rows={INVENTORY_METRICS.slice(0, 3)} />
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <div
-                    style={{
-                      padding: "20px",
-                      borderRadius: "12px",
-                      background: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
-                      border: "1.5px solid rgba(245,158,11,0.2)",
-                    }}
-                  >
-                    <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f59e0b", margin: "0 0 16px" }}>
-                      Supplies & Consumption
-                    </h3>
-                    <MetricList rows={INVENTORY_METRICS.slice(3)} />
-                  </div>
-                </Grid>
-              </Grid>
-            </SectionCard>
-          </Grid>
-        </Grid>
-      )}
     </div>
   );
 }
