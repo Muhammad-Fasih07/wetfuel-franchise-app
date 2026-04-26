@@ -49,9 +49,19 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (values: LoginFormValues) => {
-    await signIn({ email: values.email, password: values.password });
-    // TODO: only redirect after a real successful auth response
-    router.push("/");
+    try {
+      await signIn({ email: values.email, password: values.password });
+      
+      // Set authentication cookie (temporary until real API is connected)
+      document.cookie = "auth-token=authenticated; path=/; max-age=86400"; // 24 hours
+      
+      // Redirect to dashboard or the original requested page
+      const urlParams = new URLSearchParams(window.location.search);
+      const from = urlParams.get("from") || "/";
+      router.push(from);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (

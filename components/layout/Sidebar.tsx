@@ -43,6 +43,9 @@ export function Sidebar() {
   const router = useRouter();
 
   const handleSignOut = () => {
+    // Clear authentication cookie
+    document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    
     // TODO: call signOut() from next-auth and clear authStore before redirecting
     router.push("/login");
   };
