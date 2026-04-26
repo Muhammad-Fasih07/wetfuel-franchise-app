@@ -444,7 +444,7 @@ export default function FranchiseeReportPage() {
             <Button
               fullWidth
               startIcon={<EditIcon sx={{ fontSize: 18 }} />}
-              onClick={() => router.push(`/franchisees/${row.id}/edit`)}
+              onClick={() => router.push(`/franchisees/${row.id}`)}
             >
               Edit Details
             </Button>
