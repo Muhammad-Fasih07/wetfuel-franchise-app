@@ -29,19 +29,6 @@ const NETWORK_HEALTH_ROWS: Array<{
   { label: "Low inventory alerts", value: "2", valueColor: "#f0797a" },
 ];
 
-// TODO: replace with real activity feed
-const ACTIVITY_ITEMS: Array<{
-  color: string;
-  text: string;
-  time: string;
-}> = [
-  { color: "#ce1c1a", text: "AlphaFuel Co. registered", time: "2 hours ago" },
-  { color: "#15803d", text: "34 jobs completed — PrimeFuel LLC", time: "4 hours ago" },
-  { color: "#f0797a", text: "NorthFuel Ltd. account frozen", time: "Yesterday, 3:40 PM" },
-  { color: "#3b82f6", text: "12 new customers — SouthFuel Inc.", time: "Yesterday, 11:00 AM" },
-  { color: "#f59e0b", text: "Low fuel inventory — WestEnd Fuel", time: "2 days ago" },
-];
-
 // TODO: replace with real fuel volume rankings
 const TOP_FRANCHISEES: Array<{
   rank: number;
@@ -185,63 +172,6 @@ export default function DashboardOverviewPage() {
                     >
                       {row.value}
                     </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section style={CARD_BASE}>
-              <h2 style={{ ...CARD_TITLE, marginBottom: "16px" }}>
-                Recent Activity
-              </h2>
-
-              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                {ACTIVITY_ITEMS.map((item, idx) => (
-                  <li
-                    key={`${item.text}-${idx}`}
-                    style={{
-                      display: "flex",
-                      gap: "12px",
-                      alignItems: "flex-start",
-                      padding: "10px 0",
-                      borderBottom:
-                        idx === ACTIVITY_ITEMS.length - 1
-                          ? "none"
-                          : "1px solid #f5f5f5",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        background: item.color,
-                        marginTop: "6px",
-                        flexShrink: 0,
-                      }}
-                    />
-                    <div style={{ minWidth: 0 }}>
-                      <p
-                        style={{
-                          fontSize: "13px",
-                          color: "#2b2b2b",
-                          fontWeight: 500,
-                          margin: 0,
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {item.text}
-                      </p>
-                      <p
-                        style={{
-                          fontSize: "11px",
-                          color: "#887b6a",
-                          margin: "2px 0 0 0",
-                        }}
-                      >
-                        {item.time}
-                      </p>
-                    </div>
                   </li>
                 ))}
               </ul>
