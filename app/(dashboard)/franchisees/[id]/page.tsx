@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   AcUnit as AcUnitIcon,
   ArrowBack as ArrowBackIcon,
@@ -18,30 +18,6 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { getFranchiseeStubById } from "../_data";
 
-const HEADER_CELL_SX = {
-  background: "#fafafa",
-  fontSize: "11px",
-  fontWeight: 600,
-  color: "#887b6a",
-  letterSpacing: "0.5px",
-  textTransform: "uppercase",
-  borderBottom: "1px solid #f0f0f0",
-  padding: "12px 16px",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f5f5f5",
-  padding: "12px 16px",
-};
-
-// TODO: replace with real customer data scoped to this franchisee.
-const CUSTOMER_ROWS = [
-  { name: "Lone Star Logistics", location: "Houston, TX", margin: "12%", equipment: 6, avgFuel: "1,200 gal" },
-  { name: "Bayou Transport", location: "Houston, TX", margin: "9%", equipment: 4, avgFuel: "880 gal" },
-  { name: "Gulfside Hauling", location: "Galveston, TX", margin: "10%", equipment: 3, avgFuel: "640 gal" },
-];
 
 const LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
@@ -154,13 +130,6 @@ export default function FranchiseeDetailPage() {
   const closeConfirm = () => setConfirm({ open: false, action: null });
   const isFrozen = row.status === "frozen";
 
-  const performanceRows: Array<{ label: string; value: string }> = [
-    { label: "Active Drivers", value: String(row.drivers) },
-    { label: "Trucks Enrolled", value: String(row.trucks) },
-    { label: "Avg Fuel/Month", value: row.avgFuel },
-    { label: "Customers", value: String(row.customers) },
-  ];
-
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <PageHeader
@@ -228,83 +197,11 @@ export default function FranchiseeDetailPage() {
                 </Grid>
               </Grid>
             </SectionCard>
-
-            <SectionCard title="Customers" bodyPadding={0}>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell sx={HEADER_CELL_SX}>Customer Name</TableCell>
-                      <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
-                      <TableCell sx={HEADER_CELL_SX}>Margin</TableCell>
-                      <TableCell sx={HEADER_CELL_SX} align="center">Equipment Count</TableCell>
-                      <TableCell sx={HEADER_CELL_SX} align="right">Avg Fuel/Mo</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {CUSTOMER_ROWS.map((c) => (
-                      <TableRow
-                        key={c.name}
-                        sx={{
-                          "&:hover": { background: "#fafafa" },
-                          "&:last-child td": { borderBottom: 0 },
-                        }}
-                      >
-                        <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                          {c.name}
-                        </TableCell>
-                        <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
-                        <TableCell sx={BODY_CELL_SX}>{c.margin}</TableCell>
-                        <TableCell sx={BODY_CELL_SX} align="center">
-                          {c.equipment}
-                        </TableCell>
-                        <TableCell sx={BODY_CELL_SX} align="right">
-                          {c.avgFuel}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </SectionCard>
           </div>
         </Grid>
 
         <Grid item xs={12} lg={4}>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <SectionCard title="Performance" bodyPadding="8px 24px 16px">
-              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                {performanceRows.map((m, idx) => (
-                  <li
-                    key={m.label}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px 0",
-                      borderBottom:
-                        idx === performanceRows.length - 1
-                          ? "none"
-                          : "1px solid #f5f5f5",
-                    }}
-                  >
-                    <span style={{ fontSize: "13px", color: "#887b6a" }}>
-                      {m.label}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: 500,
-                        color: "#2b2b2b",
-                      }}
-                    >
-                      {m.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </SectionCard>
-
             <SectionCard title="Account Actions" bodyPadding="20px 24px 24px">
               <div
                 style={{
