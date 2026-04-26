@@ -385,7 +385,7 @@ export default function ReportingPage() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} lg={4}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
@@ -453,10 +453,7 @@ export default function ReportingPage() {
             <MetricList rows={CUSTOMER_METRICS} />
           </SectionCard>
         </Grid>
-      </Grid>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} lg={4}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
@@ -524,10 +521,7 @@ export default function ReportingPage() {
             <MetricList rows={DRIVER_METRICS} />
           </SectionCard>
         </Grid>
-      </Grid>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} lg={4}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
