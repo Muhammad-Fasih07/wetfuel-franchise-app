@@ -14,8 +14,10 @@ import {
   AccessTimeOutlined as AccessTimeOutlinedIcon,
   ArrowBack as ArrowBackIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
+  Inventory as InventoryIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
+  Warning as WarningIcon,
 } from "@mui/icons-material";
 
 import { Button } from "@/components/ui/Button";
@@ -63,6 +65,16 @@ const DRIVER_ROWS: Array<{
   { name: "Avery Chen", jobs: 58, hours: "192 hrs", status: "active" },
   { name: "Liam Patel", jobs: 41, hours: "138 hrs", status: "active" },
   { name: "Sofia Ortiz", jobs: 22, hours: "78 hrs", status: "flagged" },
+];
+
+// TODO: replace with real inventory data scoped to the franchisee
+const INVENTORY_METRICS: Array<{ label: string; value: string; color?: string }> = [
+  { label: "Total fuel in main storage", value: "12,000 gal" },
+  { label: "Total fuel on trucks", value: "2,800 gal" },
+  { label: "Low inventory alerts", value: "0", color: "#15803d" },
+  { label: "Packaged goods SKUs", value: "8" },
+  { label: "3rd party fuel purchases", value: "2 this mo." },
+  { label: "Avg daily consumption", value: "450 gal" },
 ];
 
 export default function FranchiseeReportPage() {
@@ -166,7 +178,7 @@ export default function FranchiseeReportPage() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={6}>
+        <Grid item xs={12}>
           <SectionCard title="Customers" bodyPadding={0}>
             <TableContainer>
               <Table>
@@ -202,8 +214,10 @@ export default function FranchiseeReportPage() {
             </TableContainer>
           </SectionCard>
         </Grid>
+      </Grid>
 
-        <Grid item xs={12} lg={6}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
           <SectionCard title="Drivers" bodyPadding={0}>
             <TableContainer>
               <Table>
@@ -237,6 +251,95 @@ export default function FranchiseeReportPage() {
                 </TableBody>
               </Table>
             </TableContainer>
+          </SectionCard>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <SectionCard
+            bodyPadding="24px 26px 26px"
+            style={{
+              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+              <span
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "14px",
+                  background:
+                    "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%, #bbf7d0 100%)",
+                  color: "#15803d",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow:
+                    "0 6px 16px rgba(21,128,61,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
+                }}
+              >
+                <InventoryIcon sx={{ fontSize: 26 }} />
+              </span>
+              <div>
+                <h2
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: 600,
+                    color: "#2b2b2b",
+                    margin: "0 0 2px",
+                    letterSpacing: "-0.2px",
+                  }}
+                >
+                  Inventory Analytics
+                </h2>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "#887b6a",
+                    margin: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <WarningIcon sx={{ fontSize: 14, color: "#f59e0b" }} />
+                  Current inventory status
+                </p>
+              </div>
+            </div>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {INVENTORY_METRICS.map((m, idx) => (
+                <li
+                  key={m.label}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "12px 14px",
+                    marginBottom: idx === INVENTORY_METRICS.length - 1 ? 0 : "6px",
+                    borderRadius: "8px",
+                    background: m.color ? "rgba(21,128,61,0.03)" : "transparent",
+                    border: m.color ? "1px solid rgba(21,128,61,0.1)" : "1px solid transparent",
+                    transition: "all 200ms ease",
+                  }}
+                >
+                  <span style={{ fontSize: "13px", color: "#887b6a", fontWeight: 500 }}>
+                    {m.label}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      color: m.color ?? "#2b2b2b",
+                      letterSpacing: "-0.1px",
+                    }}
+                  >
+                    {m.value}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </SectionCard>
         </Grid>
       </Grid>
