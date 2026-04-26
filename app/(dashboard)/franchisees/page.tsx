@@ -141,14 +141,12 @@ export default function FranchiseesPage() {
     setActiveRow(null);
   };
 
-  const handleAction = (action: "view" | "edit" | "freeze" | "unfreeze") => {
+  const handleAction = (action: "edit" | "freeze" | "unfreeze") => {
     const row = activeRow;
     closeMenu();
     if (!row) return;
 
-    if (action === "view") {
-      router.push(`/franchisees/${row.id}`);
-    } else if (action === "edit") {
+    if (action === "edit") {
       router.push(`/franchisees/${row.id}/edit`);
     } else {
       setConfirm({ open: true, action, row });
@@ -278,9 +276,7 @@ export default function FranchiseesPage() {
                 <TableRow
                   key={row.id}
                   hover
-                  onClick={() => router.push(`/franchisees/${row.id}`)}
                   sx={{
-                    cursor: "pointer",
                     "&:hover": { background: "#fafafa" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
@@ -381,12 +377,6 @@ export default function FranchiseesPage() {
           },
         }}
       >
-        <MenuItem
-          onClick={() => handleAction("view")}
-          sx={{ fontSize: "13px", color: "#2b2b2b" }}
-        >
-          View details
-        </MenuItem>
         <MenuItem
           onClick={() => handleAction("edit")}
           sx={{ fontSize: "13px", color: "#2b2b2b" }}

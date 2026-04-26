@@ -234,8 +234,8 @@ export default function ReportingPage() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <SectionCard
-            title="Franchisee Performance"
-            subtitle="Detailed performance metrics and analytics for all franchisees"
+            title="Franchisee Information & Performance"
+            subtitle="Comprehensive overview of all franchisees with detailed performance metrics"
             action={
               <TextField
                 select
@@ -385,7 +385,7 @@ export default function ReportingPage() {
       </Grid>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={4}>
+        <Grid item xs={12}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
@@ -453,7 +453,10 @@ export default function ReportingPage() {
             <MetricList rows={CUSTOMER_METRICS} />
           </SectionCard>
         </Grid>
-        <Grid item xs={12} lg={4}>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
@@ -521,7 +524,10 @@ export default function ReportingPage() {
             <MetricList rows={DRIVER_METRICS} />
           </SectionCard>
         </Grid>
-        <Grid item xs={12} lg={4}>
+      </Grid>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
