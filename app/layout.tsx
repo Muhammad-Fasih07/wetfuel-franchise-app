@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { MuiProvider } from "../components/providers/MuiProvider";
+import { DevAuthCleaner } from "../components/providers/DevAuthCleaner";
 import "../styles/globals.css";
 import "../styles/tokens.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         <MuiProvider>
+          <DevAuthCleaner />
           {children}
         </MuiProvider>
       </body>

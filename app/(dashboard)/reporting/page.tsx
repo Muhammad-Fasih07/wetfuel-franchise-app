@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Grid,
-  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -141,8 +140,6 @@ function MetricList({
   );
 }
 
-const RANK_COLORS = ["#ce1c1a", "#e05555", "#e5e5e5", "#e5e5e5", "#e5e5e5"];
-
 export default function ReportingPage() {
   const router = useRouter();
   const [range, setRange] = useState("30d");
@@ -155,14 +152,6 @@ export default function ReportingPage() {
     if (statusFilter === "all") return PERFORMANCE_ROWS;
     return PERFORMANCE_ROWS.filter((r) => r.status === statusFilter);
   }, [statusFilter]);
-
-  const top5 = useMemo(() => {
-    return [...PERFORMANCE_ROWS]
-      .sort((a, b) => b.fuelGal - a.fuelGal)
-      .slice(0, 5);
-  }, []);
-
-  const topMax = top5[0]?.fuelGal ?? 1;
 
   return (
     <div className="animate-fade-in" style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
@@ -391,198 +380,6 @@ export default function ReportingPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </SectionCard>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12} lg={4}>
-          <SectionCard
-            bodyPadding="24px 26px 26px"
-            style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fffbeb 100%)",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-              <span
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "14px",
-                  background:
-                    "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
-                  color: "#ce1c1a",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow:
-                    "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
-                }}
-              >
-                <LocalGasStationOutlinedIcon sx={{ fontSize: 26 }} />
-              </span>
-              <div>
-                <h2
-                  style={{
-                    fontSize: "17px",
-                    fontWeight: 600,
-                    color: "#2b2b2b",
-                    margin: "0 0 2px",
-                    letterSpacing: "-0.2px",
-                  }}
-                >
-                  Top Performers
-                </h2>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#887b6a",
-                    margin: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <TrendingUpIcon sx={{ fontSize: 14, color: "#15803d" }} />
-                  By fuel volume
-                </p>
-              </div>
-            </div>
-
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {top5.map((r, idx) => {
-                const percent = Math.round((r.fuelGal / topMax) * 100);
-                const isTop = idx === 0;
-                return (
-                  <li
-                    key={r.id}
-                    style={{
-                      marginBottom: idx === top5.length - 1 ? 0 : "18px",
-                      padding: "12px",
-                      borderRadius: "10px",
-                      background: isTop 
-                        ? "linear-gradient(90deg, rgba(206,28,26,0.04) 0%, rgba(255,255,255,0) 100%)"
-                        : "transparent",
-                      border: isTop ? "1.5px solid rgba(206,28,26,0.15)" : "1.5px solid transparent",
-                      transition: "all 200ms ease",
-                      cursor: "pointer",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 
-                        "linear-gradient(90deg, rgba(206,28,26,0.06) 0%, rgba(255,255,255,0.5) 100%)";
-                      e.currentTarget.style.borderColor = "rgba(206,28,26,0.2)";
-                      e.currentTarget.style.transform = "translateX(4px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = isTop
-                        ? "linear-gradient(90deg, rgba(206,28,26,0.04) 0%, rgba(255,255,255,0) 100%)"
-                        : "transparent";
-                      e.currentTarget.style.borderColor = isTop 
-                        ? "rgba(206,28,26,0.15)"
-                        : "transparent";
-                      e.currentTarget.style.transform = "translateX(0)";
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        marginBottom: "10px",
-                        gap: "12px",
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px", flex: 1, minWidth: 0 }}>
-                        <span
-                          style={{
-                            minWidth: "28px",
-                            height: "28px",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: "12px",
-                            fontWeight: 700,
-                            color: isTop ? "#ffffff" : idx < 3 ? "#ce1c1a" : "#887b6a",
-                            background: isTop
-                              ? "linear-gradient(135deg, #ce1c1a 0%, #8b1816 100%)"
-                              : idx < 3
-                                ? "linear-gradient(135deg, rgba(206,28,26,0.15) 0%, rgba(206,28,26,0.08) 100%)"
-                                : "#f5f5f5",
-                            borderRadius: "8px",
-                            flexShrink: 0,
-                            boxShadow: isTop
-                              ? "0 3px 8px rgba(206,28,26,0.3)"
-                              : "none",
-                            border: idx < 3 ? "1px solid rgba(206,28,26,0.2)" : "none",
-                          }}
-                        >
-                          {idx + 1}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: idx < 3 ? 600 : 500,
-                            color: "#2b2b2b",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            letterSpacing: "-0.1px",
-                          }}
-                        >
-                          {r.name}
-                        </span>
-                      </div>
-                      <span
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: idx < 3 ? "#ce1c1a" : "#887b6a",
-                          flexShrink: 0,
-                        }}
-                      >
-                        {r.fuel}
-                      </span>
-                    </div>
-                    <div style={{ position: "relative" }}>
-                      <LinearProgress
-                        variant="determinate"
-                        value={percent}
-                        sx={{
-                          height: 8,
-                          borderRadius: 6,
-                          backgroundColor: "#f5f5f5",
-                          border: "1px solid #ececec",
-                          overflow: "hidden",
-                          "& .MuiLinearProgress-bar": {
-                            background: isTop
-                              ? "linear-gradient(90deg, #f0797a 0%, #ce1c1a 60%, #8b1816 100%)"
-                              : idx < 3
-                                ? "linear-gradient(90deg, #fca5a5 0%, #f87171 50%, #dc2626 100%)"
-                                : "linear-gradient(90deg, #d4d4d4 0%, #a3a3a3 100%)",
-                            borderRadius: 6,
-                            boxShadow: idx < 3 ? "inset 0 1px 2px rgba(0,0,0,0.1)" : "none",
-                          },
-                        }}
-                      />
-                      <span
-                        style={{
-                          position: "absolute",
-                          right: "6px",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                          fontSize: "10px",
-                          fontWeight: 700,
-                          color: percent > 50 ? "#ffffff" : "#887b6a",
-                          letterSpacing: "0.3px",
-                        }}
-                      >
-                        {percent}%
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
           </SectionCard>
         </Grid>
       </Grid>
