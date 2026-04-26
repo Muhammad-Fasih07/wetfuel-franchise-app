@@ -7,13 +7,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Alert, Grid, Snackbar } from "@mui/material";
 import { z } from "zod";
 import {
-  AcUnit as AcUnitIcon,
   ArrowBack as ArrowBackIcon,
-  DeleteOutline as DeleteOutlineIcon,
 } from "@mui/icons-material";
 
 import { Button } from "@/components/ui/Button";
-import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Input } from "@/components/ui/Input";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -49,35 +46,12 @@ const SECTION_LABEL: React.CSSProperties = {
   fontWeight: 600,
 };
 
-const DANGER_BTN_SX: React.CSSProperties = {
-  background: "#ffffff",
-  border: "1px solid #f0797a",
-  color: "#f0797a",
-  height: "40px",
-  borderRadius: "8px",
-  padding: "0 16px",
-  fontSize: "13px",
-  fontWeight: 500,
-  textTransform: "none",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "6px",
-  cursor: "pointer",
-  transition: "background 150ms ease",
-};
-
 export default function EditFranchiseePage() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id ?? "";
   const row = getFranchiseeStubById(id);
   const [toastOpen, setToastOpen] = useState(false);
-
-  const [confirm, setConfirm] = useState<{
-    open: boolean;
-    action: "freeze" | "unfreeze" | "delete" | null;
-  }>({ open: false, action: null });
 
   const {
     register,
@@ -148,9 +122,6 @@ export default function EditFranchiseePage() {
     } as never);
     setToastOpen(true);
   };
-
-  const closeConfirm = () => setConfirm({ open: false, action: null });
-  const isFrozen = row.status === "frozen";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -256,156 +227,6 @@ export default function EditFranchiseePage() {
           </div>
         </div>
       </form>
-
-      <div style={{ maxWidth: "680px", margin: "0 auto", width: "100%" }}>
-        <section
-          style={{
-            background: "#ffffff",
-            border: "1px solid #e5e5e5",
-            borderLeft: "3px solid #f0797a",
-            borderRadius: "0 12px 12px 0",
-            boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-            padding: "24px 28px",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "14px",
-              color: "#dc2626",
-              fontWeight: 600,
-              margin: 0,
-            }}
-          >
-            Danger Zone
-          </p>
-          <p
-            style={{
-              fontSize: "12px",
-              color: "#887b6a",
-              margin: "4px 0 16px",
-            }}
-          >
-            Irreversible and high-impact actions for this franchisee.
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "12px",
-              padding: "12px 0",
-              borderBottom: "1px solid #fef2f2",
-              flexWrap: "wrap",
-            }}
-          >
-            <div style={{ minWidth: 0, flex: 1 }}>
-              <p style={{ fontSize: "13px", fontWeight: 500, color: "#2b2b2b", margin: 0 }}>
-                {isFrozen
-                  ? "Unfreeze this franchisee account"
-                  : "Freeze this franchisee account"}
-              </p>
-              <p style={{ fontSize: "11px", color: "#887b6a", margin: "2px 0 0 0" }}>
-                {isFrozen
-                  ? "Restore access to the platform for this partner."
-                  : "Temporarily revoke access to the platform for this partner."}
-              </p>
-            </div>
-            <button
-              type="button"
-              style={DANGER_BTN_SX as React.CSSProperties}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.background =
-                  "#fff5f5")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.background =
-                  "#ffffff")
-              }
-              onClick={() =>
-                setConfirm({
-                  open: true,
-                  action: isFrozen ? "unfreeze" : "freeze",
-                })
-              }
-            >
-              <AcUnitIcon sx={{ fontSize: 16 }} />
-              {isFrozen ? "Unfreeze" : "Freeze"}
-            </button>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "12px",
-              padding: "12px 0",
-              flexWrap: "wrap",
-            }}
-          >
-            <div style={{ minWidth: 0, flex: 1 }}>
-              <p style={{ fontSize: "13px", fontWeight: 500, color: "#2b2b2b", margin: 0 }}>
-                Permanently remove franchisee
-              </p>
-              <p style={{ fontSize: "11px", color: "#887b6a", margin: "2px 0 0 0" }}>
-                Removes the franchisee, their admin account, and all history. This cannot be undone.
-              </p>
-            </div>
-            <button
-              type="button"
-              style={DANGER_BTN_SX as React.CSSProperties}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.background =
-                  "#fff5f5")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.background =
-                  "#ffffff")
-              }
-              onClick={() => setConfirm({ open: true, action: "delete" })}
-            >
-              <DeleteOutlineIcon sx={{ fontSize: 16 }} />
-              Remove
-            </button>
-          </div>
-        </section>
-      </div>
-
-      <ConfirmDialog
-        open={confirm.open && confirm.action !== "delete"}
-        title={
-          confirm.action === "freeze"
-            ? "Freeze this account?"
-            : "Unfreeze this account?"
-        }
-        message={
-          confirm.action === "freeze"
-            ? "The franchisee will lose access immediately."
-            : "The franchisee will regain full access."
-        }
-        confirmLabel={confirm.action === "freeze" ? "Freeze" : "Unfreeze"}
-        confirmColor={confirm.action === "freeze" ? "#f0797a" : "#ce1c1a"}
-        onConfirm={() => {
-          // TODO: call freezeFranchisee / unfreezeFranchisee
-          closeConfirm();
-        }}
-        onCancel={closeConfirm}
-      />
-
-      <ConfirmDialog
-        open={confirm.open && confirm.action === "delete"}
-        title="Remove this franchisee?"
-        message="This permanently removes the franchisee, their admin account, and all history. This action cannot be undone."
-        confirmLabel="Yes, remove franchisee"
-        confirmColor="#dc2626"
-        onConfirm={() => {
-          // TODO: call deleteFranchisee
-          closeConfirm();
-          router.push("/franchisees");
-        }}
-        onCancel={closeConfirm}
-      />
 
       <Snackbar
         open={toastOpen}
