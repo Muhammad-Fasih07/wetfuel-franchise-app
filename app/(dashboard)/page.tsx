@@ -1,15 +1,27 @@
 "use client";
 
-import { Grid, LinearProgress } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   CheckCircleOutline as CheckCircleOutlineIcon,
-  EmojiEvents as TrophyIcon,
+  DirectionsCar as DirectionsCarIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
+  LocalShipping as LocalShippingIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
   Refresh as RefreshIcon,
   Store as StoreIcon,
-  TrendingUp as TrendingUpIcon,
+  Warning as WarningIcon,
+  Assessment as AssessmentIcon,
 } from "@mui/icons-material";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 
 import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -17,30 +29,51 @@ import { StatCard } from "@/components/ui/StatCard";
 import { FranchiseeTable } from "@/components/franchisees/FranchiseeTable";
 
 // TODO: replace with real API data from lib/api/reporting.ts
-const NETWORK_HEALTH_ROWS: Array<{
-  label: string;
-  value: string;
-  valueColor?: string;
-}> = [
-  { label: "Total active drivers", value: "89" },
-  { label: "Total trucks enrolled", value: "64" },
-  { label: "Jobs completed today", value: "34" },
-  { label: "Pending job reviews", value: "7", valueColor: "#ce1c1a" },
-  { label: "Low inventory alerts", value: "2", valueColor: "#f0797a" },
+const NETWORK_HEALTH_METRICS = [
+  { 
+    label: "Active Drivers", 
+    value: "89", 
+    icon: <DirectionsCarIcon />,
+    color: "#3b82f6",
+    bgColor: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
+  },
+  { 
+    label: "Trucks Enrolled", 
+    value: "64", 
+    icon: <LocalShippingIcon />,
+    color: "#8b5cf6",
+    bgColor: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)",
+  },
+  { 
+    label: "Jobs Today", 
+    value: "34", 
+    icon: <CheckCircleOutlineIcon />,
+    color: "#10b981",
+    bgColor: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+  },
+  { 
+    label: "Pending Reviews", 
+    value: "7", 
+    icon: <AssessmentIcon />,
+    color: "#f59e0b",
+    bgColor: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+  },
+  { 
+    label: "Low Stock Alerts", 
+    value: "2", 
+    icon: <WarningIcon />,
+    color: "#ef4444",
+    bgColor: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
+  },
 ];
 
 // TODO: replace with real fuel volume rankings
-const TOP_FRANCHISEES: Array<{
-  rank: number;
-  name: string;
-  volume: string;
-  percent: number;
-}> = [
-  { rank: 1, name: "AlphaFuel Co.", volume: "8,200 gal", percent: 100 },
-  { rank: 2, name: "PrimeFuel LLC", volume: "6,100 gal", percent: 74 },
-  { rank: 3, name: "SouthFuel Inc.", volume: "4,800 gal", percent: 59 },
-  { rank: 4, name: "NorthFuel Ltd.", volume: "3,900 gal", percent: 48 },
-  { rank: 5, name: "WestEnd Fuel", volume: "2,600 gal", percent: 32 },
+const TOP_FRANCHISEES_CHART_DATA = [
+  { name: "AlphaFuel Co.", volume: 8200, displayVolume: "8,200 gal" },
+  { name: "PrimeFuel LLC", volume: 6100, displayVolume: "6,100 gal" },
+  { name: "SouthFuel Inc.", volume: 4800, displayVolume: "4,800 gal" },
+  { name: "NorthFuel Ltd.", volume: 3900, displayVolume: "3,900 gal" },
+  { name: "WestEnd Fuel", volume: 2600, displayVolume: "2,600 gal" },
 ];
 
 
@@ -133,50 +166,72 @@ export default function DashboardOverviewPage() {
         </Grid>
 
         <Grid item xs={12} lg={4}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-            }}
-          >
-            <section style={CARD_BASE}>
-              <h2 style={{ ...CARD_TITLE, marginBottom: "20px" }}>
-                Network Health
-              </h2>
+          <section style={CARD_BASE}>
+            <h2 style={{ ...CARD_TITLE, marginBottom: "20px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span
+                style={{
+                  width: "4px",
+                  height: "18px",
+                  borderRadius: "2px",
+                  background: "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
+                  boxShadow: "0 0 8px rgba(206,28,26,0.4)",
+                }}
+              />
+              Network Health
+            </h2>
 
-              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                {NETWORK_HEALTH_ROWS.map((row, idx) => (
-                  <li
-                    key={row.label}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              {NETWORK_HEALTH_METRICS.map((metric) => (
+                <div
+                  key={metric.label}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    padding: "14px",
+                    borderRadius: "10px",
+                    background: metric.bgColor,
+                    border: `1.5px solid ${metric.color}20`,
+                    transition: "all 200ms ease",
+                    cursor: "default",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateX(4px)";
+                    e.currentTarget.style.boxShadow = `0 4px 12px ${metric.color}30`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <div
                     style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "10px",
+                      background: `${metric.color}15`,
+                      color: metric.color,
                       display: "flex",
-                      justifyContent: "space-between",
                       alignItems: "center",
-                      padding: "10px 0",
-                      borderBottom:
-                        idx === NETWORK_HEALTH_ROWS.length - 1
-                          ? "none"
-                          : "1px solid #f5f5f5",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      border: `1.5px solid ${metric.color}30`,
                     }}
                   >
-                    <span style={{ fontSize: "13px", color: "#887b6a" }}>
-                      {row.label}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "13px",
-                        fontWeight: 500,
-                        color: row.valueColor ?? "#2b2b2b",
-                      }}
-                    >
-                      {row.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </div>
+                    {metric.icon}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: "12px", color: "#887b6a", fontWeight: 500 }}>
+                      {metric.label}
+                    </div>
+                    <div style={{ fontSize: "20px", fontWeight: 700, color: metric.color, marginTop: "2px" }}>
+                      {metric.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         </Grid>
       </Grid>
 
@@ -187,16 +242,6 @@ export default function DashboardOverviewPage() {
               ...CARD_BASE,
               position: "relative",
               overflow: "visible",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 16px rgba(0,0,0,0.06), 0 12px 32px -16px rgba(206,28,26,0.25), inset 0 1px 0 rgba(255,255,255,0.9)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
             }}
           >
             <div
@@ -219,7 +264,7 @@ export default function DashboardOverviewPage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                marginBottom: "24px",
+                marginBottom: "32px",
                 flexWrap: "wrap",
                 gap: "12px",
               }}
@@ -227,9 +272,9 @@ export default function DashboardOverviewPage() {
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <span
                   style={{
-                    width: "42px",
-                    height: "42px",
-                    borderRadius: "12px",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "14px",
                     background:
                       "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
                     color: "#ce1c1a",
@@ -240,7 +285,7 @@ export default function DashboardOverviewPage() {
                       "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
                   }}
                 >
-                  <TrophyIcon sx={{ fontSize: 24 }} />
+                  <LocalGasStationOutlinedIcon sx={{ fontSize: 26 }} />
                 </span>
                 <div>
                   <h2 style={{ ...CARD_TITLE, marginBottom: "4px" }}>
@@ -251,13 +296,9 @@ export default function DashboardOverviewPage() {
                       fontSize: "12px",
                       color: "#887b6a",
                       margin: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
                     }}
                   >
-                    <TrendingUpIcon sx={{ fontSize: 14, color: "#15803d" }} />
-                    Monthly performance leaders
+                    Monthly performance comparison across network
                   </p>
                 </div>
               </div>
@@ -268,9 +309,9 @@ export default function DashboardOverviewPage() {
                   color: "#ce1c1a",
                   background:
                     "linear-gradient(135deg, rgba(206,28,26,0.12) 0%, rgba(240,121,122,0.12) 100%)",
-                  padding: "6px 12px",
+                  padding: "6px 14px",
                   borderRadius: "24px",
-                  border: "1px solid rgba(206,28,26,0.25)",
+                  border: "1.5px solid rgba(206,28,26,0.25)",
                   letterSpacing: "0.3px",
                   textTransform: "uppercase",
                 }}
@@ -279,169 +320,69 @@ export default function DashboardOverviewPage() {
               </span>
             </div>
 
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-              {TOP_FRANCHISEES.map((row, idx) => {
-                const isTop3 = row.rank <= 3;
-                const isFirst = row.rank === 1;
-                return (
-                  <li
-                    key={row.rank}
-                    className="franchisee-rank-row"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "16px",
-                      padding: "16px 18px",
-                      marginBottom: idx === TOP_FRANCHISEES.length - 1 ? 0 : "8px",
-                      borderRadius: "12px",
-                      border: isFirst
-                        ? "1.5px solid rgba(206,28,26,0.2)"
-                        : "1.5px solid transparent",
-                      background: isFirst
-                        ? "linear-gradient(90deg, rgba(206,28,26,0.04) 0%, rgba(255,255,255,0) 100%)"
-                        : "transparent",
-                      transition: "all 250ms cubic-bezier(0.4, 0, 0.2, 1)",
-                      cursor: "pointer",
-                      position: "relative",
-                    }}
-                  >
-                    {isFirst && (
-                      <span
-                        aria-hidden
-                        style={{
-                          position: "absolute",
-                          left: "-26px",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                          width: "4px",
-                          height: "50%",
-                          borderRadius: "0 4px 4px 0",
-                          background:
-                            "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-                          boxShadow: "0 0 12px rgba(206,28,26,0.6)",
-                        }}
-                      />
-                    )}
-
-                    <span
-                      style={{
-                        minWidth: "36px",
-                        height: "36px",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "14px",
-                        fontWeight: 700,
-                        color: isFirst ? "#ffffff" : isTop3 ? "#ce1c1a" : "#887b6a",
-                        background: isFirst
-                          ? "linear-gradient(135deg, #ce1c1a 0%, #8b1816 100%)"
-                          : isTop3
-                            ? "linear-gradient(135deg, rgba(206,28,26,0.15) 0%, rgba(206,28,26,0.08) 100%)"
-                            : "#f5f5f5",
-                        borderRadius: "10px",
-                        flexShrink: 0,
-                        boxShadow: isFirst
-                          ? "0 4px 12px rgba(206,28,26,0.35), inset 0 1px 0 rgba(255,255,255,0.2)"
-                          : isTop3
-                            ? "0 2px 6px rgba(206,28,26,0.15)"
-                            : "none",
-                        border: isTop3 ? "1.5px solid rgba(206,28,26,0.2)" : "none",
-                      }}
-                    >
-                      {row.rank}
-                    </span>
-
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          marginBottom: "8px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: isTop3 ? 600 : 500,
-                            color: "#2b2b2b",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
-                            letterSpacing: "-0.1px",
-                          }}
-                        >
-                          {row.name}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: 600,
-                            color: isTop3 ? "#ce1c1a" : "#887b6a",
-                            marginLeft: "16px",
-                            flexShrink: 0,
-                          }}
-                        >
-                          {row.volume}
-                        </span>
-                      </div>
-
-                      <div style={{ position: "relative" }}>
-                        <LinearProgress
-                          variant="determinate"
-                          value={row.percent}
-                          sx={{
-                            height: 8,
-                            borderRadius: 6,
-                            backgroundColor: "#f5f5f5",
-                            border: "1px solid #ececec",
-                            overflow: "hidden",
-                            "& .MuiLinearProgress-bar": {
-                              background: isFirst
-                                ? "linear-gradient(90deg, #f0797a 0%, #ce1c1a 60%, #8b1816 100%)"
-                                : isTop3
-                                  ? "linear-gradient(90deg, #fca5a5 0%, #f87171 50%, #dc2626 100%)"
-                                  : "linear-gradient(90deg, #d4d4d4 0%, #a3a3a3 100%)",
-                              borderRadius: 6,
-                              boxShadow: isTop3
-                                ? "inset 0 1px 2px rgba(0,0,0,0.1)"
-                                : "none",
-                              transition: "transform 300ms ease",
-                            },
-                          }}
-                        />
-                        <span
-                          style={{
-                            position: "absolute",
-                            right: "6px",
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                            fontSize: "10px",
-                            fontWeight: 700,
-                            color: row.percent > 50 ? "#ffffff" : "#887b6a",
-                            letterSpacing: "0.3px",
-                          }}
-                        >
-                          {row.percent}%
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart
+                data={TOP_FRANCHISEES_CHART_DATA}
+                margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+              >
+                <defs>
+                  <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#f0797a" stopOpacity={1} />
+                    <stop offset="50%" stopColor="#ce1c1a" stopOpacity={1} />
+                    <stop offset="100%" stopColor="#8b1816" stopOpacity={1} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis
+                  dataKey="name"
+                  angle={-15}
+                  textAnchor="end"
+                  height={80}
+                  tick={{ fill: "#887b6a", fontSize: 12, fontWeight: 500 }}
+                  stroke="#e5e5e5"
+                />
+                <YAxis
+                  tick={{ fill: "#887b6a", fontSize: 12 }}
+                  stroke="#e5e5e5"
+                  label={{
+                    value: "Fuel Volume (gallons)",
+                    angle: -90,
+                    position: "insideLeft",
+                    style: { fill: "#887b6a", fontSize: 12, fontWeight: 600 },
+                  }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "rgba(255, 255, 255, 0.98)",
+                    border: "1.5px solid #ececec",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                    padding: "12px 14px",
+                  }}
+                  labelStyle={{ color: "#2b2b2b", fontWeight: 600, marginBottom: "6px" }}
+                  itemStyle={{ color: "#ce1c1a", fontWeight: 500 }}
+                  formatter={(value: number, name: string, props: any) => [
+                    props.payload.displayVolume,
+                    "Fuel Volume",
+                  ]}
+                />
+                <Bar
+                  dataKey="volume"
+                  radius={[8, 8, 0, 0]}
+                  maxBarSize={80}
+                >
+                  {TOP_FRANCHISEES_CHART_DATA.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={index === 0 ? "url(#barGradient)" : index < 3 ? "#f87171" : "#d4d4d4"}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </section>
         </Grid>
       </Grid>
-
-      <style>{`
-        .franchisee-rank-row:hover {
-          background: linear-gradient(90deg, rgba(206,28,26,0.06) 0%, rgba(255,255,255,0.5) 100%) !important;
-          border-color: rgba(206,28,26,0.25) !important;
-          transform: translateX(4px);
-          box-shadow: 0 4px 12px rgba(206,28,26,0.12) !important;
-        }
-      `}</style>
     </div>
   );
 }
