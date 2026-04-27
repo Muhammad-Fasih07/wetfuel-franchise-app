@@ -19,6 +19,10 @@ import { Button } from "../../../components/ui/Button";
 import { Input } from "../../../components/ui/Input";
 import { signIn } from "../../../lib/api/auth";
 
+/** Demo login — remove or replace when real auth is wired. */
+const HARDCODED_EMAIL = "test@test.com";
+const HARDCODED_PASSWORD = "test1234";
+
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email address."),
   password: z
@@ -37,18 +41,32 @@ export default function LoginPage() {
     register,
     control,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: HARDCODED_EMAIL,
+      password: HARDCODED_PASSWORD,
       rememberMe: false,
     },
     mode: "onSubmit",
   });
 
   const onSubmit = async (values: LoginFormValues) => {
+    clearErrors("root");
+    const emailOk =
+      values.email.trim().toLowerCase() === HARDCODED_EMAIL.toLowerCase();
+    const passOk = values.password === HARDCODED_PASSWORD;
+    if (!emailOk || !passOk) {
+      setError("root", {
+        type: "manual",
+        message: "Invalid email or password.",
+      });
+      return;
+    }
+
     try {
       await signIn({ email: values.email, password: values.password });
       
@@ -263,6 +281,20 @@ export default function LoginPage() {
               Forgot password?
             </Link>
           </div>
+
+          {errors.root?.message ? (
+            <p
+              role="alert"
+              style={{
+                margin: 0,
+                fontSize: "14px",
+                color: "#ce1c1a",
+                fontWeight: 500,
+              }}
+            >
+              {errors.root.message}
+            </p>
+          ) : null}
 
           <Button type="submit" fullWidth loading={isSubmitting}>
             Sign in
