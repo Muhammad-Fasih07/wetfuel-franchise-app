@@ -21,7 +21,7 @@ import { getFranchiseeStubById } from "../_data";
 
 const LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  color: "#887b6a",
+  color: "#9a8c7a",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
   margin: 0,
@@ -30,14 +30,14 @@ const LABEL_STYLE: React.CSSProperties = {
 
 const VALUE_STYLE: React.CSSProperties = {
   fontSize: "14px",
-  color: "#2b2b2b",
+  color: "#e8e6e3",
   fontWeight: 500,
   margin: "4px 0 0 0",
 };
 
 const PAIR_WRAPPER: React.CSSProperties = {
   padding: "12px 0",
-  borderBottom: "1px solid #f5f5f5",
+  borderBottom: "1px solid rgba(255,255,255,0.06)",
 };
 
 function InfoPair({
@@ -63,7 +63,7 @@ function InfoPair({
 }
 
 const PERFORMANCE_BTN_DANGER_SX = {
-  background: "#ffffff",
+  background: "#1c1c1d",
   border: "1px solid #f0797a",
   color: "#f0797a",
   width: "100%",
@@ -223,11 +223,11 @@ export default function FranchiseeDetailPage() {
                   style={PERFORMANCE_BTN_DANGER_SX}
                   onMouseEnter={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#fff5f5")
+                      "rgba(240,121,122,0.12)")
                   }
                   onMouseLeave={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#ffffff")
+                      "#1c1c1d")
                   }
                   onClick={() =>
                     setConfirm({
@@ -245,11 +245,11 @@ export default function FranchiseeDetailPage() {
                   style={PERFORMANCE_BTN_DANGER_SX}
                   onMouseEnter={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#fff5f5")
+                      "rgba(240,121,122,0.12)")
                   }
                   onMouseLeave={(e) =>
                     ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#ffffff")
+                      "#1c1c1d")
                   }
                   onClick={() => setConfirm({ open: true, action: "delete" })}
                 >

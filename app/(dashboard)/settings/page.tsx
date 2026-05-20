@@ -64,11 +64,11 @@ export default function SettingsPage() {
             position: "sticky",
             top: "32px",
             background:
-              "linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #fdfcfb 100%)",
-            border: "1px solid #ececec",
+              "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 60%, #212123 100%)",
+            border: "1px solid rgba(255,255,255,0.08)",
             borderRadius: "12px",
             boxShadow:
-              "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.18)",
+              "0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4)",
             padding: "10px",
             overflow: "hidden",
           }}
@@ -103,7 +103,7 @@ export default function SettingsPage() {
                   style={{
                     width: "10px",
                     height: "1px",
-                    background: "rgba(43,43,43,0.15)",
+                    background: "rgba(255,255,255,0.15)",
                   }}
                 />
                 <p
@@ -159,7 +159,7 @@ export default function SettingsPage() {
                           position: "relative",
                           transition: "all 140ms ease",
                           boxShadow: isActive
-                            ? `0 4px 14px -8px ${isDanger ? "rgba(220,38,38,0.5)" : "rgba(206,28,26,0.5)"}, inset 0 1px 0 rgba(255,255,255,0.6)`
+                            ? `0 4px 14px -8px ${isDanger ? "rgba(220,38,38,0.5)" : "rgba(206,28,26,0.5)"}, inset 0 1px 0 rgba(255,255,255,0.06)`
                             : "none",
                         }}
                       >
@@ -215,9 +215,9 @@ export default function SettingsPage() {
         dangerouslySetInnerHTML={{
           __html: `
         .settings-nav-item[data-active="false"]:hover {
-          background: #fafafa !important;
-          color: #2b2b2b !important;
-          border-color: #ececec !important;
+          background: rgba(255,255,255,0.05) !important;
+          color: #e8e6e3 !important;
+          border-color: rgba(255,255,255,0.1) !important;
         }
       `,
         }}

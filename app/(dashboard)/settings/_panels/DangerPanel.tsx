@@ -6,7 +6,7 @@ import { Alert, Snackbar } from "@mui/material";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 const DANGER_BTN_SX: React.CSSProperties = {
-  background: "#ffffff",
+  background: "#1c1c1d",
   border: "1px solid #f0797a",
   color: "#dc2626",
   height: "34px",
@@ -62,8 +62,8 @@ export function DangerPanel() {
   return (
     <section
       style={{
-        background: "#ffffff",
-        border: "1px solid #e5e5e5",
+      background: "#1c1c1d",
+      border: "1px solid rgba(255,255,255,0.08)",
         borderLeft: "4px solid #f0797a",
         borderRadius: "0 12px 12px 0",
         boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
@@ -73,7 +73,7 @@ export function DangerPanel() {
       <header
         style={{
           padding: "18px 24px",
-          borderBottom: "1px solid #f0f0f0",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
       >
         <h2
@@ -92,7 +92,7 @@ export function DangerPanel() {
         <p
           style={{
             fontSize: "13px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             margin: "0 0 24px",
           }}
         >
@@ -109,7 +109,7 @@ export function DangerPanel() {
                 alignItems: "center",
                 padding: "16px 0",
                 borderBottom:
-                  idx === rows.length - 1 ? "none" : "1px solid #fef2f2",
+                  idx === rows.length - 1 ? "none" : "1px solid rgba(239,68,68,0.12)",
                 gap: "16px",
                 flexWrap: "wrap",
               }}
@@ -119,7 +119,7 @@ export function DangerPanel() {
                   style={{
                     fontSize: "13px",
                     fontWeight: 500,
-                    color: "#2b2b2b",
+                    color: "#e8e6e3",
                     margin: 0,
                   }}
                 >
@@ -128,7 +128,7 @@ export function DangerPanel() {
                 <p
                   style={{
                     fontSize: "11px",
-                    color: "#887b6a",
+                    color: "#9a8c7a",
                     margin: "2px 0 0 0",
                   }}
                 >
@@ -140,11 +140,11 @@ export function DangerPanel() {
                 style={DANGER_BTN_SX}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#fff5f5")
+                    "rgba(240,121,122,0.12)")
                 }
                 onMouseLeave={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#ffffff")
+                    "#1c1c1d")
                 }
                 onClick={r.onClick}
               >
@@ -191,11 +191,11 @@ export function DangerPanel() {
           severity="success"
           onClose={() => setExportToast(false)}
           sx={{
-            background: "#f0fdf4",
-            color: "#15803d",
-            border: "1px solid #bbf7d0",
+            background: "#0a2015",
+            color: "#34d399",
+            border: "1px solid rgba(52,211,153,0.3)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#15803d" },
+            "& .MuiAlert-icon": { color: "#34d399" },
           }}
         >
           Export started. We will email you when it's ready.

@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           style={{
             flex: 1,
             background:
-              "radial-gradient(1200px 600px at 100% 0%, rgba(206,28,26,0.06) 0%, transparent 60%), radial-gradient(900px 500px at 0% 100%, rgba(136,123,106,0.09) 0%, transparent 55%), #f7f7f7",
+              "radial-gradient(1200px 600px at 100% 0%, rgba(206,28,26,0.08) 0%, transparent 60%), radial-gradient(900px 500px at 0% 100%, rgba(136,123,106,0.06) 0%, transparent 55%), #111113",
             padding: "32px",
             overflowY: "auto",
             position: "relative",

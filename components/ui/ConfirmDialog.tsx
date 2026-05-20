@@ -46,10 +46,10 @@ export function ConfirmDialog({
           overflow: "hidden",
           position: "relative",
           boxShadow:
-            "0 12px 40px -12px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.08)",
+            "0 12px 40px -12px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.4)",
           background:
-            "linear-gradient(180deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
-          border: "1px solid #ececec",
+            "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 70%, #212123 100%)",
+          border: "1px solid rgba(255,255,255,0.1)",
         },
       }}
       BackdropProps={{
@@ -73,7 +73,7 @@ export function ConfirmDialog({
         sx={{
           fontSize: "16px",
           fontWeight: 600,
-          color: "#2b2b2b",
+          color: "#e8e6e3",
           padding: "22px 24px 6px",
           display: "flex",
           alignItems: "center",
@@ -96,7 +96,7 @@ export function ConfirmDialog({
       {message && (
         <DialogContent sx={{ padding: "8px 24px 18px" }}>
           <DialogContentText
-            sx={{ fontSize: "14px", color: "#887b6a", lineHeight: 1.55 }}
+            sx={{ fontSize: "14px", color: "#9a8c7a", lineHeight: 1.55 }}
           >
             {message}
           </DialogContentText>
@@ -107,9 +107,9 @@ export function ConfirmDialog({
         sx={{
           padding: "14px 20px 20px",
           gap: "8px",
-          borderTop: "1px solid #f4f4f4",
+          borderTop: "1px solid rgba(255,255,255,0.07)",
           background:
-            "linear-gradient(180deg, rgba(250,250,250,0) 0%, rgba(250,250,250,0.6) 100%)",
+            "linear-gradient(180deg, rgba(28,28,29,0) 0%, rgba(33,33,35,0.6) 100%)",
         }}
       >
         <Button variant="ghost" fullWidth={false} onClick={onCancel}>

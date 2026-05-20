@@ -47,7 +47,7 @@ function ToggleColumn({
         style={{
           fontSize: "13px",
           fontWeight: 600,
-          color: "#2b2b2b",
+          color: "#e8e6e3",
           margin: "0 0 16px",
         }}
       >
@@ -63,7 +63,7 @@ function ToggleColumn({
               alignItems: "center",
               padding: "12px 0",
               borderBottom:
-                idx === rows.length - 1 ? "none" : "1px solid #f5f5f5",
+                idx === rows.length - 1 ? "none" : "1px solid rgba(255,255,255,0.07)",
               gap: "16px",
             }}
           >
@@ -72,7 +72,7 @@ function ToggleColumn({
                 style={{
                   fontSize: "13px",
                   fontWeight: 500,
-                  color: "#2b2b2b",
+                  color: "#e8e6e3",
                   margin: 0,
                 }}
               >
@@ -81,7 +81,7 @@ function ToggleColumn({
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#887b6a",
+                  color: "#9a8c7a",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -128,7 +128,7 @@ export function NotificationsPanel() {
       <p
         style={{
           fontSize: "13px",
-          color: "#887b6a",
+          color: "#9a8c7a",
           margin: "0 0 24px",
         }}
       >

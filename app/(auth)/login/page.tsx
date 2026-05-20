@@ -156,7 +156,7 @@ export default function LoginPage() {
         <p
           style={{
             fontSize: "14px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             margin: 0,
             lineHeight: 1.6,
             textAlign: "center",
@@ -202,7 +202,7 @@ export default function LoginPage() {
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => setShowPassword((prev) => !prev)}
                   sx={{ 
-                    color: "#887b6a", 
+                    color: "#9a8c7a", 
                     "&:hover": { 
                       color: "#ce1c1a",
                       backgroundColor: "rgba(206,28,26,0.05)",
@@ -253,7 +253,7 @@ export default function LoginPage() {
                     marginRight: 0,
                     "& .MuiFormControlLabel-label": {
                       fontSize: "14px",
-                      color: "#2b2b2b",
+                      color: "#9a8c7a",
                       fontWeight: 500,
                     },
                   }}
@@ -307,19 +307,14 @@ export default function LoginPage() {
         style={{
           marginTop: "28px",
           paddingTop: "20px",
-          borderTop:
-            "1px solid transparent",
-          backgroundImage:
-            "linear-gradient(#fff, #fff), linear-gradient(90deg, transparent 0%, #e5e5e5 50%, transparent 100%)",
-          backgroundOrigin: "border-box",
-          backgroundClip: "padding-box, border-box",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
           animationDelay: "0.4s",
         }}
       >
         <p
           style={{
             fontSize: "12px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             textAlign: "center",
             margin: 0,
             letterSpacing: "0.2px",

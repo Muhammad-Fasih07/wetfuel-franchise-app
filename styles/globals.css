@@ -15,7 +15,7 @@
 
 @layer utilities {
   .text-gradient-primary {
-    background: linear-gradient(135deg, #2b2b2b 0%, #2b2b2b 55%, #5a5a5a 100%);
+    background: linear-gradient(135deg, #e8e6e3 0%, #e8e6e3 55%, #b0aca6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -29,10 +29,10 @@
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(28, 28, 29, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.09);
   }
 
   .animate-float {
@@ -121,7 +121,7 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.07) 50%,
     transparent 100%
   );
   background-size: 1000px 100%;

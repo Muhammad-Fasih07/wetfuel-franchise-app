@@ -41,20 +41,20 @@ import {
 } from "./_data";
 
 const HEADER_CELL_SX = {
-  background: "#fafafa",
+  background: "#1a1a1c",
   fontSize: "11px",
   fontWeight: 600,
-  color: "#887b6a",
+  color: "#9a8c7a",
   letterSpacing: "0.5px",
   textTransform: "uppercase",
-  borderBottom: "1px solid #f0f0f0",
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
   padding: "12px 16px",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f5f5f5",
+  color: "#e8e6e3",
+  borderBottom: "1px solid rgba(255,255,255,0.05)",
   padding: "14px 16px",
 };
 
@@ -209,7 +209,7 @@ export default function FranchiseesPage() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon sx={{ fontSize: 18, color: "#887b6a" }} />
+                    <SearchIcon sx={{ fontSize: 18, color: "#9a8c7a" }} />
                   </InputAdornment>
                 ),
               }}
@@ -277,21 +277,21 @@ export default function FranchiseesPage() {
                   key={row.id}
                   hover
                   sx={{
-                    "&:hover": { background: "#fafafa" },
+                    "&:hover": { background: "rgba(255,255,255,0.03)" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
                   <TableCell sx={BODY_CELL_SX}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: "#2b2b2b" }}>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: "#e8e6e3" }}>
                       {row.name}
                     </div>
-                    <div style={{ fontSize: 12, color: "#887b6a", marginTop: 2 }}>
+                    <div style={{ fontSize: 12, color: "#9a8c7a", marginTop: 2 }}>
                       {row.email}
                     </div>
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>
-                    <div style={{ fontSize: 13, color: "#2b2b2b" }}>{row.username}</div>
-                    <div style={{ fontSize: 12, color: "#887b6a", marginTop: 2 }}>
+                    <div style={{ fontSize: 13, color: "#e8e6e3" }}>{row.username}</div>
+                    <div style={{ fontSize: 12, color: "#9a8c7a", marginTop: 2 }}>
                       {row.phone}
                     </div>
                   </TableCell>
@@ -300,7 +300,7 @@ export default function FranchiseesPage() {
                   <TableCell sx={BODY_CELL_SX} align="center">{row.drivers}</TableCell>
                   <TableCell sx={BODY_CELL_SX} align="center">{row.trucks}</TableCell>
                   <TableCell sx={BODY_CELL_SX} align="right">{row.avgFuel}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, fontSize: "12px", color: "#887b6a" }}>
+                  <TableCell sx={{ ...BODY_CELL_SX, fontSize: "12px", color: "#9a8c7a" }}>
                     {row.joined}
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>
@@ -310,7 +310,7 @@ export default function FranchiseesPage() {
                     <IconButton
                       size="small"
                       onClick={(e) => openMenu(e, row)}
-                      sx={{ color: "#887b6a" }}
+                      sx={{ color: "#9a8c7a" }}
                     >
                       <MoreVertIcon sx={{ fontSize: 20 }} />
                     </IconButton>
@@ -325,7 +325,7 @@ export default function FranchiseesPage() {
                     sx={{
                       ...BODY_CELL_SX,
                       textAlign: "center",
-                      color: "#887b6a",
+                      color: "#9a8c7a",
                       padding: "32px 16px",
                     }}
                   >
@@ -349,12 +349,12 @@ export default function FranchiseesPage() {
           }}
           rowsPerPageOptions={[8, 16, 24]}
           sx={{
-            borderTop: "1px solid #f0f0f0",
+            borderTop: "1px solid rgba(255,255,255,0.06)",
             fontSize: "12px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             padding: "8px 16px",
             "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
-              { fontSize: "12px", color: "#887b6a", margin: 0 },
+              { fontSize: "12px", color: "#9a8c7a", margin: 0 },
             "& .MuiTablePagination-select": { fontSize: "12px" },
           }}
         />
@@ -370,8 +370,9 @@ export default function FranchiseesPage() {
           paper: {
             sx: {
               borderRadius: "8px",
-              border: "1px solid #e5e5e5",
-              boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              background: "#242426",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.4)",
               minWidth: 180,
             },
           },
@@ -379,7 +380,7 @@ export default function FranchiseesPage() {
       >
         <MenuItem
           onClick={() => handleAction("edit")}
-          sx={{ fontSize: "13px", color: "#2b2b2b" }}
+          sx={{ fontSize: "13px", color: "#e8e6e3" }}
         >
           Edit details
         </MenuItem>

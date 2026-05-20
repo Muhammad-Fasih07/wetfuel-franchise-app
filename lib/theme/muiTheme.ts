@@ -10,12 +10,12 @@ export const muiTheme = createTheme({
       main: "#f0797a",
     },
     text: {
-      primary: "#2b2b2b",
-      secondary: "#887b6a",
+      primary: "#e8e6e3",
+      secondary: "#9a8c7a",
     },
     background: {
-      default: "#f5f5f5",
-      paper: "#ffffff",
+      default: "#111113",
+      paper: "#1c1c1d",
     },
   },
   shape: {
@@ -41,7 +41,7 @@ export const muiTheme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#e0e0e0",
+            borderColor: "rgba(255,255,255,0.12)",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "#ce1c1a",

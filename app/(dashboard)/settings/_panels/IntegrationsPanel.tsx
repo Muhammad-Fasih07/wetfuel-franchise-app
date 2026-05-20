@@ -11,8 +11,8 @@ const INTEGRATIONS = [
     id: "quickbooks",
     name: "QuickBooks",
     icon: "QB",
-    iconBg: "#f0fdf4",
-    iconColor: "#15803d",
+    iconBg: "#0a2015",
+    iconColor: "#34d399",
     description: "Sync invoicing, timeclocks and inventory data.",
     connected: true,
     lastSync: "2 hours ago",
@@ -21,8 +21,8 @@ const INTEGRATIONS = [
     id: "opis",
     name: "OPIS Pricing",
     icon: "OP",
-    iconBg: "#fffbeb",
-    iconColor: "#b45309",
+    iconBg: "#1c1508",
+    iconColor: "#fbbf24",
     description: "Fetch daily fuel pricing for admin approval.",
     connected: true,
     lastSync: "6 hours ago",
@@ -31,8 +31,8 @@ const INTEGRATIONS = [
     id: "mail",
     name: "Email Service",
     icon: "MB",
-    iconBg: "#eff6ff",
-    iconColor: "#1d4ed8",
+    iconBg: "#0f1520",
+    iconColor: "#60a5fa",
     description: "Send credential emails to new drivers and customers.",
     connected: false,
     lastSync: null,
@@ -45,7 +45,7 @@ export function IntegrationsPanel() {
       <p
         style={{
           fontSize: "13px",
-          color: "#887b6a",
+          color: "#9a8c7a",
           margin: "0 0 24px",
         }}
       >
@@ -57,7 +57,7 @@ export function IntegrationsPanel() {
           <div
             key={i.id}
             style={{
-              border: "1px solid #e5e5e5",
+              border: "1px solid rgba(255,255,255,0.09)",
               borderRadius: "8px",
               padding: "20px 24px",
               display: "flex",
@@ -91,7 +91,7 @@ export function IntegrationsPanel() {
                 style={{
                   fontSize: "14px",
                   fontWeight: 600,
-                  color: "#2b2b2b",
+                  color: "#e8e6e3",
                   margin: 0,
                 }}
               >
@@ -100,7 +100,7 @@ export function IntegrationsPanel() {
               <p
                 style={{
                   fontSize: "12px",
-                  color: "#887b6a",
+                  color: "#9a8c7a",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -109,7 +109,7 @@ export function IntegrationsPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: i.connected ? "#15803d" : "#f0797a",
+                  color: i.connected ? "#34d399" : "#f0797a",
                   margin: "6px 0 0 0",
                   fontWeight: 500,
                 }}

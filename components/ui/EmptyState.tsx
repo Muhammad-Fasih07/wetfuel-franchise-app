@@ -33,12 +33,12 @@ export function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
             height: "72px",
             borderRadius: "18px",
             background:
-              "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd0d0 100%)",
-            color: "#ce1c1a",
+              "linear-gradient(135deg, rgba(206,28,26,0.15) 0%, rgba(206,28,26,0.22) 60%, rgba(206,28,26,0.28) 100%)",
+            color: "#f0797a",
             fontSize: "32px",
             border: "1.5px solid rgba(206,28,26,0.2)",
             boxShadow:
-              "0 8px 20px -8px rgba(206,28,26,0.4), 0 4px 10px rgba(206,28,26,0.15), inset 0 1px 0 rgba(255,255,255,0.7)",
+              "0 8px 20px -8px rgba(206,28,26,0.4), 0 4px 10px rgba(206,28,26,0.15), inset 0 1px 0 rgba(255,255,255,0.05)",
             position: "relative",
           }}
         >
@@ -48,7 +48,7 @@ export function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
               inset: 0,
               borderRadius: "18px",
               background:
-                "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)",
+                "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06) 0%, transparent 60%)",
             }}
           />
           {icon}
@@ -59,7 +59,7 @@ export function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
         style={{
           fontSize: "17px",
           fontWeight: 600,
-          color: "#2b2b2b",
+          color: "#e8e6e3",
           margin: 0,
           letterSpacing: "-0.2px",
           animationDelay: "0.1s",
@@ -72,7 +72,7 @@ export function EmptyState({ icon, title, subtitle, action }: EmptyStateProps) {
           className="animate-fade-in"
           style={{
             fontSize: "14px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             margin: 0,
             maxWidth: "400px",
             lineHeight: 1.6,

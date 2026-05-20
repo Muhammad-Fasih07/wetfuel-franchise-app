@@ -49,8 +49,8 @@ export function Input({
         sx: {
           height: "46px",
           borderRadius: "10px",
-          backgroundColor: "#ffffff",
-          color: "#2b2b2b",
+          backgroundColor: "#161618",
+          color: "#e8e6e3",
           fontSize: "15px",
           outline: "none",
           transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)",
@@ -59,22 +59,22 @@ export function Input({
             padding: "10px 14px",
           },
           "& input:-webkit-autofill": {
-            WebkitBoxShadow: "0 0 0 1000px #ffffff inset",
-            WebkitTextFillColor: "#2b2b2b",
+            WebkitBoxShadow: "0 0 0 1000px #161618 inset",
+            WebkitTextFillColor: "#e8e6e3",
             caretColor: "#ce1c1a",
             borderRadius: "10px",
           },
           "& input::placeholder": {
-            color: "#887b6a",
+            color: "#9a8c7a",
             opacity: 0.7,
           },
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "#e5e5e5",
+            borderColor: error ? "#f0797a" : "rgba(255,255,255,0.12)",
             borderWidth: "1.5px",
             transition: "all 200ms ease",
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "#d0d0d0",
+            borderColor: error ? "#f0797a" : "rgba(255,255,255,0.2)",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: "#ce1c1a",
@@ -94,7 +94,7 @@ export function Input({
         sx: {
           fontSize: "14px",
           fontWeight: 500,
-          color: "#2b2b2b",
+          color: "#e8e6e3",
           backgroundColor: "transparent",
           "&.Mui-focused": {
             color: "#ce1c1a",

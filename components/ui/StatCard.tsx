@@ -36,12 +36,12 @@ export function StatCard({
       className="animate-scale-in"
       style={{
         background:
-          "linear-gradient(160deg, #ffffff 0%, #ffffff 70%, #fff8f8 100%)",
+          "linear-gradient(160deg, #1c1c1d 0%, #1e1e20 70%, #212022 100%)",
         border: "1.5px solid transparent",
         backgroundOrigin: "border-box",
         backgroundClip: "padding-box, border-box",
         backgroundImage:
-          "linear-gradient(160deg, #ffffff 0%, #ffffff 70%, #fff8f8 100%), linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(229,229,229,1) 35%, rgba(229,229,229,1) 100%)",
+          "linear-gradient(160deg, #1c1c1d 0%, #1e1e20 70%, #212022 100%), linear-gradient(135deg, rgba(206,28,26,0.35) 0%, rgba(50,50,52,1) 35%, rgba(40,40,42,1) 100%)",
         borderRadius: "14px",
         padding: "24px",
         minHeight: "130px",
@@ -49,7 +49,7 @@ export function StatCard({
         flexDirection: "column",
         justifyContent: "space-between",
         boxShadow:
-          "0 2px 8px rgba(0,0,0,0.06), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.8)",
+          "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
         position: "relative",
         overflow: "hidden",
         transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
@@ -58,12 +58,12 @@ export function StatCard({
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
         e.currentTarget.style.boxShadow =
-          "0 8px 24px rgba(0,0,0,0.08), 0 12px 32px -16px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.9)";
+          "0 8px 24px rgba(0,0,0,0.4), 0 12px 32px -16px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.07)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateY(0)";
         e.currentTarget.style.boxShadow =
-          "0 2px 8px rgba(0,0,0,0.06), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.8)";
+          "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)";
       }}
     >
       <div
@@ -91,7 +91,7 @@ export function StatCard({
         <span
           style={{
             fontSize: "11px",
-            color: "#887b6a",
+            color: "#9a8c7a",
             textTransform: "uppercase",
             letterSpacing: "0.8px",
             fontWeight: 700,
@@ -106,14 +106,14 @@ export function StatCard({
             height: "42px",
             borderRadius: "12px",
             background:
-              "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
-            color: "#ce1c1a",
+              "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0.25) 60%, rgba(206,28,26,0.30) 100%)",
+            color: "#f0797a",
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
             fontSize: "22px",
             boxShadow:
-              "0 6px 16px rgba(206,28,26,0.22), 0 2px 6px rgba(206,28,26,0.15), inset 0 1px 0 rgba(255,255,255,0.7)",
+              "0 6px 16px rgba(206,28,26,0.22), 0 2px 6px rgba(206,28,26,0.15), inset 0 1px 0 rgba(255,255,255,0.05)",
             transition: "transform 200ms ease",
           }}
           onMouseEnter={(e) => {
@@ -174,7 +174,7 @@ export function StatCard({
           <p
             style={{
               fontSize: "13px",
-              color: "#887b6a",
+              color: "#9a8c7a",
               margin: "8px 0 0 0",
               fontWeight: 500,
               lineHeight: 1.4,

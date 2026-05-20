@@ -85,7 +85,7 @@ export function PageHeader({ title, subtitle, action, eyebrow }: PageHeaderProps
             className="animate-fade-in"
             style={{
               fontSize: "14px",
-              color: "#887b6a",
+              color: "#9a8c7a",
               margin: "6px 0 0 0",
               lineHeight: 1.6,
               fontWeight: 400,

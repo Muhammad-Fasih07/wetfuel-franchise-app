@@ -83,7 +83,7 @@ export function BrandMark({
           className="animate-fade-in"
           style={{
             fontSize: `${subtitleSize}px`,
-            color: "#887b6a",
+            color: "#9a8c7a",
             fontWeight: 500,
             margin: 0,
             lineHeight: 1.4,

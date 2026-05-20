@@ -56,8 +56,8 @@ export function Topbar() {
       style={{
         height: "64px",
         background:
-          "linear-gradient(180deg, #ffffff 0%, #ffffff 75%, #fafafa 100%)",
-        borderBottom: "1px solid #ececec",
+          "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 75%, #212123 100%)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -107,7 +107,7 @@ export function Topbar() {
             href="/"
             style={{
               fontSize: "13px",
-              color: "#887b6a",
+              color: "#9a8c7a",
               textDecoration: "none",
               display: "inline-flex",
               alignItems: "center",
@@ -137,7 +137,7 @@ export function Topbar() {
                   style={{
                     fontSize: "13px",
                     fontWeight: 500,
-                    color: "#2b2b2b",
+                    color: "#e8e6e3",
                   }}
                 >
                   {c.label}
@@ -150,7 +150,7 @@ export function Topbar() {
                 href={c.href}
                 style={{
                   fontSize: "13px",
-                  color: "#887b6a",
+                  color: "#9a8c7a",
                   textDecoration: "none",
                 }}
               >
@@ -164,11 +164,11 @@ export function Topbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "8px",
-            background: searchFocus ? "#ffffff" : "#f7f7f7",
-            border: searchFocus
-              ? "1.5px solid #ce1c1a"
-              : "1.5px solid #ececec",
+          gap: "8px",
+          background: searchFocus ? "#161618" : "#141416",
+          border: searchFocus
+            ? "1.5px solid #ce1c1a"
+            : "1.5px solid rgba(255,255,255,0.1)",
             borderRadius: "10px",
             padding: "0 12px",
             height: "38px",
@@ -199,7 +199,7 @@ export function Topbar() {
               outline: "none",
               background: "transparent",
               fontSize: "14px",
-              color: "#2b2b2b",
+              color: "#e8e6e3",
               fontFamily: "inherit",
               fontWeight: 400,
             }}
@@ -211,10 +211,10 @@ export function Topbar() {
               alignItems: "center",
               gap: "2px",
               fontSize: "10px",
-              fontWeight: 600,
-              color: "#887b6a",
-              background: "#ffffff",
-              border: "1px solid #e5e5e5",
+            fontWeight: 600,
+            color: "#9a8c7a",
+            background: "#242426",
+            border: "1px solid rgba(255,255,255,0.1)",
               borderRadius: "6px",
               padding: "3px 7px",
               fontFamily: "inherit",
@@ -240,7 +240,7 @@ export function Topbar() {
           <IconButton
             size="small"
             sx={{
-              color: "#887b6a",
+              color: "#9a8c7a",
               borderRadius: "8px",
               width: "36px",
               height: "36px",
@@ -248,7 +248,7 @@ export function Topbar() {
               transition: "all 140ms ease",
               "&:hover": {
                 color: "#ce1c1a",
-                background: "#fff5f5",
+                background: "rgba(206,28,26,0.12)",
                 borderColor: "rgba(206,28,26,0.25)",
               },
               position: "relative",
@@ -265,7 +265,7 @@ export function Topbar() {
                 height: "8px",
                 borderRadius: "50%",
                 background: "#ce1c1a",
-                border: "2px solid #ffffff",
+                border: "2px solid #1c1c1d",
                 boxShadow: "0 0 0 0 rgba(206,28,26,0.6)",
                 animation: "wf-pulse 2s ease-in-out infinite",
               }}
@@ -273,13 +273,13 @@ export function Topbar() {
           </IconButton>
         </Tooltip>
 
-        <Divider
+        <          Divider
           orientation="vertical"
           flexItem
           sx={{
             height: 28,
             alignSelf: "center",
-            borderColor: "#ececec",
+            borderColor: "rgba(255,255,255,0.08)",
             mx: "4px",
           }}
         />
@@ -293,19 +293,19 @@ export function Topbar() {
             cursor: "pointer",
             background: "transparent",
             border: "1px solid transparent",
-            borderRadius: "10px",
-            padding: "4px 10px 4px 4px",
-            fontFamily: "inherit",
-            transition: "all 140ms ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "#fafafa";
-            (e.currentTarget as HTMLButtonElement).style.borderColor = "#ececec";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-            (e.currentTarget as HTMLButtonElement).style.borderColor = "transparent";
-          }}
+          borderRadius: "10px",
+          padding: "4px 10px 4px 4px",
+          fontFamily: "inherit",
+          transition: "all 140ms ease",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "transparent";
+        }}
         >
           <div style={{ position: "relative" }}>
             <Avatar
@@ -327,13 +327,13 @@ export function Topbar() {
               aria-hidden
               style={{
                 position: "absolute",
-                bottom: 0,
-                right: 0,
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                background: "#22c55e",
-                border: "2px solid #ffffff",
+              bottom: 0,
+              right: 0,
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              background: "#22c55e",
+              border: "2px solid #1c1c1d",
                 boxShadow: "0 0 6px rgba(34,197,94,0.5)",
               }}
             />
@@ -347,19 +347,19 @@ export function Topbar() {
               lineHeight: 1.2,
             }}
           >
-            <span
-              style={{
-                fontSize: "13px",
-                fontWeight: 500,
-                color: "#2b2b2b",
-              }}
-            >
-              Super Admin
-            </span>
+          <span
+            style={{
+              fontSize: "13px",
+              fontWeight: 500,
+              color: "#e8e6e3",
+            }}
+          >
+            Super Admin
+          </span>
             <span
               style={{
                 fontSize: "11px",
-                color: "#887b6a",
+                color: "#9a8c7a",
                 fontWeight: 500,
               }}
             >
@@ -367,7 +367,7 @@ export function Topbar() {
             </span>
           </div>
           <KeyboardArrowDownIcon
-            sx={{ fontSize: 18, color: "#887b6a", ml: "2px" }}
+            sx={{ fontSize: 18, color: "#9a8c7a", ml: "2px" }}
           />
         </button>
       </div>

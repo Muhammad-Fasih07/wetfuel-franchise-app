@@ -32,20 +32,20 @@ import { StatusChip } from "@/components/ui/StatusChip";
 import { PERFORMANCE_ROWS } from "./_data";
 
 const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)",
+  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
   fontSize: "11px",
   fontWeight: 700,
-  color: "#887b6a",
+  color: "#9a8c7a",
   letterSpacing: "0.7px",
   textTransform: "uppercase",
-  borderBottom: "1.5px solid #ececec",
+  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
   padding: "14px 18px",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f8f8f8",
+  color: "#e8e6e3",
+  borderBottom: "1px solid rgba(255,255,255,0.05)",
   padding: "16px 18px",
   transition: "all 200ms ease",
 };
@@ -103,10 +103,10 @@ function MetricList({
           onMouseEnter={(e) => {
             e.currentTarget.style.background = m.color 
               ? "rgba(206,28,26,0.06)"
-              : "#f9f9f9";
+              : "rgba(255,255,255,0.04)";
             e.currentTarget.style.borderColor = m.color 
               ? "rgba(206,28,26,0.15)"
-              : "#f0f0f0";
+              : "rgba(255,255,255,0.08)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = m.color 
@@ -117,14 +117,14 @@ function MetricList({
               : "transparent";
           }}
         >
-          <span style={{ fontSize: "13px", color: "#887b6a", fontWeight: 500 }}>
+          <span style={{ fontSize: "13px", color: "#9a8c7a", fontWeight: 500 }}>
             {m.label}
           </span>
           <span
             style={{
               fontSize: "14px",
               fontWeight: 600,
-              color: m.color ?? "#2b2b2b",
+              color: m.color ?? "#e8e6e3",
               letterSpacing: "-0.1px",
             }}
           >
@@ -245,7 +245,7 @@ export default function ReportingPage() {
                     borderRadius: "10px",
                     fontSize: "13px",
                     height: "38px",
-                    border: "1.5px solid #ececec",
+                    border: "1.5px solid rgba(255,255,255,0.1)",
                     transition: "all 200ms ease",
                     "&:hover": {
                       borderColor: "#d0d0d0",
@@ -286,11 +286,11 @@ export default function ReportingPage() {
                       onClick={() => router.push(`/reporting/${r.id}`)}
                       sx={{
                         cursor: "pointer",
-                        "&:hover": { background: "#fafafa" },
+                        "&:hover": { background: "rgba(255,255,255,0.03)" },
                         "&:last-child td": { borderBottom: 0 },
                       }}
                     >
-                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 600, color: "#2b2b2b" }}>
+                      <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 600, color: "#e8e6e3" }}>
                         {r.name}
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX} align="center">
@@ -333,17 +333,17 @@ export default function ReportingPage() {
                         </span>
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX} align="center">
-                        <span style={{ fontSize: "14px", fontWeight: 600, color: "#15803d" }}>
+                        <span style={{ fontSize: "14px", fontWeight: 600,                           color: "#34d399" }}>
                           {r.jobs}
                         </span>
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX}>
-                        <span style={{ fontSize: "13px", color: "#887b6a", fontWeight: 500 }}>
+                        <span style={{ fontSize: "13px", color: "#9a8c7a", fontWeight: 500 }}>
                           {r.avgJobTime}
                         </span>
                       </TableCell>
                       <TableCell sx={BODY_CELL_SX} align="right">
-                        <span style={{ fontSize: "13px", fontWeight: 500, color: "#2b2b2b" }}>
+                        <span style={{ fontSize: "13px", fontWeight: 500, color: "#e8e6e3" }}>
                           {r.driverHrs}
                         </span>
                       </TableCell>
@@ -359,7 +359,7 @@ export default function ReportingPage() {
                         sx={{
                           ...BODY_CELL_SX,
                           textAlign: "center",
-                          color: "#887b6a",
+                          color: "#9a8c7a",
                           padding: "24px 16px",
                         }}
                       >
@@ -379,7 +379,7 @@ export default function ReportingPage() {
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
+              background: "linear-gradient(165deg, #1c1c1d 0%, #1e1e20 70%, #212123 100%)",
               cursor: "default",
             }}
             onMouseEnter={() => undefined}
@@ -392,13 +392,13 @@ export default function ReportingPage() {
                   height: "48px",
                   borderRadius: "14px",
                   background:
-                    "linear-gradient(135deg, #eff6ff 0%, #dbeafe 60%, #bfdbfe 100%)",
-                  color: "#3b82f6",
+                    "linear-gradient(135deg, #0f1520 0%, #152035 60%, #1a2845 100%)",
+                  color: "#60a5fa",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow:
-                    "0 6px 16px rgba(59,130,246,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
+                    "0 6px 16px rgba(59,130,246,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
               >
                 <PeopleAltOutlinedIcon sx={{ fontSize: 26 }} />
@@ -406,13 +406,13 @@ export default function ReportingPage() {
               <div>
                 <h2
                   style={{
-                    fontSize: "17px",
-                    fontWeight: 600,
-                    color: "#2b2b2b",
-                    margin: 0,
-                    letterSpacing: "-0.2px",
-                  }}
-                >
+                  fontSize: "17px",
+                  fontWeight: 600,
+                  color: "#e8e6e3",
+                  margin: 0,
+                  letterSpacing: "-0.2px",
+                }}
+              >
                   Customer Analytics
                 </h2>
               </div>
@@ -424,7 +424,7 @@ export default function ReportingPage() {
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
+              background: "linear-gradient(165deg, #1c1c1d 0%, #1e1e20 70%, #212123 100%)",
               cursor: "default",
             }}
             onMouseEnter={() => undefined}
@@ -437,13 +437,13 @@ export default function ReportingPage() {
                   height: "48px",
                   borderRadius: "14px",
                   background:
-                    "linear-gradient(135deg, #fef3c7 0%, #fde68a 60%, #fcd34d 100%)",
-                  color: "#f59e0b",
+                    "linear-gradient(135deg, #1c1508 0%, #22190b 60%, #2a2010 100%)",
+                  color: "#fbbf24",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow:
-                    "0 6px 16px rgba(245,158,11,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
+                    "0 6px 16px rgba(245,158,11,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
               >
                 <DirectionsCarIcon sx={{ fontSize: 26 }} />
@@ -451,13 +451,13 @@ export default function ReportingPage() {
               <div>
                 <h2
                   style={{
-                    fontSize: "17px",
-                    fontWeight: 600,
-                    color: "#2b2b2b",
-                    margin: 0,
-                    letterSpacing: "-0.2px",
-                  }}
-                >
+                  fontSize: "17px",
+                  fontWeight: 600,
+                  color: "#e8e6e3",
+                  margin: 0,
+                  letterSpacing: "-0.2px",
+                }}
+              >
                   Driver Analytics
                 </h2>
               </div>
@@ -469,7 +469,7 @@ export default function ReportingPage() {
           <SectionCard
             bodyPadding="24px 26px 26px"
             style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #ffffff 70%, #fdfcfb 100%)",
+              background: "linear-gradient(165deg, #1c1c1d 0%, #1e1e20 70%, #212123 100%)",
               cursor: "default",
             }}
             onMouseEnter={() => undefined}
@@ -482,13 +482,13 @@ export default function ReportingPage() {
                   height: "48px",
                   borderRadius: "14px",
                   background:
-                    "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%, #bbf7d0 100%)",
-                  color: "#15803d",
+                    "linear-gradient(135deg, #0a1c10 0%, #0f2a18 60%, #142e1d 100%)",
+                  color: "#34d399",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow:
-                    "0 6px 16px rgba(21,128,61,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
+                    "0 6px 16px rgba(52,211,153,0.18), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
               >
                 <InventoryIcon sx={{ fontSize: 26 }} />
@@ -498,7 +498,7 @@ export default function ReportingPage() {
                   style={{
                     fontSize: "17px",
                     fontWeight: 600,
-                    color: "#2b2b2b",
+                    color: "#e8e6e3",
                     margin: 0,
                     letterSpacing: "-0.2px",
                   }}

@@ -150,7 +150,7 @@ export default function ForgotPasswordPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#887b6a",
+                color: "#9a8c7a",
                 margin: 0,
                 lineHeight: 1.6,
                 textAlign: "center",
@@ -246,7 +246,7 @@ export default function ForgotPasswordPage() {
             className="animate-fade-in"
             style={{
               fontSize: "14px",
-              color: "#887b6a",
+              color: "#9a8c7a",
               margin: 0,
               lineHeight: 1.6,
               maxWidth: "360px",

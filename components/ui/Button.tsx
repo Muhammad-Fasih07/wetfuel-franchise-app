@@ -86,21 +86,21 @@ export function Button({
             }
           : {
               color: "#ce1c1a",
-              backgroundColor: "#ffffff",
+              backgroundColor: "#1c1c1d",
               border: "1px solid transparent",
               backgroundImage:
-                "linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
+                "linear-gradient(#1c1c1d, #1e1e20), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
               backgroundOrigin: "border-box",
               backgroundClip: "padding-box, border-box",
               "&:hover": {
                 backgroundImage:
-                  "linear-gradient(#fff5f5, #fff5f5), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
-                boxShadow: "0 4px 12px rgba(206,28,26,0.15)",
+                  "linear-gradient(#241414, #221212), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
+                boxShadow: "0 4px 12px rgba(206,28,26,0.2)",
                 transform: "translateY(-1px)",
               },
               "&:active": {
                 backgroundImage:
-                  "linear-gradient(#fff0f0, #fff0f0), linear-gradient(135deg, #bf2524 0%, #ce1c1a 50%, #cd171a 100%)",
+                  "linear-gradient(#200f0f, #1e0e0e), linear-gradient(135deg, #bf2524 0%, #ce1c1a 50%, #cd171a 100%)",
                 transform: "translateY(0px)",
               },
             }),

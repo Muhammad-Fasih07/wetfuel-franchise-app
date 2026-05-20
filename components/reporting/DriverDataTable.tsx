@@ -42,20 +42,20 @@ const DRIVERS: Driver[] = [
 ];
 
 const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)",
+  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
   fontSize: "11px",
   fontWeight: 700,
-  color: "#887b6a",
+  color: "#9a8c7a",
   letterSpacing: "0.7px",
   textTransform: "uppercase",
-  borderBottom: "1.5px solid #ececec",
+  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
   padding: "14px 18px",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f8f8f8",
+  color: "#e8e6e3",
+  borderBottom: "1px solid rgba(255,255,255,0.05)",
   padding: "16px 18px",
 };
 
@@ -105,22 +105,22 @@ export function DriverDataTable() {
                     {driver.name.split(" ").map(n => n[0]).join("")}
                   </Avatar>
                   <div>
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", margin: 0 }}>
+                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#e8e6e3", margin: 0 }}>
                       {driver.name}
                     </p>
-                    <p style={{ fontSize: "11px", color: "#887b6a", margin: "2px 0 0" }}>
+                    <p style={{ fontSize: "11px", color: "#9a8c7a", margin: "2px 0 0" }}>
                       ID: {driver.id}
                     </p>
                   </div>
                 </div>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#2b2b2b", fontWeight: 500 }}>
+                <span style={{ fontSize: "13px", color: "#e8e6e3", fontWeight: 500 }}>
                   {driver.franchisee}
                 </span>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#887b6a" }}>
+                <span style={{ fontSize: "13px", color: "#9a8c7a" }}>
                   {driver.phone}
                 </span>
               </TableCell>
@@ -132,7 +132,7 @@ export function DriverDataTable() {
                     gap: "4px",
                     fontSize: "14px",
                     fontWeight: 600,
-                    color: "#2b2b2b",
+                    color: "#e8e6e3",
                   }}
                 >
                   <CarIcon sx={{ fontSize: 16, color: "#f59e0b" }} />
@@ -140,12 +140,12 @@ export function DriverDataTable() {
                 </span>
               </TableCell>
               <TableCell sx={BODY_CELL_SX} align="center">
-                <span style={{ fontSize: "13px", fontWeight: 500, color: "#2b2b2b" }}>
+                <span style={{ fontSize: "13px", fontWeight: 500, color: "#e8e6e3" }}>
                   {driver.hoursWorked}
                 </span>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#887b6a" }}>
+                <span style={{ fontSize: "13px", color: "#9a8c7a" }}>
                   {driver.avgJobTime}
                 </span>
               </TableCell>
@@ -181,7 +181,7 @@ export function DriverDataTable() {
                 )}
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "12px", color: "#887b6a" }}>
+                <span style={{ fontSize: "12px", color: "#9a8c7a" }}>
                   {driver.lastActive}
                 </span>
               </TableCell>

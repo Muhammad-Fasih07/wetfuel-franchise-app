@@ -34,36 +34,36 @@ const NETWORK_HEALTH_METRICS = [
     label: "Active Drivers", 
     value: "89", 
     icon: <DirectionsCarIcon />,
-    color: "#3b82f6",
-    bgColor: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
+    color: "#60a5fa",
+    bgColor: "linear-gradient(135deg, #0f1520 0%, #152035 100%)",
   },
   { 
     label: "Trucks Enrolled", 
     value: "64", 
     icon: <LocalShippingIcon />,
-    color: "#8b5cf6",
-    bgColor: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)",
+    color: "#a78bfa",
+    bgColor: "linear-gradient(135deg, #140f20 0%, #1f1535 100%)",
   },
   { 
     label: "Jobs Today", 
     value: "34", 
     icon: <CheckCircleOutlineIcon />,
-    color: "#10b981",
-    bgColor: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
+    color: "#34d399",
+    bgColor: "linear-gradient(135deg, #0a1c10 0%, #0f2a18 100%)",
   },
   { 
     label: "Pending Reviews", 
     value: "7", 
     icon: <AssessmentIcon />,
-    color: "#f59e0b",
-    bgColor: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
+    color: "#fbbf24",
+    bgColor: "linear-gradient(135deg, #1c1508 0%, #25190a 100%)",
   },
   { 
     label: "Low Stock Alerts", 
     value: "2", 
     icon: <WarningIcon />,
-    color: "#ef4444",
-    bgColor: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
+    color: "#f87171",
+    bgColor: "linear-gradient(135deg, #1c0a0a 0%, #280e0e 100%)",
   },
 ];
 
@@ -78,18 +78,18 @@ const TOP_FRANCHISEES_CHART_DATA = [
 
 
 const CARD_BASE: React.CSSProperties = {
-  background: "linear-gradient(180deg, #ffffff 0%, #ffffff 90%, #fafafa 100%)",
-  border: "1.5px solid #ececec",
+  background: "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 90%, #212123 100%)",
+  border: "1.5px solid rgba(255,255,255,0.08)",
   borderRadius: "14px",
   padding: "26px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
   transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
 };
 
 const CARD_TITLE: React.CSSProperties = {
   fontSize: "17px",
   fontWeight: 600,
-  color: "#2b2b2b",
+  color: "#e8e6e3",
   margin: 0,
   letterSpacing: "-0.2px",
 };
@@ -221,7 +221,7 @@ export default function DashboardOverviewPage() {
                     {metric.icon}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: "12px", color: "#887b6a", fontWeight: 500 }}>
+                    <div style={{ fontSize: "12px", color: "#9a8c7a", fontWeight: 500 }}>
                       {metric.label}
                     </div>
                     <div style={{ fontSize: "20px", fontWeight: 700, color: metric.color, marginTop: "2px" }}>
@@ -276,13 +276,13 @@ export default function DashboardOverviewPage() {
                     height: "48px",
                     borderRadius: "14px",
                     background:
-                      "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
-                    color: "#ce1c1a",
+                      "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0.28) 60%, rgba(206,28,26,0.32) 100%)",
+                    color: "#f0797a",
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
                     boxShadow:
-                      "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.7)",
+                      "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
                   }}
                 >
                   <LocalGasStationOutlinedIcon sx={{ fontSize: 26 }} />
@@ -294,7 +294,7 @@ export default function DashboardOverviewPage() {
                   <p
                     style={{
                       fontSize: "12px",
-                      color: "#887b6a",
+                      color: "#9a8c7a",
                       margin: 0,
                     }}
                   >
@@ -332,34 +332,34 @@ export default function DashboardOverviewPage() {
                     <stop offset="100%" stopColor="#8b1816" stopOpacity={1} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
                 <XAxis
                   dataKey="name"
                   angle={-15}
                   textAnchor="end"
                   height={80}
-                  tick={{ fill: "#887b6a", fontSize: 12, fontWeight: 500 }}
-                  stroke="#e5e5e5"
+                  tick={{ fill: "#9a8c7a", fontSize: 12, fontWeight: 500 }}
+                  stroke="rgba(255,255,255,0.08)"
                 />
                 <YAxis
-                  tick={{ fill: "#887b6a", fontSize: 12 }}
-                  stroke="#e5e5e5"
+                  tick={{ fill: "#9a8c7a", fontSize: 12 }}
+                  stroke="rgba(255,255,255,0.08)"
                   label={{
                     value: "Fuel Volume (gallons)",
                     angle: -90,
                     position: "insideLeft",
-                    style: { fill: "#887b6a", fontSize: 12, fontWeight: 600 },
+                    style: { fill: "#9a8c7a", fontSize: 12, fontWeight: 600 },
                   }}
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "rgba(255, 255, 255, 0.98)",
-                    border: "1.5px solid #ececec",
+                    background: "#242426",
+                    border: "1.5px solid rgba(255,255,255,0.1)",
                     borderRadius: "10px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
                     padding: "12px 14px",
                   }}
-                  labelStyle={{ color: "#2b2b2b", fontWeight: 600, marginBottom: "6px" }}
+                  labelStyle={{ color: "#e8e6e3", fontWeight: 600, marginBottom: "6px" }}
                   itemStyle={{ color: "#ce1c1a", fontWeight: 500 }}
                   formatter={(value: number, name: string, props: any) => [
                     props.payload.displayVolume,

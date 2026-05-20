@@ -37,21 +37,21 @@ import { StatusChip } from "@/components/ui/StatusChip";
 import { getPerformanceRowById } from "../_data";
 
 const HEADER_CELL_SX = {
-  background: "#fafafa",
+  background: "#1a1a1c",
   fontSize: "11px",
   fontWeight: 600,
-  color: "#887b6a",
+  color: "#9a8c7a",
   letterSpacing: "0.5px",
   textTransform: "uppercase",
-  borderBottom: "2px solid #e5e5e5",
+  borderBottom: "2px solid rgba(255,255,255,0.08)",
   padding: "14px 20px",
   whiteSpace: "nowrap",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f5f5f5",
+  color: "#e8e6e3",
+  borderBottom: "1px solid rgba(255,255,255,0.05)",
   padding: "14px 20px",
 };
 
@@ -207,7 +207,7 @@ export default function FranchiseeReportPage() {
           <SectionCard
             bodyPadding="20px 22px"
             style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
+              background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
               position: "relative",
               overflow: "hidden",
               height: "100%",
@@ -267,7 +267,7 @@ export default function FranchiseeReportPage() {
                       style={{
                         fontSize: "20px",
                         fontWeight: 700,
-                        color: "#2b2b2b",
+                        color: "#e8e6e3",
                         margin: "0 0 4px 0",
                         letterSpacing: "-0.4px",
                       }}
@@ -367,10 +367,10 @@ export default function FranchiseeReportPage() {
                     <LocationIcon sx={{ fontSize: 18 }} />
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Location
                     </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
                       Houston, TX
                     </div>
                   </div>
@@ -403,10 +403,10 @@ export default function FranchiseeReportPage() {
                     <PersonIcon sx={{ fontSize: 18 }} />
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Admin
                     </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
                       John Martinez
                     </div>
                   </div>
@@ -439,10 +439,10 @@ export default function FranchiseeReportPage() {
                     <EmailIcon sx={{ fontSize: 18 }} />
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Email
                     </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
                       admin@alphafuel.com
                     </div>
                   </div>
@@ -475,10 +475,10 @@ export default function FranchiseeReportPage() {
                     <PhoneIcon sx={{ fontSize: 18 }} />
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Phone
                     </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
                       (713) 555-0142
                     </div>
                   </div>
@@ -511,10 +511,10 @@ export default function FranchiseeReportPage() {
                     <CalendarIcon sx={{ fontSize: 18 }} />
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", color: "#887b6a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Registered
                     </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#2b2b2b", marginTop: "2px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
                       Jan 15, 2024
                     </div>
                   </div>
@@ -529,7 +529,7 @@ export default function FranchiseeReportPage() {
             title="Performance"
             bodyPadding="12px 16px 14px"
             style={{
-              background: "linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #fdfcfb 100%)",
+              background: "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 60%, #212123 100%)",
               height: "100%",
               maxWidth: "100%",
             }}
@@ -547,14 +547,14 @@ export default function FranchiseeReportPage() {
                     borderBottom: idx < performanceRows.length - 1 ? "1px solid #f0f0f0" : "none",
                   }}
                 >
-                  <span style={{ fontSize: "12px", color: "#887b6a", fontWeight: 500 }}>
+                  <span style={{ fontSize: "12px", color: "#9a8c7a", fontWeight: 500 }}>
                     {m.label}
                   </span>
                   <span
                     style={{
                       fontSize: "13px",
                       fontWeight: 600,
-                      color: "#2b2b2b",
+                      color: "#e8e6e3",
                     }}
                   >
                     {m.value}
@@ -570,9 +570,9 @@ export default function FranchiseeReportPage() {
         title="Customers" 
         bodyPadding={0}
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-          border: "1px solid #e5e5e5",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
         }}
       >
         <TableContainer>
@@ -591,7 +591,7 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={c.name}
                   sx={{
-                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
+                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
@@ -613,9 +613,9 @@ export default function FranchiseeReportPage() {
         title="Drivers" 
         bodyPadding={0}
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-          border: "1px solid #e5e5e5",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
         }}
       >
         <TableContainer>
@@ -633,7 +633,7 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={d.name}
                   sx={{
-                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
+                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
@@ -656,9 +656,9 @@ export default function FranchiseeReportPage() {
         title="Inventory" 
         bodyPadding={0}
         style={{
-          background: "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
-          border: "1px solid #e5e5e5",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
         }}
       >
         <TableContainer>
@@ -677,7 +677,7 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={item.product}
                   sx={{
-                    "&:hover": { background: "#fafafa", transition: "background 0.2s ease" },
+                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >

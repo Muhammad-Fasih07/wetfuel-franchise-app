@@ -59,7 +59,7 @@ const SESSIONS: Array<{
 ];
 
 const DANGER_GHOST_SX: React.CSSProperties = {
-  background: "#ffffff",
+  background: "#1c1c1d",
   border: "1px solid #f0797a",
   color: "#f0797a",
   height: "32px",
@@ -106,11 +106,11 @@ export function SecurityPanel() {
           style={{
             fontSize: "14px",
             fontWeight: 600,
-            color: "#2b2b2b",
-            margin: "0 0 16px",
-          }}
-        >
-          Change Password
+          color: "#e8e6e3",
+          margin: "0 0 16px",
+        }}
+      >
+        Change Password
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -132,7 +132,7 @@ export function SecurityPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#887b6a",
+                  color: "#9a8c7a",
                   margin: "6px 0 0 4px",
                 }}
               >
@@ -158,7 +158,7 @@ export function SecurityPanel() {
       <div
         style={{
           height: "1px",
-          background: "#f0f0f0",
+          background: "rgba(255,255,255,0.07)",
           margin: "28px 0",
         }}
       />
@@ -167,7 +167,7 @@ export function SecurityPanel() {
         style={{
           fontSize: "14px",
           fontWeight: 600,
-          color: "#2b2b2b",
+          color: "#e8e6e3",
           margin: "0 0 16px",
         }}
       >
@@ -184,10 +184,10 @@ export function SecurityPanel() {
               gap: "12px",
               padding: "12px 0",
               borderBottom:
-                idx === SESSIONS.length - 1 ? "none" : "1px solid #f5f5f5",
+                idx === SESSIONS.length - 1 ? "none" : "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <span style={{ color: "#887b6a", display: "inline-flex" }}>
+            <span style={{ color: "#9a8c7a", display: "inline-flex" }}>
               {s.type === "computer" ? (
                 <ComputerIcon sx={{ fontSize: 20 }} />
               ) : (
@@ -199,7 +199,7 @@ export function SecurityPanel() {
                 style={{
                   fontSize: "13px",
                   fontWeight: 500,
-                  color: "#2b2b2b",
+                  color: "#e8e6e3",
                   margin: 0,
                 }}
               >
@@ -208,7 +208,7 @@ export function SecurityPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#887b6a",
+                  color: "#9a8c7a",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -223,11 +223,11 @@ export function SecurityPanel() {
                 style={DANGER_GHOST_SX}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#fff5f5")
+                    "rgba(240,121,122,0.12)")
                 }
                 onMouseLeave={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#ffffff")
+                    "#1c1c1d")
                 }
               >
                 Revoke
@@ -247,11 +247,11 @@ export function SecurityPanel() {
           severity="success"
           onClose={() => setToastOpen(false)}
           sx={{
-            background: "#f0fdf4",
-            color: "#15803d",
-            border: "1px solid #bbf7d0",
+            background: "#0a2015",
+            color: "#34d399",
+            border: "1px solid rgba(52,211,153,0.3)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#15803d" },
+            "& .MuiAlert-icon": { color: "#34d399" },
           }}
         >
           Password updated successfully.

@@ -5,10 +5,10 @@ interface AuthCardProps {
 }
 
 const gradientBorder =
-  "linear-gradient(135deg, #ce1c1a 0%, #bf2524 25%, #f0797a 60%, rgba(255,255,255,0.18) 100%)";
+  "linear-gradient(135deg, #ce1c1a 0%, #bf2524 25%, #f0797a 60%, rgba(255,255,255,0.10) 100%)";
 
 const cardSurface =
-  "linear-gradient(165deg, #ffffff 0%, #ffffff 50%, #fbfaf9 80%, #f7f6f4 100%)";
+  "linear-gradient(165deg, #1c1c1d 0%, #1e1e20 50%, #212123 80%, #242426 100%)";
 
 // Same dark gradient palette used by the sidebar — radial red glows over a deep
 // charcoal base.
@@ -39,8 +39,8 @@ export function AuthCard({ children }: AuthCardProps) {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px)," +
-            "linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px)," +
+            "linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
           maskImage:
             "radial-gradient(ellipse at center, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 75%)",
@@ -110,7 +110,7 @@ export function AuthCard({ children }: AuthCardProps) {
           borderRadius: "18px",
           background: gradientBorder,
           boxShadow:
-            "0 2px 8px rgba(0,0,0,0.4), 0 30px 80px -20px rgba(206,28,26,0.5), 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15)",
+            "0 2px 8px rgba(0,0,0,0.6), 0 30px 80px -20px rgba(206,28,26,0.5), 0 12px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)",
           transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}
       >

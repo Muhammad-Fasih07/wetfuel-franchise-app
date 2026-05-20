@@ -29,7 +29,7 @@ const schema = z.object({
 type ProfileValues = z.infer<typeof schema>;
 
 const DANGER_GHOST_SX: React.CSSProperties = {
-  background: "#ffffff",
+  background: "#1c1c1d",
   border: "1px solid #f0797a",
   color: "#f0797a",
   height: "36px",
@@ -91,7 +91,7 @@ export function ProfilePanel() {
             gap: "20px",
             marginBottom: "28px",
             paddingBottom: "24px",
-            borderBottom: "1px solid #f0f0f0",
+            borderBottom: "1px solid rgba(255,255,255,0.07)",
           }}
         >
           <Avatar
@@ -111,16 +111,16 @@ export function ProfilePanel() {
               style={{
                 fontSize: "16px",
                 fontWeight: 600,
-                color: "#2b2b2b",
-                margin: 0,
-              }}
-            >
-              Super Admin
+              color: "#e8e6e3",
+              margin: 0,
+            }}
+          >
+            Super Admin
             </p>
             <p
               style={{
                 fontSize: "13px",
-                color: "#887b6a",
+                color: "#9a8c7a",
                 margin: "2px 0 12px",
               }}
             >
@@ -139,11 +139,11 @@ export function ProfilePanel() {
                 style={DANGER_GHOST_SX}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#fff5f5")
+                    "rgba(240,121,122,0.12)")
                 }
                 onMouseLeave={(e) =>
                   ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#ffffff")
+                    "#1c1c1d")
                 }
               >
                 <DeleteOutlineIcon sx={{ fontSize: 16 }} />
@@ -232,11 +232,11 @@ export function ProfilePanel() {
           severity="success"
           onClose={() => setToastOpen(false)}
           sx={{
-            background: "#f0fdf4",
-            color: "#15803d",
-            border: "1px solid #bbf7d0",
+            background: "#0a2015",
+            color: "#34d399",
+            border: "1px solid rgba(52,211,153,0.3)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#15803d" },
+            "& .MuiAlert-icon": { color: "#34d399" },
           }}
         >
           Profile updated successfully.

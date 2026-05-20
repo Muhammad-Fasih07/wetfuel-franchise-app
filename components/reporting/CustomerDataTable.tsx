@@ -42,20 +42,20 @@ const CUSTOMERS: Customer[] = [
 ];
 
 const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)",
+  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
   fontSize: "11px",
   fontWeight: 700,
-  color: "#887b6a",
+  color: "#9a8c7a",
   letterSpacing: "0.7px",
   textTransform: "uppercase",
-  borderBottom: "1.5px solid #ececec",
+  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
   padding: "14px 18px",
 };
 
 const BODY_CELL_SX = {
   fontSize: "13px",
-  color: "#2b2b2b",
-  borderBottom: "1px solid #f8f8f8",
+  color: "#e8e6e3",
+  borderBottom: "1px solid rgba(255,255,255,0.05)",
   padding: "16px 18px",
 };
 
@@ -104,17 +104,17 @@ export function CustomerDataTable() {
                     <BusinessIcon sx={{ fontSize: 20 }} />
                   </Avatar>
                   <div style={{ minWidth: 0 }}>
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#2b2b2b", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#e8e6e3", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {customer.name}
                     </p>
-                    <p style={{ fontSize: "11px", color: "#887b6a", margin: "2px 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <p style={{ fontSize: "11px", color: "#9a8c7a", margin: "2px 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {customer.email}
                     </p>
                   </div>
                 </div>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#2b2b2b", fontWeight: 500 }}>
+                <span style={{ fontSize: "13px", color: "#e8e6e3", fontWeight: 500 }}>
                   {customer.franchisee}
                 </span>
               </TableCell>
@@ -125,7 +125,7 @@ export function CustomerDataTable() {
                     alignItems: "center",
                     gap: "4px",
                     fontSize: "13px",
-                    color: "#887b6a",
+                    color: "#9a8c7a",
                   }}
                 >
                   <PhoneIcon sx={{ fontSize: 14 }} />
@@ -159,7 +159,7 @@ export function CustomerDataTable() {
                     gap: "6px",
                     fontSize: "13px",
                     fontWeight: 500,
-                    color: "#2b2b2b",
+                    color: "#e8e6e3",
                   }}
                 >
                   <FuelIcon sx={{ fontSize: 16, color: "#ce1c1a" }} />

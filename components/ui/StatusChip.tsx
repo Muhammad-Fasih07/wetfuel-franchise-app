@@ -23,36 +23,36 @@ const STYLES: Record<
   }
 > = {
   active: {
-    bg: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-    color: "#15803d",
+    bg: "linear-gradient(135deg, #0a1c10 0%, #0f2a18 100%)",
+    color: "#34d399",
     dot: "#22c55e",
     border: "rgba(34,197,94,0.3)",
     label: "Active",
   },
   frozen: {
-    bg: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
-    color: "#dc2626",
+    bg: "linear-gradient(135deg, #1c0a0a 0%, #280e0e 100%)",
+    color: "#f87171",
     dot: "#ef4444",
     border: "rgba(239,68,68,0.3)",
     label: "Frozen",
   },
   pending: {
-    bg: "linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)",
-    color: "#b45309",
+    bg: "linear-gradient(135deg, #1c1508 0%, #25190a 100%)",
+    color: "#fbbf24",
     dot: "#f59e0b",
     border: "rgba(245,158,11,0.3)",
     label: "Pending",
   },
   completed: {
-    bg: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-    color: "#15803d",
+    bg: "linear-gradient(135deg, #0a1c10 0%, #0f2a18 100%)",
+    color: "#34d399",
     dot: "#22c55e",
     border: "rgba(34,197,94,0.3)",
     label: "Completed",
   },
   flagged: {
-    bg: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
-    color: "#dc2626",
+    bg: "linear-gradient(135deg, #1c0a0a 0%, #280e0e 100%)",
+    color: "#f87171",
     dot: "#ef4444",
     border: "rgba(239,68,68,0.3)",
     label: "Flagged",
@@ -75,18 +75,18 @@ export function StatusChip({ status, label }: StatusChipProps) {
         borderRadius: "24px",
         whiteSpace: "nowrap",
         border: `1.5px solid ${border}`,
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px ${border}30`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 6px ${border}30`,
         letterSpacing: "0.3px",
         transition: "all 200ms ease",
         cursor: "default",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.05)";
-        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.7), 0 4px 10px ${border}40`;
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 10px ${border}40`;
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "scale(1)";
-        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 6px ${border}30`;
+        e.currentTarget.style.boxShadow = `inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 6px ${border}30`;
       }}
     >
       <span

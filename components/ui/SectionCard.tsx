@@ -37,13 +37,13 @@ export function SectionCard({
 }: SectionCardProps) {
   const defaultMouseEnter = (e: MouseEvent<HTMLElement>) => {
     e.currentTarget.style.boxShadow =
-      "0 4px 16px rgba(0,0,0,0.06), 0 12px 32px -16px rgba(43,43,43,0.25), inset 0 1px 0 rgba(255,255,255,0.9)";
+      "0 4px 16px rgba(0,0,0,0.4), 0 12px 32px -16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)";
     e.currentTarget.style.transform = "translateY(-2px)";
   };
 
   const defaultMouseLeave = (e: MouseEvent<HTMLElement>) => {
     e.currentTarget.style.boxShadow =
-      "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)";
+      "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)";
     e.currentTarget.style.transform = "translateY(0)";
   };
 
@@ -52,11 +52,11 @@ export function SectionCard({
       className={className}
       style={{
         background:
-          "linear-gradient(180deg, #ffffff 0%, #ffffff 60%, #fdfcfb 100%)",
-        border: "1.5px solid #ececec",
+          "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 60%, #212123 100%)",
+        border: "1.5px solid rgba(255,255,255,0.08)",
         borderRadius: "14px",
         boxShadow:
-          "0 2px 8px rgba(0,0,0,0.04), 0 8px 24px -16px rgba(43,43,43,0.2), inset 0 1px 0 rgba(255,255,255,0.8)",
+          "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
         overflow: "hidden",
         position: "relative",
         transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
@@ -88,14 +88,14 @@ export function SectionCard({
         <header
           style={{
             padding: "20px 26px",
-            borderBottom: headerBorder ? "1.5px solid #f5f5f5" : "none",
+            borderBottom: headerBorder ? "1.5px solid rgba(255,255,255,0.06)" : "none",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             gap: "16px",
             flexWrap: "wrap",
             background:
-              "linear-gradient(180deg, rgba(255,245,245,0.4) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(180deg, rgba(206,28,26,0.06) 0%, rgba(28,28,29,0) 100%)",
           }}
         >
           {title && (
@@ -104,7 +104,7 @@ export function SectionCard({
                 style={{
                   fontSize: "16px",
                   fontWeight: 600,
-                  color: "#2b2b2b",
+                  color: "#e8e6e3",
                   margin: 0,
                   display: "flex",
                   alignItems: "center",
@@ -129,7 +129,7 @@ export function SectionCard({
                 <p
                   style={{
                     fontSize: "13px",
-                    color: "#887b6a",
+                    color: "#9a8c7a",
                     margin: 0,
                     paddingLeft: "17px",
                     fontWeight: 400,
