@@ -1,14 +1,19 @@
-import type { ReactNode } from "react";
+"use client";
+
+import type { MouseEvent, ReactNode } from "react";
+import { useState } from "react";
 import { Button as MuiButton, CircularProgress } from "@mui/material";
+import { withGlobalLoading } from "../../lib/loading/withGlobalLoading";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
   variant?: "primary" | "ghost";
   disabled?: boolean;
   loading?: boolean;
+  disableGlobalLoading?: boolean;
   startIcon?: ReactNode;
 }
 
@@ -27,16 +32,39 @@ export function Button({
   variant = "primary",
   disabled = false,
   loading = false,
+  disableGlobalLoading = false,
   startIcon,
 }: ButtonProps) {
-  const isDisabled = disabled || loading;
+  const [pending, setPending] = useState(false);
+  const isDisabled = disabled || loading || pending;
+
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
+    if (!onClick) return;
+    const result = onClick(event);
+    if (!(result instanceof Promise)) return;
+    if (loading || disableGlobalLoading) {
+      setPending(true);
+      try {
+        await result;
+      } finally {
+        setPending(false);
+      }
+      return;
+    }
+    setPending(true);
+    try {
+      await withGlobalLoading(() => result);
+    } finally {
+      setPending(false);
+    }
+  };
 
   return (
     <MuiButton
       type={type}
-      onClick={onClick}
+      onClick={onClick ? handleClick : undefined}
       fullWidth={fullWidth}
-      startIcon={loading ? undefined : startIcon}
+      startIcon={loading || pending ? undefined : startIcon}
       disableElevation
       disabled={isDisabled}
       sx={{
@@ -115,7 +143,11 @@ export function Button({
         },
       }}
     >
-      {loading ? <CircularProgress size={18} sx={{ color: "inherit" }} /> : children}
+      {loading || pending ? (
+        <CircularProgress size={18} sx={{ color: "inherit" }} />
+      ) : (
+        children
+      )}
     </MuiButton>
   );
 }

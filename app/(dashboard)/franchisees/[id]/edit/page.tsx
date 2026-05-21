@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Alert, Grid, Snackbar } from "@mui/material";
@@ -47,7 +48,7 @@ const SECTION_LABEL: React.CSSProperties = {
 };
 
 export default function EditFranchiseePage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id ?? "";
   const row = getFranchiseeStubById(id);

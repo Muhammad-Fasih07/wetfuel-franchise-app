@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { AppLink } from "../navigation/AppLink";
 import { usePathname } from "next/navigation";
 import {
   Avatar,
@@ -103,7 +103,7 @@ export function Topbar() {
             minWidth: 0,
           }}
         >
-          <Link
+          <AppLink
             href="/"
             style={{
               fontSize: "13px",
@@ -127,7 +127,7 @@ export function Topbar() {
               }}
             />
             WetFuel
-          </Link>
+          </AppLink>
           {crumbs.map((c, idx) => {
             const isLast = idx === crumbs.length - 1;
             if (isLast) {
@@ -145,7 +145,7 @@ export function Topbar() {
               );
             }
             return (
-              <Link
+              <AppLink
                 key={c.href}
                 href={c.href}
                 style={{
@@ -155,7 +155,7 @@ export function Topbar() {
                 }}
               >
                 {c.label}
-              </Link>
+              </AppLink>
             );
           })}
         </Breadcrumbs>

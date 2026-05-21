@@ -1,8 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { AppLink } from "../navigation/AppLink";
+import { useAppRouter } from "../../lib/hooks/useAppRouter";
 import { Avatar, IconButton, Tooltip } from "@mui/material";
 import {
   AssessmentOutlined,
@@ -40,12 +41,11 @@ function isActivePath(pathname: string, href: string) {
 
 export function Sidebar() {
   const pathname = usePathname() ?? "/";
-  const router = useRouter();
+  const router = useAppRouter();
 
   const handleSignOut = () => {
-    // Clear authentication cookie
-    document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    
+    document.cookie =
+      "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     // TODO: call signOut() from next-auth and clear authStore before redirecting
     router.push("/login");
   };
@@ -194,7 +194,7 @@ export function Sidebar() {
             const active = isActivePath(pathname, item.href);
             return (
               <li key={item.href} style={{ margin: "2px 0" }}>
-                <Link
+                <AppLink
                   href={item.href}
                   style={{
                     textDecoration: "none",
@@ -284,100 +284,13 @@ export function Sidebar() {
                       }}
                     />
                   )}
-                </Link>
+                </AppLink>
               </li>
             );
           })}
         </ul>
 
-        <div style={{ padding: "20px 16px 0" }}>
-          <div
-            style={{
-              borderRadius: "12px",
-              padding: "14px",
-              background:
-                "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(0,0,0,0.4) 100%)",
-              border: "1px solid rgba(206,28,26,0.22)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "6px",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            <span
-              aria-hidden
-              style={{
-                position: "absolute",
-                top: "-30px",
-                right: "-30px",
-                width: "80px",
-                height: "80px",
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(206,28,26,0.4) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }}
-            />
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span
-                style={{
-                  width: "28px",
-                  height: "28px",
-                  borderRadius: "8px",
-                  background:
-                    "linear-gradient(135deg, #ce1c1a 0%, #8b1816 100%)",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#ffffff",
-                  boxShadow: "0 4px 10px rgba(206,28,26,0.4)",
-                  flexShrink: 0,
-                }}
-              >
-                <HelpOutlineIcon sx={{ fontSize: 16 }} />
-              </span>
-              <p
-                style={{
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  margin: 0,
-                }}
-              >
-                Need help?
-              </p>
-            </div>
-            <p
-              style={{
-                fontSize: "11px",
-                color: "rgba(255,255,255,0.55)",
-                margin: 0,
-                lineHeight: 1.4,
-              }}
-            >
-              Reach our team for onboarding & data migration.
-            </p>
-            <a
-              href="mailto:support@wetfuel.com"
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                color: "#f0797a",
-                textDecoration: "none",
-                marginTop: "2px",
-              }}
-            >
-              Contact support →
-            </a>
-          </div>
-        </div>
+        
       </nav>
 
       <div

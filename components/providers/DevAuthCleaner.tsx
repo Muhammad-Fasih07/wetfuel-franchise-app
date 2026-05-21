@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useAppRouter } from "../../lib/hooks/useAppRouter";
 
 /**
  * Component that enforces login page on fresh browser tab
@@ -10,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
  */
 export function DevAuthCleaner() {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useAppRouter();
 
   useEffect(() => {
     // Check if this is the first load in this tab

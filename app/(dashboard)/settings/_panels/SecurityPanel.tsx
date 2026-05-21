@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/Input";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { updatePassword } from "@/lib/api/auth";
+import { withGlobalLoading } from "@/lib/loading/withGlobalLoading";
 
 const passwordRule = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/;
 
@@ -93,8 +94,10 @@ export function SecurityPanel() {
   });
 
   const onSubmit = async (values: SecurityValues) => {
-    // TODO: wire to lib/api/auth.ts updatePassword
-    await updatePassword(values.currentPassword, values.newPassword);
+    await withGlobalLoading(async () => {
+      // TODO: wire to lib/api/auth.ts updatePassword
+      await updatePassword(values.currentPassword, values.newPassword);
+    });
     setToastOpen(true);
     reset();
   };

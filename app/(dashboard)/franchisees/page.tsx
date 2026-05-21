@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type MouseEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import {
   Divider,
   Grid,
@@ -95,7 +95,7 @@ const FRANCHISEE_STATS = [
 ];
 
 export default function FranchiseesPage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "frozen">(
     "all",

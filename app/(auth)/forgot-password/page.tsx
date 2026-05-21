@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "../../../components/navigation/AppLink";
+import { withGlobalLoading } from "../../../lib/loading/withGlobalLoading";
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -34,7 +35,9 @@ export default function ForgotPasswordPage() {
   });
 
   const onSubmit = async (values: ForgotPasswordFormValues) => {
-    const success = await sendResetLink(values.email);
+    const success = await withGlobalLoading(() =>
+      sendResetLink(values.email),
+    );
     if (success) {
       setSubmitted(true);
     }
@@ -63,7 +66,7 @@ export default function ForgotPasswordPage() {
               animationDelay: "0.1s",
             }}
           >
-            <Link
+            <AppLink
               href="/login"
               style={{
                 display: "inline-flex",
@@ -86,7 +89,7 @@ export default function ForgotPasswordPage() {
             >
               <ArrowBack sx={{ fontSize: "17px" }} />
               Back to sign in
-            </Link>
+            </AppLink>
           </div>
 
           <div
@@ -256,7 +259,7 @@ export default function ForgotPasswordPage() {
           >
             If that address is registered, you&apos;ll receive a reset link shortly.
           </p>
-          <Link
+          <AppLink
             href="/login"
             className="animate-fade-in"
             style={{
@@ -282,7 +285,7 @@ export default function ForgotPasswordPage() {
           >
             <ArrowBack sx={{ fontSize: "17px" }} />
             Back to sign in
-          </Link>
+          </AppLink>
         </div>
       )}
     </AuthCard>

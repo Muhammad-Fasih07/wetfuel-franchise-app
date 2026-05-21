@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { updateProfile } from "@/lib/api/auth";
+import { withGlobalLoading } from "@/lib/loading/withGlobalLoading";
 
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -68,8 +69,10 @@ export function ProfilePanel() {
   });
 
   const onSubmit = async (values: ProfileValues) => {
-    // TODO: replace stub call with real lib/api/auth.ts updateProfile
-    await updateProfile(values);
+    await withGlobalLoading(async () => {
+      // TODO: replace stub call with real lib/api/auth.ts updateProfile
+      await updateProfile(values);
+    });
     setToastOpen(true);
   };
 

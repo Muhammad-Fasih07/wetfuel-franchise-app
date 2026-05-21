@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import {
   Grid,
   Table,
@@ -137,7 +137,7 @@ function MetricList({
 }
 
 export default function ReportingPage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [range, setRange] = useState("30d");
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "frozen">(
     "all",

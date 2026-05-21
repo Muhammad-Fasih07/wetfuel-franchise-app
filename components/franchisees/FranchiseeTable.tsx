@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type MouseEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "../../lib/hooks/useAppRouter";
 import {
   Dialog,
   DialogActions,
@@ -116,7 +116,7 @@ function StatusChip({ status }: { status: FranchiseeStatus }) {
 }
 
 export function FranchiseeTable() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "frozen">("all");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(6);

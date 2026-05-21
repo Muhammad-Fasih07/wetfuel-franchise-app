@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import { Grid } from "@mui/material";
 import {
   AcUnit as AcUnitIcon,
@@ -82,7 +83,7 @@ const PERFORMANCE_BTN_DANGER_SX = {
 };
 
 export default function FranchiseeDetailPage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id ?? "";
   const row = getFranchiseeStubById(id);

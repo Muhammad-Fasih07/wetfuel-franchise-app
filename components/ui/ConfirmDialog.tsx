@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Button as MuiButton,
   Dialog,
@@ -8,6 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import { withGlobalLoading } from "../../lib/loading/withGlobalLoading";
 import { Button } from "./Button";
 
 interface ConfirmDialogProps {
@@ -18,7 +20,7 @@ interface ConfirmDialogProps {
   cancelLabel?: string;
   confirmColor?: string;
   loading?: boolean;
-  onConfirm: () => void;
+  onConfirm: () => void | Promise<void>;
   onCancel: () => void;
 }
 
@@ -33,6 +35,20 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
+  const [pending, setPending] = useState(false);
+  const isBusy = loading || pending;
+
+  const handleConfirm = async () => {
+    const result = onConfirm();
+    if (!(result instanceof Promise)) return;
+    setPending(true);
+    try {
+      await withGlobalLoading(() => result);
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
     <Dialog
       open={open}
@@ -118,8 +134,8 @@ export function ConfirmDialog({
         <MuiButton
           variant="contained"
           disableElevation
-          disabled={loading}
-          onClick={onConfirm}
+          disabled={isBusy}
+          onClick={handleConfirm}
           sx={{
             background: `linear-gradient(135deg, ${confirmColor} 0%, ${confirmColor}d9 50%, ${confirmColor}b3 100%)`,
             color: "#ffffff",
@@ -137,7 +153,7 @@ export function ConfirmDialog({
             },
           }}
         >
-          {loading ? "Working..." : confirmLabel}
+          {isBusy ? "Working..." : confirmLabel}
         </MuiButton>
       </DialogActions>
     </Dialog>

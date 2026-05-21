@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Grid, Snackbar, Alert } from "@mui/material";
@@ -44,7 +44,7 @@ const SECTION_LABEL: React.CSSProperties = {
 };
 
 export default function NewFranchiseePage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [toastOpen, setToastOpen] = useState(false);
 
   const {

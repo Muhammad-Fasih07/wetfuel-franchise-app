@@ -1,4 +1,5 @@
 import type { CreateFranchiseePayload, Franchisee } from "../../types/franchisee";
+import { withGlobalLoading } from "../loading/withGlobalLoading";
 
 export async function getFranchisees(): Promise<Franchisee[]> {
   // TODO: replace with real API call to fetch franchisees list.
@@ -13,20 +14,24 @@ export async function getFranchiseeById(id: string): Promise<Franchisee | null> 
 export async function createFranchisee(
   data: CreateFranchiseePayload,
 ): Promise<Franchisee> {
-  // TODO: replace with real API call to create a franchisee.
-  return {
-    id: "stub",
-    createdAt: new Date().toISOString(),
-    ...data,
-  } as Franchisee;
+  return withGlobalLoading(async () => {
+    // TODO: replace with apiFetch to create a franchisee.
+    return {
+      id: "stub",
+      createdAt: new Date().toISOString(),
+      ...data,
+    } as Franchisee;
+  });
 }
 
 export async function updateFranchisee(
   id: string,
   data: Partial<Franchisee>,
 ): Promise<Franchisee> {
-  // TODO: replace with real API call to update a franchisee.
-  return { id, ...data } as Franchisee;
+  return withGlobalLoading(async () => {
+    // TODO: replace with apiFetch to update a franchisee.
+    return { id, ...data } as Franchisee;
+  });
 }
 
 export async function freezeFranchisee(id: string): Promise<void> {

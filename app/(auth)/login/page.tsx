@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { AppLink } from "../../../components/navigation/AppLink";
+import { useAppRouter } from "../../../lib/hooks/useAppRouter";
+import { withGlobalLoading } from "../../../lib/loading/withGlobalLoading";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -34,7 +35,7 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -68,12 +69,11 @@ export default function LoginPage() {
     }
 
     try {
-      await signIn({ email: values.email, password: values.password });
-      
-      // Set authentication cookie (temporary until real API is connected)
-      document.cookie = "auth-token=authenticated; path=/; max-age=86400"; // 24 hours
-      
-      // Redirect to dashboard or the original requested page
+      await withGlobalLoading(async () => {
+        await signIn({ email: values.email, password: values.password });
+        document.cookie = "auth-token=authenticated; path=/; max-age=86400";
+      });
+
       const urlParams = new URLSearchParams(window.location.search);
       const from = urlParams.get("from") || "/";
       router.push(from);
@@ -261,7 +261,7 @@ export default function LoginPage() {
               )}
             />
 
-            <Link
+            <AppLink
               href="/forgot-password"
               style={{
                 color: "#ce1c1a",
@@ -279,7 +279,7 @@ export default function LoginPage() {
               }}
             >
               Forgot password?
-            </Link>
+            </AppLink>
           </div>
 
           {errors.root?.message ? (

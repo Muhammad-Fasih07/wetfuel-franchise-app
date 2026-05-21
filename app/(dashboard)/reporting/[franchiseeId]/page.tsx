@@ -1,6 +1,7 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useAppRouter } from "@/lib/hooks/useAppRouter";
 import {
   Grid,
   Table,
@@ -96,7 +97,7 @@ const INVENTORY_ROWS: Array<{
 ];
 
 export default function FranchiseeReportPage() {
-  const router = useRouter();
+  const router = useAppRouter();
   const params = useParams<{ franchiseeId: string }>();
   const id = params?.franchiseeId ?? "";
   const row = getPerformanceRowById(id);
