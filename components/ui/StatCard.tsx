@@ -16,8 +16,8 @@ const trendStyles: Record<
   "up" | "down",
   { color: string; bg: string; Icon: typeof TrendingUp }
 > = {
-  up: { color: "#15803d", bg: "#f0fdf4", Icon: TrendingUp },
-  down: { color: "#dc2626", bg: "#fef2f2", Icon: TrendingDown },
+  up: { color: "#4ade80", bg: "rgba(21,128,61,0.2)", Icon: TrendingUp },
+  down: { color: "#f87171", bg: "rgba(239,68,68,0.2)", Icon: TrendingDown },
 };
 
 export function StatCard({

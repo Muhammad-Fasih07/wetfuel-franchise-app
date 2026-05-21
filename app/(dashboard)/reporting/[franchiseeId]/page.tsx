@@ -251,13 +251,15 @@ export default function FranchiseeReportPage() {
                       width: "52px",
                       height: "52px",
                       borderRadius: "14px",
-                      background: "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd2d2 100%)",
-                      color: "#ce1c1a",
+                      background:
+                        "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0.25) 60%, rgba(206,28,26,0.30) 100%)",
+                      color: "#f0797a",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: "0 6px 16px rgba(206,28,26,0.2), inset 0 1px 0 rgba(255,255,255,0.7)",
-                      border: "2px solid rgba(206,28,26,0.2)",
+                      boxShadow:
+                        "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
+                      border: "2px solid rgba(206,28,26,0.25)",
                     }}
                   >
                     <StoreIcon sx={{ fontSize: 26 }} />
@@ -347,8 +349,9 @@ export default function FranchiseeReportPage() {
                     gap: "10px",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)",
-                    border: "1.5px solid rgba(59,130,246,0.2)",
+                    background:
+                      "linear-gradient(135deg, #0f1520 0%, #152035 60%, #1a2845 100%)",
+                    border: "1.5px solid rgba(59,130,246,0.25)",
                   }}
                 >
                   <div
@@ -383,8 +386,9 @@ export default function FranchiseeReportPage() {
                     gap: "10px",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-                    border: "1.5px solid rgba(34,197,94,0.2)",
+                    background:
+                      "linear-gradient(135deg, #0f1a12 0%, #142818 60%, #1a3320 100%)",
+                    border: "1.5px solid rgba(34,197,94,0.25)",
                   }}
                 >
                   <div
@@ -419,8 +423,9 @@ export default function FranchiseeReportPage() {
                     gap: "10px",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-                    border: "1.5px solid rgba(245,158,11,0.2)",
+                    background:
+                      "linear-gradient(135deg, #1a1608 0%, #252010 60%, #302818 100%)",
+                    border: "1.5px solid rgba(245,158,11,0.25)",
                   }}
                 >
                   <div
@@ -455,8 +460,9 @@ export default function FranchiseeReportPage() {
                     gap: "10px",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)",
-                    border: "1.5px solid rgba(139,92,246,0.2)",
+                    background:
+                      "linear-gradient(135deg, #14101f 0%, #1c1830 60%, #242040 100%)",
+                    border: "1.5px solid rgba(139,92,246,0.25)",
                   }}
                 >
                   <div
@@ -491,8 +497,9 @@ export default function FranchiseeReportPage() {
                     gap: "10px",
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
-                    border: "1.5px solid rgba(239,68,68,0.2)",
+                    background:
+                      "linear-gradient(135deg, #1a0f0f 0%, #251414 60%, #301818 100%)",
+                    border: "1.5px solid rgba(239,68,68,0.25)",
                   }}
                 >
                   <div
@@ -544,7 +551,10 @@ export default function FranchiseeReportPage() {
                     alignItems: "center",
                     gap: "8px",
                     padding: "6px 0",
-                    borderBottom: idx < performanceRows.length - 1 ? "1px solid #f0f0f0" : "none",
+                    borderBottom:
+                      idx < performanceRows.length - 1
+                        ? "1px solid rgba(255,255,255,0.07)"
+                        : "none",
                   }}
                 >
                   <span style={{ fontSize: "12px", color: "#9a8c7a", fontWeight: 500 }}>
