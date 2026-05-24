@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { TrendingDown, TrendingUp } from "@mui/icons-material";
+import { AppLink } from "@/components/navigation/AppLink";
 
 interface StatCardProps {
   label: string;
@@ -10,6 +11,7 @@ interface StatCardProps {
   trend?: "up" | "down" | "neutral";
   trendValue?: string;
   icon: ReactNode;
+  href?: string;
 }
 
 const trendStyles: Record<
@@ -27,11 +29,12 @@ export function StatCard({
   trend,
   trendValue,
   icon,
+  href,
 }: StatCardProps) {
   const showChip = trend && trend !== "neutral" && trendValue;
   const chip = showChip ? trendStyles[trend as "up" | "down"] : null;
 
-  return (
+  const card = (
     <div
       className="animate-scale-in"
       style={{
@@ -53,7 +56,7 @@ export function StatCard({
         position: "relative",
         overflow: "hidden",
         transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
-        cursor: "default",
+        cursor: href ? "pointer" : "default",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
@@ -186,4 +189,17 @@ export function StatCard({
       </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <AppLink
+        href={href}
+        style={{ textDecoration: "none", color: "inherit", display: "block" }}
+      >
+        {card}
+      </AppLink>
+    );
+  }
+
+  return card;
 }

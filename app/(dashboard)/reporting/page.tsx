@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { StatCard } from "@/components/ui/StatCard";
+import { UnderDevelopmentModal } from "@/components/ui/UnderDevelopmentModal";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { PERFORMANCE_ROWS } from "./_data";
 
@@ -142,6 +143,7 @@ export default function ReportingPage() {
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "frozen">(
     "all",
   );
+  const [exportModalOpen, setExportModalOpen] = useState(false);
   const filteredPerformance = useMemo(() => {
     if (statusFilter === "all") return PERFORMANCE_ROWS;
     return PERFORMANCE_ROWS.filter((r) => r.status === statusFilter);
@@ -178,6 +180,7 @@ export default function ReportingPage() {
               variant="ghost"
               fullWidth={false}
               startIcon={<FileDownloadOutlinedIcon sx={{ fontSize: 18 }} />}
+              onClick={() => setExportModalOpen(true)}
             >
               Export Report
             </Button>
@@ -511,6 +514,13 @@ export default function ReportingPage() {
           </SectionCard>
         </Grid>
       </Grid>
+
+      <UnderDevelopmentModal
+        open={exportModalOpen}
+        onClose={() => setExportModalOpen(false)}
+        title="Export Report"
+        message="Report exports are currently under development. You'll be able to download network-wide analytics here soon."
+      />
     </div>
   );
 }

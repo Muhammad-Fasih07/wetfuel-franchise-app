@@ -127,6 +127,7 @@ export default function DashboardOverviewPage() {
             trend="up"
             trendValue="+3 this month"
             icon={<StoreIcon sx={{ fontSize: 20 }} />}
+            href="/franchisees"
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>

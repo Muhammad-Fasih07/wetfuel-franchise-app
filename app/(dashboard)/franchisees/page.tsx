@@ -35,6 +35,7 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import { StatCard } from "@/components/ui/StatCard";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { UnderDevelopmentModal } from "@/components/ui/UnderDevelopmentModal";
 import {
   FRANCHISEES_STUB,
   type FranchiseeStub,
@@ -102,6 +103,8 @@ export default function FranchiseesPage() {
   );
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(8);
+
+  const [exportModalOpen, setExportModalOpen] = useState(false);
 
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [activeRow, setActiveRow] = useState<FranchiseeStub | null>(null);
@@ -248,6 +251,7 @@ export default function FranchiseesPage() {
               variant="ghost"
               fullWidth={false}
               startIcon={<FileDownloadOutlinedIcon sx={{ fontSize: 18 }} />}
+              onClick={() => setExportModalOpen(true)}
             >
               Export
             </Button>
@@ -421,6 +425,13 @@ export default function FranchiseesPage() {
           closeConfirm();
         }}
         onCancel={closeConfirm}
+      />
+
+      <UnderDevelopmentModal
+        open={exportModalOpen}
+        onClose={() => setExportModalOpen(false)}
+        title="Export Franchisees"
+        message="Exporting franchisee data is currently under development. You'll be able to download CSV and PDF reports here soon."
       />
     </div>
   );

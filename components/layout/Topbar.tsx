@@ -7,15 +7,13 @@ import {
   Avatar,
   Breadcrumbs,
   Divider,
-  IconButton,
-  Tooltip,
 } from "@mui/material";
 import {
   ChevronRight as ChevronRightIcon,
   KeyboardArrowDown as KeyboardArrowDownIcon,
-  NotificationsOutlined,
   Search as SearchIcon,
 } from "@mui/icons-material";
+import { NotificationButton } from "./NotificationButton";
 
 const PATH_LABELS: Record<string, string> = {
   "": "Dashboard",
@@ -236,44 +234,9 @@ export function Topbar() {
           flexShrink: 0,
         }}
       >
-        <Tooltip title="Notifications" placement="bottom">
-          <IconButton
-            size="small"
-            sx={{
-              color: "#9a8c7a",
-              borderRadius: "8px",
-              width: "36px",
-              height: "36px",
-              border: "1px solid transparent",
-              transition: "all 140ms ease",
-              "&:hover": {
-                color: "#ce1c1a",
-                background: "rgba(206,28,26,0.12)",
-                borderColor: "rgba(206,28,26,0.25)",
-              },
-              position: "relative",
-            }}
-          >
-            <NotificationsOutlined sx={{ fontSize: 20 }} />
-            <span
-              aria-hidden
-              style={{
-                position: "absolute",
-                top: "8px",
-                right: "8px",
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#ce1c1a",
-                border: "2px solid #1c1c1d",
-                boxShadow: "0 0 0 0 rgba(206,28,26,0.6)",
-                animation: "wf-pulse 2s ease-in-out infinite",
-              }}
-            />
-          </IconButton>
-        </Tooltip>
+        <NotificationButton />
 
-        <          Divider
+        <Divider
           orientation="vertical"
           flexItem
           sx={{
@@ -371,18 +334,6 @@ export function Topbar() {
           />
         </button>
       </div>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes wf-pulse {
-          0%   { box-shadow: 0 0 0 0   rgba(206,28,26,0.55); }
-          70%  { box-shadow: 0 0 0 6px rgba(206,28,26,0); }
-          100% { box-shadow: 0 0 0 0   rgba(206,28,26,0); }
-        }
-      `,
-        }}
-      />
     </header>
   );
 }
