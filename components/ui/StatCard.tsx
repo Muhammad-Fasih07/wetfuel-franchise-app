@@ -34,6 +34,17 @@ export function StatCard({
   const showChip = trend && trend !== "neutral" && trendValue;
   const chip = showChip ? trendStyles[trend as "up" | "down"] : null;
 
+  const cardBgImage =
+    "linear-gradient(160deg, #1c1c1d 0%, #1e1e20 70%, #212022 100%), linear-gradient(135deg, rgba(206,28,26,0.35) 0%, rgba(50,50,52,1) 35%, rgba(40,40,42,1) 100%)";
+  const cardBgImageHover = href
+    ? "linear-gradient(160deg, #1f1a1a 0%, #211c1c 70%, #241e1e 100%), linear-gradient(135deg, rgba(206,28,26,0.95) 0%, rgba(240,121,122,0.75) 45%, rgba(206,28,26,0.95) 100%)"
+    : cardBgImage;
+  const defaultShadow =
+    "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)";
+  const hoverShadow = href
+    ? "0 0 0 1px rgba(206,28,26,0.35), 0 0 32px rgba(206,28,26,0.28), 0 12px 36px -12px rgba(206,28,26,0.4), inset 0 1px 0 rgba(255,255,255,0.08)"
+    : "0 8px 24px rgba(0,0,0,0.4), 0 12px 32px -16px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.07)";
+
   const card = (
     <div
       className="animate-scale-in"
@@ -43,16 +54,14 @@ export function StatCard({
         border: "1.5px solid transparent",
         backgroundOrigin: "border-box",
         backgroundClip: "padding-box, border-box",
-        backgroundImage:
-          "linear-gradient(160deg, #1c1c1d 0%, #1e1e20 70%, #212022 100%), linear-gradient(135deg, rgba(206,28,26,0.35) 0%, rgba(50,50,52,1) 35%, rgba(40,40,42,1) 100%)",
+        backgroundImage: cardBgImage,
         borderRadius: "14px",
         padding: "24px",
         minHeight: "130px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        boxShadow:
-          "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
+        boxShadow: defaultShadow,
         position: "relative",
         overflow: "hidden",
         transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
@@ -60,13 +69,17 @@ export function StatCard({
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow =
-          "0 8px 24px rgba(0,0,0,0.4), 0 12px 32px -16px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.07)";
+        e.currentTarget.style.boxShadow = hoverShadow;
+        if (href) {
+          e.currentTarget.style.backgroundImage = cardBgImageHover;
+        }
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow =
-          "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)";
+        e.currentTarget.style.boxShadow = defaultShadow;
+        if (href) {
+          e.currentTarget.style.backgroundImage = cardBgImage;
+        }
       }}
     >
       <div

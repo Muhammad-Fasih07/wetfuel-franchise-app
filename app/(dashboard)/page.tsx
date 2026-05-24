@@ -137,6 +137,7 @@ export default function DashboardOverviewPage() {
             subtext="3 currently frozen"
             trend="neutral"
             icon={<CheckCircleOutlineIcon sx={{ fontSize: 20 }} />}
+            href="/reporting"
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
@@ -147,6 +148,7 @@ export default function DashboardOverviewPage() {
             trend="up"
             trendValue="+8%"
             icon={<PeopleAltOutlinedIcon sx={{ fontSize: 20 }} />}
+            href="/reporting"
           />
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
@@ -157,6 +159,7 @@ export default function DashboardOverviewPage() {
             trend="up"
             trendValue="+5%"
             icon={<LocalGasStationOutlinedIcon sx={{ fontSize: 20 }} />}
+            href="/reporting"
           />
         </Grid>
       </Grid>
