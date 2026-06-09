@@ -36,25 +36,7 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import { StatCard } from "@/components/ui/StatCard";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { getPerformanceRowById } from "../_data";
-
-const HEADER_CELL_SX = {
-  background: "#1a1a1c",
-  fontSize: "11px",
-  fontWeight: 600,
-  color: "#9a8c7a",
-  letterSpacing: "0.5px",
-  textTransform: "uppercase",
-  borderBottom: "2px solid rgba(255,255,255,0.08)",
-  padding: "14px 20px",
-  whiteSpace: "nowrap",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#e8e6e3",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
-  padding: "14px 20px",
-};
+import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 // TODO: replace with real customer data scoped to the franchisee
 const CUSTOMER_ROWS = [
@@ -147,6 +129,8 @@ export default function FranchiseeReportPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <PageHeader
+        breadcrumb={`Network / Reporting / ${row.name}`}
+        icon={<StoreIcon sx={{ fontSize: 24 }} />}
         title={`${row.name} — Report`}
         subtitle="Detailed performance breakdown."
         action={
@@ -205,343 +189,117 @@ export default function FranchiseeReportPage() {
 
       <Grid container spacing={2} sx={{ alignItems: "stretch" }}>
         <Grid item xs={12} md={8} lg={8}>
-          <SectionCard
-            bodyPadding="20px 22px"
-            style={{
-              background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
-              position: "relative",
-              overflow: "hidden",
-              height: "100%",
-            }}
-          >
+          <SectionCard bodyPadding="20px 24px" style={{ height: "100%" }}>
             <div
-              aria-hidden
               style={{
-                position: "absolute",
-                top: "-40px",
-                right: "-40px",
-                width: "180px",
-                height: "180px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(206,28,26,0.06) 0%, transparent 70%)",
-                pointerEvents: "none",
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                gap: "16px",
+                flexWrap: "wrap",
+                marginBottom: "16px",
               }}
-            />
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  gap: "16px",
-                  flexWrap: "wrap",
-                  marginBottom: "16px",
-                }}
-              >
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", flex: "1 1 200px", minWidth: 0 }}>
                 <div
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "8px",
+                    background: "var(--bg-surface-hover)",
+                    border: "1px solid var(--border-subtle)",
+                    color: "var(--text-secondary)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <StoreIcon sx={{ fontSize: 22 }} />
+                </div>
+                <div>
+                  <h2 style={{ fontSize: "18px", fontWeight: 600, color: "var(--text-primary)", margin: "0 0 4px 0", lineHeight: 1.2 }}>
+                    {row.name}
+                  </h2>
+                  <StatusChip status={row.status} />
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", flex: "0 0 auto", minWidth: "160px" }}>
+                <Button
+                  fullWidth
+                  startIcon={<EditIcon sx={{ fontSize: 16 }} />}
+                  onClick={() => router.push(`/franchisees/${row.id}`)}
+                >
+                  Edit Details
+                </Button>
+                <button
+                  type="button"
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "12px",
-                    minWidth: 0,
-                    flex: "1 1 200px",
+                    justifyContent: "center",
+                    gap: "6px",
+                    padding: "8px 16px",
+                    borderRadius: "6px",
+                    border: "1px solid var(--border-subtle)",
+                    background: "var(--bg-surface-hover)",
+                    color: row.status === "active" ? "var(--error-text)" : "var(--success-text)",
+                    fontWeight: 500,
+                    fontSize: "14px",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    transition: "background-color var(--transition-fast)",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "14px",
-                      background:
-                        "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0.25) 60%, rgba(206,28,26,0.30) 100%)",
-                      color: "#f0797a",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      boxShadow:
-                        "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
-                      border: "2px solid rgba(206,28,26,0.25)",
-                    }}
-                  >
-                    <StoreIcon sx={{ fontSize: 26 }} />
-                  </div>
-                  <div>
-                    <h2
-                      style={{
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        color: "#e8e6e3",
-                        margin: "0 0 4px 0",
-                        letterSpacing: "-0.4px",
-                      }}
-                    >
-                      {row.name}
-                    </h2>
-                    <StatusChip status={row.status} />
-                  </div>
-                </div>
+                  <FreezeIcon sx={{ fontSize: 16 }} />
+                  {row.status === "active" ? "Freeze Account" : "Unfreeze Account"}
+                </button>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+                gap: "8px",
+              }}
+            >
+              {[
+                { label: "Location", value: "Houston, TX", icon: <LocationIcon sx={{ fontSize: 16 }} /> },
+                { label: "Admin", value: "John Martinez", icon: <PersonIcon sx={{ fontSize: 16 }} /> },
+                { label: "Email", value: "admin@alphafuel.com", icon: <EmailIcon sx={{ fontSize: 16 }} /> },
+                { label: "Phone", value: "(713) 555-0142", icon: <PhoneIcon sx={{ fontSize: 16 }} /> },
+                { label: "Registered", value: "Jan 15, 2024", icon: <CalendarIcon sx={{ fontSize: 16 }} /> },
+              ].map((info) => (
                 <div
+                  key={info.label}
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "10px",
-                    minWidth: "180px",
-                    flex: "0 0 auto",
+                    gap: "4px",
+                    padding: "10px 12px",
+                    borderRadius: "6px",
+                    background: "var(--bg-surface-hover)",
+                    border: "1px solid var(--border-subtle)",
                   }}
                 >
-                  <Button
-                    fullWidth
-                    startIcon={<EditIcon sx={{ fontSize: 18 }} />}
-                    onClick={() => router.push(`/franchisees/${row.id}`)}
-                  >
-                    Edit Details
-                  </Button>
-                  <div
-                    style={{
-                      background:
-                        row.status === "active"
-                          ? "linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(220,38,38,0.05) 100%)"
-                          : "linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(21,128,61,0.05) 100%)",
-                      borderRadius: "10px",
-                      border:
-                        row.status === "active"
-                          ? "1.5px solid rgba(239,68,68,0.3)"
-                          : "1.5px solid rgba(34,197,94,0.3)",
-                      padding: "12px 20px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      cursor: "pointer",
-                      transition: "all 200ms ease",
-                      color: row.status === "active" ? "#dc2626" : "#15803d",
-                      fontWeight: 600,
-                      fontSize: "14px",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow =
-                        row.status === "active"
-                          ? "0 4px 12px rgba(239,68,68,0.25)"
-                          : "0 4px 12px rgba(34,197,94,0.25)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  >
-                    <FreezeIcon sx={{ fontSize: 18 }} />
-                    {row.status === "active" ? "Freeze Account" : "Unfreeze Account"}
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "var(--text-muted)" }}>
+                    {info.icon}
+                    <span style={{ fontSize: "11px", fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                      {info.label}
+                    </span>
                   </div>
+                  <span style={{ fontSize: "13px", fontWeight: 500, color: "var(--text-primary)" }}>
+                    {info.value}
+                  </span>
                 </div>
-              </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                  gap: "12px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    background:
-                      "linear-gradient(135deg, #0f1520 0%, #152035 60%, #1a2845 100%)",
-                    border: "1.5px solid rgba(59,130,246,0.25)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(59,130,246,0.15)",
-                      color: "#3b82f6",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <LocationIcon sx={{ fontSize: 18 }} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                      Location
-                    </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
-                      Houston, TX
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    background:
-                      "linear-gradient(135deg, #0f1a12 0%, #142818 60%, #1a3320 100%)",
-                    border: "1.5px solid rgba(34,197,94,0.25)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(34,197,94,0.15)",
-                      color: "#22c55e",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <PersonIcon sx={{ fontSize: 18 }} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                      Admin
-                    </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
-                      John Martinez
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    background:
-                      "linear-gradient(135deg, #1a1608 0%, #252010 60%, #302818 100%)",
-                    border: "1.5px solid rgba(245,158,11,0.25)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(245,158,11,0.15)",
-                      color: "#f59e0b",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <EmailIcon sx={{ fontSize: 18 }} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                      Email
-                    </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
-                      admin@alphafuel.com
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    background:
-                      "linear-gradient(135deg, #14101f 0%, #1c1830 60%, #242040 100%)",
-                    border: "1.5px solid rgba(139,92,246,0.25)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(139,92,246,0.15)",
-                      color: "#8b5cf6",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <PhoneIcon sx={{ fontSize: 18 }} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                      Phone
-                    </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
-                      (713) 555-0142
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "12px 14px",
-                    borderRadius: "10px",
-                    background:
-                      "linear-gradient(135deg, #1a0f0f 0%, #251414 60%, #301818 100%)",
-                    border: "1.5px solid rgba(239,68,68,0.25)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "8px",
-                      background: "rgba(239,68,68,0.15)",
-                      color: "#ef4444",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <CalendarIcon sx={{ fontSize: 18 }} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: "10px", color: "#9a8c7a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                      Registered
-                    </div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#e8e6e3", marginTop: "2px" }}>
-                      Jan 15, 2024
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </SectionCard>
         </Grid>
 
         <Grid item xs={12} md={4} lg={4}>
-          <SectionCard
-            title="Performance"
-            bodyPadding="12px 16px 14px"
-            style={{
-              background: "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 60%, #212123 100%)",
-              height: "100%",
-              maxWidth: "100%",
-            }}
-          >
+          <SectionCard title="Performance" bodyPadding="0 24px 16px" style={{ height: "100%" }}>
             <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {performanceRows.map((m, idx) => (
                 <li
@@ -551,23 +309,17 @@ export default function FranchiseeReportPage() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: "8px",
-                    padding: "6px 0",
+                    padding: "10px 0",
                     borderBottom:
                       idx < performanceRows.length - 1
-                        ? "1px solid rgba(255,255,255,0.07)"
+                        ? "1px solid var(--border-subtle)"
                         : "none",
                   }}
                 >
-                  <span style={{ fontSize: "12px", color: "#9a8c7a", fontWeight: 500 }}>
+                  <span style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
                     {m.label}
                   </span>
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      color: "#e8e6e3",
-                    }}
-                  >
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)" }}>
                     {m.value}
                   </span>
                 </li>
@@ -577,15 +329,7 @@ export default function FranchiseeReportPage() {
         </Grid>
       </Grid>
 
-      <SectionCard 
-        title="Customers" 
-        bodyPadding={0}
-        style={{
-          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-        }}
-      >
+      <SectionCard title="Customers" bodyPadding={0}>
         <TableContainer>
           <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
@@ -602,17 +346,16 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={c.name}
                   sx={{
-                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
+                    transition: "background-color var(--transition-fast)",
+                    "&:hover": { background: "var(--bg-surface-hover)" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
-                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                    {c.name}
-                  </TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>{c.name}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>{c.location}</TableCell>
-                  <TableCell sx={BODY_CELL_SX}>{c.margin}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>{c.equipment}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{c.avgFuel}</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX}>{c.margin}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>{c.equipment}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>{c.avgFuel}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -620,15 +363,7 @@ export default function FranchiseeReportPage() {
         </TableContainer>
       </SectionCard>
 
-      <SectionCard 
-        title="Drivers" 
-        bodyPadding={0}
-        style={{
-          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-        }}
-      >
+      <SectionCard title="Drivers" bodyPadding={0}>
         <TableContainer>
           <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
@@ -644,15 +379,14 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={d.name}
                   sx={{
-                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
+                    transition: "background-color var(--transition-fast)",
+                    "&:hover": { background: "var(--bg-surface-hover)" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
-                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                    {d.name}
-                  </TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>{d.jobs}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{d.hours}</TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>{d.name}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>{d.jobs}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>{d.hours}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>
                     <StatusChip status={d.status} />
                   </TableCell>
@@ -663,15 +397,7 @@ export default function FranchiseeReportPage() {
         </TableContainer>
       </SectionCard>
 
-      <SectionCard 
-        title="Inventory" 
-        bodyPadding={0}
-        style={{
-          background: "linear-gradient(135deg, #1c1c1d 0%, #212123 100%)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-        }}
-      >
+      <SectionCard title="Inventory" bodyPadding={0}>
         <TableContainer>
           <Table sx={{ tableLayout: "fixed", width: "100%" }}>
             <TableHead>
@@ -688,18 +414,17 @@ export default function FranchiseeReportPage() {
                 <TableRow
                   key={item.product}
                   sx={{
-                    "&:hover": { background: "rgba(255,255,255,0.03)", transition: "background 0.2s ease" },
+                    transition: "background-color var(--transition-fast)",
+                    "&:hover": { background: "var(--bg-surface-hover)" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
-                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>
-                    {item.product}
-                  </TableCell>
+                  <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>{item.product}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>{item.category}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "center" }}>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>
                     {item.stock} {item.unit}
                   </TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, textAlign: "right" }}>{item.price}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>{item.price}</TableCell>
                   <TableCell sx={BODY_CELL_SX}>
                     <StatusChip
                       status={

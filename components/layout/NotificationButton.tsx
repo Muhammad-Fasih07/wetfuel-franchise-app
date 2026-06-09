@@ -16,16 +16,15 @@ export function NotificationButton() {
           onClick={() => setOpen(true)}
           aria-label="Open notifications"
           sx={{
-            color: "#9a8c7a",
-            borderRadius: "8px",
-            width: "36px",
-            height: "36px",
+            color: "var(--text-muted)",
+            borderRadius: "6px",
+            width: "34px",
+            height: "34px",
             border: "1px solid transparent",
-            transition: "all 140ms ease",
+            transition: "background-color var(--transition-fast), color var(--transition-fast)",
             "&:hover": {
-              color: "#ce1c1a",
-              background: "rgba(206,28,26,0.12)",
-              borderColor: "rgba(206,28,26,0.25)",
+              color: "var(--text-primary)",
+              background: "var(--bg-surface-hover)",
             },
             position: "relative",
           }}
@@ -35,15 +34,13 @@ export function NotificationButton() {
             aria-hidden
             style={{
               position: "absolute",
-              top: "8px",
-              right: "8px",
-              width: "8px",
-              height: "8px",
+              top: "7px",
+              right: "7px",
+              width: "7px",
+              height: "7px",
               borderRadius: "50%",
-              background: "#ce1c1a",
-              border: "2px solid #1c1c1d",
-              boxShadow: "0 0 0 0 rgba(206,28,26,0.6)",
-              animation: "wf-notification-pulse 2s ease-in-out infinite",
+              background: "var(--primary-brand)",
+              border: "2px solid var(--bg-main)",
             }}
           />
         </IconButton>
@@ -56,17 +53,6 @@ export function NotificationButton() {
         message="Notifications are currently under development. You'll be able to view alerts and updates here soon."
       />
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes wf-notification-pulse {
-          0%   { box-shadow: 0 0 0 0   rgba(206,28,26,0.55); }
-          70%  { box-shadow: 0 0 0 6px rgba(206,28,26,0); }
-          100% { box-shadow: 0 0 0 0   rgba(206,28,26,0); }
-        }
-      `,
-        }}
-      />
     </>
   );
 }

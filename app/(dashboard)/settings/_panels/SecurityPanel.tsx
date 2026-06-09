@@ -60,11 +60,11 @@ const SESSIONS: Array<{
 ];
 
 const DANGER_GHOST_SX: React.CSSProperties = {
-  background: "#1c1c1d",
-  border: "1px solid #f0797a",
-  color: "#f0797a",
+  background: "var(--bg-surface-hover)",
+  border: "1px solid var(--error-text)",
+  color: "var(--error-text)",
   height: "32px",
-  borderRadius: "8px",
+  borderRadius: "6px",
   padding: "0 12px",
   fontSize: "12px",
   fontWeight: 500,
@@ -73,7 +73,7 @@ const DANGER_GHOST_SX: React.CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   cursor: "pointer",
-  transition: "background 150ms ease",
+  transition: "background var(--transition-fast)",
 };
 
 export function SecurityPanel() {
@@ -106,12 +106,7 @@ export function SecurityPanel() {
     <SectionCard title="Password & Security" bodyPadding="24px 28px 28px">
       <div style={{ maxWidth: "480px" }}>
         <p
-          style={{
-            fontSize: "14px",
-            fontWeight: 600,
-          color: "#e8e6e3",
-          margin: "0 0 16px",
-        }}
+        style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-primary)", margin: "0 0 16px" }}
       >
         Change Password
         </p>
@@ -135,7 +130,7 @@ export function SecurityPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#9a8c7a",
+                  color: "var(--text-muted)",
                   margin: "6px 0 0 4px",
                 }}
               >
@@ -161,7 +156,7 @@ export function SecurityPanel() {
       <div
         style={{
           height: "1px",
-          background: "rgba(255,255,255,0.07)",
+          background: "var(--border-subtle)",
           margin: "28px 0",
         }}
       />
@@ -170,7 +165,7 @@ export function SecurityPanel() {
         style={{
           fontSize: "14px",
           fontWeight: 600,
-          color: "#e8e6e3",
+          color: "var(--text-primary)",
           margin: "0 0 16px",
         }}
       >
@@ -187,10 +182,10 @@ export function SecurityPanel() {
               gap: "12px",
               padding: "12px 0",
               borderBottom:
-                idx === SESSIONS.length - 1 ? "none" : "1px solid rgba(255,255,255,0.06)",
+                idx === SESSIONS.length - 1 ? "none" : "1px solid var(--border-subtle)",
             }}
           >
-            <span style={{ color: "#9a8c7a", display: "inline-flex" }}>
+            <span style={{ color: "var(--text-muted)", display: "inline-flex" }}>
               {s.type === "computer" ? (
                 <ComputerIcon sx={{ fontSize: 20 }} />
               ) : (
@@ -202,7 +197,7 @@ export function SecurityPanel() {
                 style={{
                   fontSize: "13px",
                   fontWeight: 500,
-                  color: "#e8e6e3",
+                  color: "var(--text-primary)",
                   margin: 0,
                 }}
               >
@@ -211,7 +206,7 @@ export function SecurityPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#9a8c7a",
+                  color: "var(--text-muted)",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -225,12 +220,10 @@ export function SecurityPanel() {
                 type="button"
                 style={DANGER_GHOST_SX}
                 onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "rgba(240,121,122,0.12)")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--error-bg)")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#1c1c1d")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--bg-surface-hover)")
                 }
               >
                 Revoke
@@ -250,11 +243,11 @@ export function SecurityPanel() {
           severity="success"
           onClose={() => setToastOpen(false)}
           sx={{
-            background: "#0a2015",
-            color: "#34d399",
-            border: "1px solid rgba(52,211,153,0.3)",
+            background: "var(--success-bg)",
+            color: "var(--success-text)",
+            border: "1px solid var(--border-subtle)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#34d399" },
+            "& .MuiAlert-icon": { color: "var(--success-text)" },
           }}
         >
           Password updated successfully.

@@ -34,12 +34,12 @@ type FormValues = z.infer<typeof schema>;
 
 const SECTION_LABEL: React.CSSProperties = {
   fontSize: "11px",
-  color: "#9a8c7a",
+  color: "var(--text-muted)",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
   marginBottom: "16px",
   paddingBottom: "8px",
-  borderBottom: "1px solid rgba(255,255,255,0.07)",
+  borderBottom: "1px solid var(--border-subtle)",
   fontWeight: 600,
 };
 
@@ -103,10 +103,9 @@ export default function NewFranchiseePage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div
           style={{
-            background: "#1c1c1d",
-            border: "1px solid rgba(255,255,255,0.09)",
-            borderRadius: "12px",
-            boxShadow: "0 1px 4px rgba(0,0,0,0.4)",
+            background: "var(--bg-surface)",
+            border: "1px solid var(--border-subtle)",
+            borderRadius: "8px",
             padding: "40px",
             maxWidth: "680px",
             margin: "0 auto",
@@ -229,7 +228,7 @@ export default function NewFranchiseePage() {
           <div
             style={{
               marginTop: "32px",
-              borderTop: "1px solid rgba(255,255,255,0.07)",
+              borderTop: "1px solid var(--border-subtle)",
               paddingTop: "24px",
               display: "flex",
               justifyContent: "flex-end",

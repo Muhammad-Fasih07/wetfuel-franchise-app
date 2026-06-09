@@ -22,7 +22,7 @@ import { getFranchiseeStubById } from "../_data";
 
 const LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  color: "#9a8c7a",
+  color: "var(--text-muted)",
   textTransform: "uppercase",
   letterSpacing: "0.5px",
   margin: 0,
@@ -31,14 +31,14 @@ const LABEL_STYLE: React.CSSProperties = {
 
 const VALUE_STYLE: React.CSSProperties = {
   fontSize: "14px",
-  color: "#e8e6e3",
+  color: "var(--text-primary)",
   fontWeight: 500,
   margin: "4px 0 0 0",
 };
 
 const PAIR_WRAPPER: React.CSSProperties = {
   padding: "12px 0",
-  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  borderBottom: "1px solid var(--border-subtle)",
 };
 
 function InfoPair({
@@ -64,12 +64,12 @@ function InfoPair({
 }
 
 const PERFORMANCE_BTN_DANGER_SX = {
-  background: "#1c1c1d",
-  border: "1px solid #f0797a",
-  color: "#f0797a",
+  background: "var(--bg-surface-hover)",
+  border: "1px solid var(--error-text)",
+  color: "var(--error-text)",
   width: "100%",
   height: "44px",
-  borderRadius: "8px",
+  borderRadius: "6px",
   fontWeight: 500,
   fontSize: "14px",
   textTransform: "none" as const,
@@ -79,7 +79,7 @@ const PERFORMANCE_BTN_DANGER_SX = {
   justifyContent: "center",
   gap: "8px",
   cursor: "pointer",
-  transition: "background 150ms ease",
+  transition: "background var(--transition-fast)",
 };
 
 export default function FranchiseeDetailPage() {
@@ -223,12 +223,10 @@ export default function FranchiseeDetailPage() {
                   type="button"
                   style={PERFORMANCE_BTN_DANGER_SX}
                   onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.background =
-                      "rgba(240,121,122,0.12)")
+                    ((e.currentTarget as HTMLButtonElement).style.background = "var(--error-bg)")
                   }
                   onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#1c1c1d")
+                    ((e.currentTarget as HTMLButtonElement).style.background = "var(--bg-surface-hover)")
                   }
                   onClick={() =>
                     setConfirm({
@@ -245,12 +243,10 @@ export default function FranchiseeDetailPage() {
                   type="button"
                   style={PERFORMANCE_BTN_DANGER_SX}
                   onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.background =
-                      "rgba(240,121,122,0.12)")
+                    ((e.currentTarget as HTMLButtonElement).style.background = "var(--error-bg)")
                   }
                   onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLButtonElement).style.background =
-                      "#1c1c1d")
+                    ((e.currentTarget as HTMLButtonElement).style.background = "var(--bg-surface-hover)")
                   }
                   onClick={() => setConfirm({ open: true, action: "delete" })}
                 >
@@ -276,7 +272,7 @@ export default function FranchiseeDetailPage() {
             : "The franchisee will regain full access."
         }
         confirmLabel={confirm.action === "freeze" ? "Freeze" : "Unfreeze"}
-        confirmColor={confirm.action === "freeze" ? "#f0797a" : "#ce1c1a"}
+        confirmColor={confirm.action === "freeze" ? "var(--error-text)" : "var(--primary-brand)"}
         onConfirm={() => {
           // TODO: call freezeFranchisee / unfreezeFranchisee
           closeConfirm();

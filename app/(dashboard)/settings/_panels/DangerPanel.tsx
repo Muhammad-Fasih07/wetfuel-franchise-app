@@ -6,11 +6,11 @@ import { Alert, Snackbar } from "@mui/material";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 const DANGER_BTN_SX: React.CSSProperties = {
-  background: "#1c1c1d",
-  border: "1px solid #f0797a",
-  color: "#dc2626",
+  background: "var(--bg-surface-hover)",
+  border: "1px solid var(--error-text)",
+  color: "var(--error-text)",
   height: "34px",
-  borderRadius: "8px",
+  borderRadius: "6px",
   padding: "0 14px",
   fontSize: "13px",
   fontWeight: 500,
@@ -19,7 +19,7 @@ const DANGER_BTN_SX: React.CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   cursor: "pointer",
-  transition: "background 150ms ease",
+  transition: "background var(--transition-fast)",
 };
 
 type ConfirmKind = "reset" | "delete" | null;
@@ -62,25 +62,24 @@ export function DangerPanel() {
   return (
     <section
       style={{
-      background: "#1c1c1d",
-      border: "1px solid rgba(255,255,255,0.08)",
-        borderLeft: "4px solid #f0797a",
-        borderRadius: "0 12px 12px 0",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        background: "var(--bg-surface)",
+        border: "1px solid var(--border-subtle)",
+        borderLeft: "3px solid var(--error-text)",
+        borderRadius: "8px",
         overflow: "hidden",
       }}
     >
       <header
         style={{
           padding: "18px 24px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          borderBottom: "1px solid var(--border-subtle)",
         }}
       >
         <h2
           style={{
             fontSize: "15px",
             fontWeight: 600,
-            color: "#dc2626",
+            color: "var(--error-text)",
             margin: 0,
           }}
         >
@@ -92,8 +91,8 @@ export function DangerPanel() {
         <p
           style={{
             fontSize: "13px",
-            color: "#9a8c7a",
-            margin: "0 0 24px",
+          color: "var(--text-muted)",
+          margin: "0 0 24px",
           }}
         >
           These actions are irreversible. Please proceed with caution.
@@ -109,7 +108,7 @@ export function DangerPanel() {
                 alignItems: "center",
                 padding: "16px 0",
                 borderBottom:
-                  idx === rows.length - 1 ? "none" : "1px solid rgba(239,68,68,0.12)",
+                  idx === rows.length - 1 ? "none" : "1px solid var(--border-subtle)",
                 gap: "16px",
                 flexWrap: "wrap",
               }}
@@ -119,7 +118,7 @@ export function DangerPanel() {
                   style={{
                     fontSize: "13px",
                     fontWeight: 500,
-                    color: "#e8e6e3",
+                    color: "var(--text-primary)",
                     margin: 0,
                   }}
                 >
@@ -128,7 +127,7 @@ export function DangerPanel() {
                 <p
                   style={{
                     fontSize: "11px",
-                    color: "#9a8c7a",
+                    color: "var(--text-muted)",
                     margin: "2px 0 0 0",
                   }}
                 >
@@ -139,12 +138,10 @@ export function DangerPanel() {
                 type="button"
                 style={DANGER_BTN_SX}
                 onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "rgba(240,121,122,0.12)")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--error-bg)")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#1c1c1d")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--bg-surface-hover)")
                 }
                 onClick={r.onClick}
               >
@@ -191,11 +188,11 @@ export function DangerPanel() {
           severity="success"
           onClose={() => setExportToast(false)}
           sx={{
-            background: "#0a2015",
-            color: "#34d399",
-            border: "1px solid rgba(52,211,153,0.3)",
+            background: "var(--success-bg)",
+            color: "var(--success-text)",
+            border: "1px solid var(--border-subtle)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#34d399" },
+            "& .MuiAlert-icon": { color: "var(--success-text)" },
           }}
         >
           Export started. We will email you when it's ready.

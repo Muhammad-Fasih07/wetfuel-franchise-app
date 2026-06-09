@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { MoreVert as MoreVertIcon } from "@mui/icons-material";
 import { Button } from "@/components/ui/Button";
+import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 type FranchiseeStatus = "Active" | "Frozen";
 
@@ -46,56 +47,23 @@ const STUB_ROWS: FranchiseeRow[] = [
   { id: "6", name: "Gulf Fuel Co.", location: "Corpus Christi, TX", customers: 21, drivers: 2, trucks: 1, avgFuel: "1,900 gal", status: "Active" },
 ];
 
-const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
-  fontSize: "11px",
-  fontWeight: 700,
-  color: "#9a8c7a",
-  letterSpacing: "0.7px",
-  textTransform: "uppercase",
-  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
-  padding: "14px 18px",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#e8e6e3",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
-  padding: "16px 18px",
-  transition: "all 200ms ease",
-};
-
-function StatusChip({ status }: { status: FranchiseeStatus }) {
-  const styles =
-    status === "Active"
-      ? {
-          bg: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)",
-          color: "#15803d",
-          dot: "#22c55e",
-          border: "rgba(34,197,94,0.3)",
-        }
-      : {
-          bg: "linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)",
-          color: "#dc2626",
-          dot: "#ef4444",
-          border: "rgba(239,68,68,0.3)",
-        };
-
+function FranchiseeStatusChip({ status }: { status: FranchiseeStatus }) {
+  const isActive = status === "Active";
   return (
     <span
       style={{
         display: "inline-flex",
         alignItems: "center",
         gap: "6px",
-        background: styles.bg,
-        color: styles.color,
-        borderRadius: "24px",
-        fontSize: "11px",
-        fontWeight: 600,
-        padding: "4px 12px 4px 10px",
-        border: `1.5px solid ${styles.border}`,
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 6px ${styles.border}30`,
-        letterSpacing: "0.3px",
+        background: isActive ? "var(--success-bg)" : "var(--error-bg)",
+        color: isActive ? "var(--success-text)" : "var(--error-text)",
+        borderRadius: "9999px",
+        fontSize: "12px",
+        fontWeight: 500,
+        padding: "2px 8px",
+        textTransform: "uppercase",
+        letterSpacing: "0.04em",
+        whiteSpace: "nowrap",
       }}
     >
       <span
@@ -104,10 +72,8 @@ function StatusChip({ status }: { status: FranchiseeStatus }) {
           width: "6px",
           height: "6px",
           borderRadius: "50%",
-          background: styles.dot,
-          boxShadow: `0 0 0 2px ${styles.dot}25, 0 0 6px ${styles.dot}40`,
+          background: isActive ? "var(--success-text)" : "var(--error-text)",
           flexShrink: 0,
-          animation: status === "Active" ? "pulse 2s ease-in-out infinite" : "none",
         }}
       />
       {status}
@@ -172,68 +138,33 @@ export function FranchiseeTable() {
 
   return (
     <div
-      className="animate-fade-in"
       style={{
-        background: "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 90%, #212123 100%)",
-        border: "1.5px solid rgba(255,255,255,0.08)",
-        borderRadius: "14px",
-        padding: 0,
+        background: "var(--bg-surface)",
+        border: "1px solid var(--border-subtle)",
+        borderRadius: "8px",
         overflow: "hidden",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
-        position: "relative",
       }}
     >
-      <span
-        aria-hidden
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background:
-            "linear-gradient(90deg, transparent 0%, rgba(206,28,26,0.6) 50%, transparent 100%)",
-          opacity: 0.8,
-          boxShadow: "0 2px 8px rgba(206,28,26,0.2)",
-        }}
-      />
-
       <div
         style={{
-          padding: "22px 26px",
-          borderBottom: "1.5px solid rgba(255,255,255,0.06)",
+          padding: "16px 24px",
+          borderBottom: "1px solid var(--border-subtle)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           gap: "16px",
           flexWrap: "wrap",
-          background:
-            "linear-gradient(180deg, rgba(206,28,26,0.06) 0%, rgba(28,28,29,0) 100%)",
         }}
       >
         <h2
           style={{
-            fontSize: "17px",
+            fontSize: "16px",
             fontWeight: 600,
-            color: "#e8e6e3",
+            color: "var(--text-primary)",
             margin: 0,
-            letterSpacing: "-0.2px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
+            lineHeight: 1.5,
           }}
         >
-          <span
-            aria-hidden
-            style={{
-              width: "4px",
-              height: "16px",
-              borderRadius: "2px",
-              background:
-                "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-              boxShadow: "0 0 8px rgba(206,28,26,0.4)",
-            }}
-          />
           Franchisee Overview
         </h2>
 
@@ -246,20 +177,26 @@ export function FranchiseeTable() {
           }
           SelectProps={{ native: true }}
           sx={{
-            width: "150px",
+            width: "140px",
             "& .MuiOutlinedInput-root": {
-              borderRadius: "10px",
+              borderRadius: "6px",
               fontSize: "13px",
-              height: "38px",
-              border: "1.5px solid #ececec",
-              transition: "all 200ms ease",
-              "&:hover": {
-                borderColor: "#d0d0d0",
+              height: "34px",
+              color: "var(--text-primary)",
+              backgroundColor: "var(--bg-surface-hover)",
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "var(--border-subtle)",
               },
-              "&.Mui-focused": {
-                borderColor: "#ce1c1a",
-                boxShadow: "0 0 0 3px rgba(206,28,26,0.1)",
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "var(--border-focus)",
               },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "var(--primary-brand)",
+                borderWidth: "1px",
+              },
+            },
+            "& .MuiNativeSelect-select": {
+              color: "var(--text-primary)",
             },
           }}
         >
@@ -290,42 +227,30 @@ export function FranchiseeTable() {
                 onClick={() => router.push(`/franchisees/${row.id}`)}
                 sx={{
                   cursor: "pointer",
-                  "&:hover": { background: "rgba(255,255,255,0.03)" },
+                  "&:hover": { background: "var(--bg-surface-hover)" },
                   "&:last-child td": { borderBottom: 0 },
                 }}
               >
                 <TableCell sx={BODY_CELL_SX}>
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 500,
-                      color: "#e8e6e3",
-                    }}
-                  >
+                  <div style={{ fontSize: "14px", fontWeight: 500, color: "var(--text-primary)" }}>
                     {row.name}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "12px",
-                      color: "#9a8c7a",
-                      marginTop: "2px",
-                    }}
-                  >
+                  <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
                     {row.location}
                   </div>
                 </TableCell>
-                <TableCell sx={BODY_CELL_SX} align="right">{row.customers}</TableCell>
-                <TableCell sx={BODY_CELL_SX} align="right">{row.drivers}</TableCell>
-                <TableCell sx={BODY_CELL_SX} align="right">{row.trucks}</TableCell>
-                <TableCell sx={BODY_CELL_SX} align="right">{row.avgFuel}</TableCell>
+                <TableCell sx={MONO_DATA_CELL_SX} align="right">{row.customers}</TableCell>
+                <TableCell sx={MONO_DATA_CELL_SX} align="right">{row.drivers}</TableCell>
+                <TableCell sx={MONO_DATA_CELL_SX} align="right">{row.trucks}</TableCell>
+                <TableCell sx={MONO_DATA_CELL_SX} align="right">{row.avgFuel}</TableCell>
                 <TableCell sx={BODY_CELL_SX}>
-                  <StatusChip status={row.status} />
+                  <FranchiseeStatusChip status={row.status} />
                 </TableCell>
                 <TableCell sx={BODY_CELL_SX} align="right">
                   <IconButton
                     size="small"
                     onClick={(e) => openMenu(e, row)}
-                    sx={{ color: "#9a8c7a" }}
+                    sx={{ color: "var(--text-muted)" }}
                   >
                     <MoreVertIcon sx={{ fontSize: 20 }} />
                   </IconButton>
@@ -340,7 +265,7 @@ export function FranchiseeTable() {
                   sx={{
                     ...BODY_CELL_SX,
                     textAlign: "center",
-                    color: "#9a8c7a",
+                    color: "var(--text-muted)",
                     padding: "32px 16px",
                   }}
                 >
@@ -364,12 +289,14 @@ export function FranchiseeTable() {
         }}
         rowsPerPageOptions={[6, 12, 24]}
         sx={{
-          borderTop: "1px solid rgba(255,255,255,0.06)",
+          borderTop: "1px solid var(--border-subtle)",
           fontSize: "12px",
-          color: "#9a8c7a",
+          color: "var(--text-muted)",
           "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
-            { fontSize: "12px", color: "#9a8c7a", margin: 0 },
-          "& .MuiTablePagination-select": { fontSize: "12px" },
+            { fontSize: "12px", color: "var(--text-muted)", margin: 0 },
+          "& .MuiTablePagination-select": { fontSize: "12px", color: "var(--text-primary)" },
+          "& .MuiIconButton-root": { color: "var(--text-muted)" },
+          "& .MuiIconButton-root.Mui-disabled": { color: "var(--border-subtle)" },
         }}
       />
 
@@ -382,10 +309,10 @@ export function FranchiseeTable() {
         slotProps={{
           paper: {
             sx: {
-              borderRadius: "8px",
-              border: "1px solid rgba(255,255,255,0.1)",
-              background: "#242426",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+              borderRadius: "6px",
+              border: "1px solid var(--border-subtle)",
+              background: "var(--bg-surface)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
               minWidth: 180,
             },
           },
@@ -393,27 +320,27 @@ export function FranchiseeTable() {
       >
         <MenuItem
           onClick={() => handleMenuAction("view")}
-          sx={{ fontSize: "13px", color: "#e8e6e3" }}
+          sx={{ fontSize: "14px", color: "var(--text-primary)" }}
         >
           View details
         </MenuItem>
         <MenuItem
           onClick={() => handleMenuAction("edit")}
-          sx={{ fontSize: "13px", color: "#e8e6e3" }}
+          sx={{ fontSize: "14px", color: "var(--text-primary)" }}
         >
           Edit
         </MenuItem>
         {activeRow?.status === "Active" ? (
           <MenuItem
             onClick={() => handleMenuAction("freeze")}
-            sx={{ fontSize: "13px", color: "#dc2626" }}
+            sx={{ fontSize: "14px", color: "var(--error-text)" }}
           >
             Freeze account
           </MenuItem>
         ) : (
           <MenuItem
             onClick={() => handleMenuAction("unfreeze")}
-            sx={{ fontSize: "13px", color: "#15803d" }}
+            sx={{ fontSize: "14px", color: "var(--success-text)" }}
           >
             Unfreeze account
           </MenuItem>
@@ -423,13 +350,13 @@ export function FranchiseeTable() {
       <Dialog
         open={confirm.open}
         onClose={closeConfirm}
-        PaperProps={{ sx: { borderRadius: "12px", padding: "8px", background: "#1c1c1d", border: "1px solid rgba(255,255,255,0.1)" } }}
+        PaperProps={{ sx: { borderRadius: "8px", padding: "8px", background: "var(--bg-surface)", border: "1px solid var(--border-subtle)" } }}
       >
-        <DialogTitle sx={{ fontSize: "16px", fontWeight: 600, color: "#e8e6e3" }}>
+        <DialogTitle sx={{ fontSize: "16px", fontWeight: 600, color: "var(--text-primary)" }}>
           {confirm.action === "freeze" ? "Freeze account?" : "Unfreeze account?"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ fontSize: "13px", color: "#9a8c7a" }}>
+          <DialogContentText sx={{ fontSize: "14px", color: "var(--text-secondary)" }}>
             {confirm.action === "freeze"
               ? `This will temporarily disable ${confirm.row?.name}'s access to the platform.`
               : `${confirm.row?.name} will regain full access to the platform.`}

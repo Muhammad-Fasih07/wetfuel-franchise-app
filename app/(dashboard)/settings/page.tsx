@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { SettingsOutlined as SettingsOutlinedIcon } from "@mui/icons-material";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ProfilePanel } from "./_panels/ProfilePanel";
 import { SecurityPanel } from "./_panels/SecurityPanel";
@@ -45,6 +46,8 @@ export default function SettingsPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <PageHeader
+        breadcrumb="System / Settings"
+        icon={<SettingsOutlinedIcon sx={{ fontSize: 24 }} />}
         title="Settings"
         subtitle="Manage your franchise admin account and preferences."
       />
@@ -59,66 +62,27 @@ export default function SettingsPage() {
       >
         <aside
           style={{
-            width: "240px",
+            width: "220px",
             flexShrink: 0,
             position: "sticky",
             top: "32px",
-            background:
-              "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 60%, #212123 100%)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "12px",
-            boxShadow:
-              "0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4)",
-            padding: "10px",
-            overflow: "hidden",
+            background: "var(--bg-surface)",
+            border: "1px solid var(--border-subtle)",
+            borderRadius: "8px",
+            padding: "8px",
           }}
         >
-          <span
-            aria-hidden
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "2px",
-              background:
-                "linear-gradient(90deg, transparent 0%, rgba(206,28,26,0.55) 50%, transparent 100%)",
-              opacity: 0.7,
-              pointerEvents: "none",
-            }}
-          />
           {NAV_SECTIONS.map((section, sIdx) => (
             <div key={section.label}>
-              <div
+              <p
+                className="type-category-label"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "14px 12px 6px",
-                  marginTop: sIdx === 0 ? 0 : "8px",
+                  color: section.label === "DANGER" ? "var(--error-text)" : undefined,
+                  margin: sIdx === 0 ? "4px 0 4px 10px" : "12px 0 4px 10px",
                 }}
               >
-                <span
-                  aria-hidden
-                  style={{
-                    width: "10px",
-                    height: "1px",
-                    background: "rgba(255,255,255,0.15)",
-                  }}
-                />
-                <p
-                  style={{
-                    fontSize: "10px",
-                    color: section.label === "DANGER" ? "#dc2626" : "#887b6a",
-                    textTransform: "uppercase",
-                    letterSpacing: "1.4px",
-                    margin: 0,
-                    fontWeight: 700,
-                  }}
-                >
-                  {section.label}
-                </p>
-              </div>
+                {section.label}
+              </p>
               <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
                 {section.items.map((item) => {
                   const isActive = active === item.id;
@@ -130,70 +94,34 @@ export default function SettingsPage() {
                         onClick={() => setActive(item.id)}
                         className="settings-nav-item"
                         data-active={isActive ? "true" : "false"}
-                        data-danger={isDanger ? "true" : "false"}
                         style={{
                           width: "100%",
                           display: "flex",
                           alignItems: "center",
-                          gap: "10px",
-                          padding: "10px 12px",
+                          padding: "8px 12px",
+                          margin: "0 4px",
                           background: isActive
-                            ? isDanger
-                              ? "linear-gradient(90deg, rgba(220,38,38,0.14) 0%, rgba(220,38,38,0.04) 60%, transparent 100%)"
-                              : "linear-gradient(90deg, rgba(206,28,26,0.16) 0%, rgba(206,28,26,0.04) 60%, transparent 100%)"
+                            ? isDanger ? "var(--error-bg)" : "var(--primary-brand-muted)"
                             : "transparent",
                           color: isActive
-                            ? isDanger
-                              ? "#dc2626"
-                              : "#ce1c1a"
-                            : "#887b6a",
-                          fontSize: "13px",
-                          fontWeight: isActive ? 600 : 500,
-                          border: isActive
-                            ? `1px solid ${isDanger ? "rgba(220,38,38,0.25)" : "rgba(206,28,26,0.25)"}`
-                            : "1px solid transparent",
-                          borderRadius: "10px",
+                            ? isDanger ? "var(--error-text)" : "var(--primary-brand)"
+                            : "var(--text-secondary)",
+                          borderLeft: isActive
+                            ? `3px solid ${isDanger ? "var(--error-text)" : "var(--primary-brand)"}`
+                            : "3px solid transparent",
+                          fontSize: "14px",
+                          fontWeight: isActive ? 500 : 400,
+                          borderTop: "none",
+                          borderRight: "none",
+                          borderBottom: "none",
+                          borderRadius: "6px",
                           cursor: "pointer",
                           textAlign: "left",
                           fontFamily: "inherit",
-                          position: "relative",
-                          transition: "all 140ms ease",
-                          boxShadow: isActive
-                            ? `0 4px 14px -8px ${isDanger ? "rgba(220,38,38,0.5)" : "rgba(206,28,26,0.5)"}, inset 0 1px 0 rgba(255,255,255,0.06)`
-                            : "none",
+                          transition: "background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast)",
                         }}
                       >
-                        {isActive && (
-                          <span
-                            aria-hidden
-                            style={{
-                              position: "absolute",
-                              left: "-10px",
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                              width: "3px",
-                              height: "20px",
-                              borderRadius: "0 3px 3px 0",
-                              background: isDanger
-                                ? "linear-gradient(180deg, #ef4444 0%, #dc2626 50%, #991b1b 100%)"
-                                : "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-                              boxShadow: `0 0 12px ${isDanger ? "rgba(220,38,38,0.6)" : "rgba(206,28,26,0.6)"}`,
-                            }}
-                          />
-                        )}
-                        <span style={{ flex: 1 }}>{item.label}</span>
-                        {isActive && (
-                          <span
-                            aria-hidden
-                            style={{
-                              width: "6px",
-                              height: "6px",
-                              borderRadius: "50%",
-                              background: isDanger ? "#dc2626" : "#ce1c1a",
-                              boxShadow: `0 0 8px ${isDanger ? "rgba(220,38,38,0.6)" : "rgba(206,28,26,0.6)"}`,
-                            }}
-                          />
-                        )}
+                        {item.label}
                       </button>
                     </li>
                   );
@@ -215,9 +143,8 @@ export default function SettingsPage() {
         dangerouslySetInnerHTML={{
           __html: `
         .settings-nav-item[data-active="false"]:hover {
-          background: rgba(255,255,255,0.05) !important;
-          color: #e8e6e3 !important;
-          border-color: rgba(255,255,255,0.1) !important;
+          background: var(--bg-surface-hover) !important;
+          color: var(--text-primary) !important;
         }
       `,
         }}

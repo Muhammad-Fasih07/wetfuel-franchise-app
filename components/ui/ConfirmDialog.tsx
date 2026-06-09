@@ -30,7 +30,7 @@ export function ConfirmDialog({
   message,
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
-  confirmColor = "#ce1c1a",
+  confirmColor = "var(--primary-brand)",
   loading = false,
   onConfirm,
   onCancel,
@@ -55,64 +55,33 @@ export function ConfirmDialog({
       onClose={onCancel}
       PaperProps={{
         sx: {
-          borderRadius: "14px",
-          maxWidth: "420px",
+          borderRadius: "8px",
+          maxWidth: "400px",
           width: "100%",
-          padding: 0,
-          overflow: "hidden",
-          position: "relative",
-          boxShadow:
-            "0 12px 40px -12px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.4)",
-          background:
-            "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 70%, #212123 100%)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--bg-surface)",
+          border: "1px solid var(--border-subtle)",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.5)",
         },
       }}
       BackdropProps={{
-        sx: { background: "rgba(20,16,16,0.55)", backdropFilter: "blur(2px)" },
+        sx: { background: "rgba(0,0,0,0.55)", backdropFilter: "blur(2px)" },
       }}
     >
-      <span
-        aria-hidden
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: `linear-gradient(90deg, transparent 0%, ${confirmColor} 50%, transparent 100%)`,
-          opacity: 0.85,
-        }}
-      />
-
       <DialogTitle
         sx={{
           fontSize: "16px",
           fontWeight: 600,
-          color: "#e8e6e3",
-          padding: "22px 24px 6px",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
+          color: "var(--text-primary)",
+          padding: "20px 24px 6px",
         }}
       >
-        <span
-          aria-hidden
-          style={{
-            width: "4px",
-            height: "18px",
-            borderRadius: "2px",
-            background: `linear-gradient(180deg, ${confirmColor} 0%, ${confirmColor}cc 100%)`,
-            boxShadow: `0 0 10px ${confirmColor}55`,
-          }}
-        />
         {title}
       </DialogTitle>
 
       {message && (
-        <DialogContent sx={{ padding: "8px 24px 18px" }}>
+        <DialogContent sx={{ padding: "8px 24px 16px" }}>
           <DialogContentText
-            sx={{ fontSize: "14px", color: "#9a8c7a", lineHeight: 1.55 }}
+            sx={{ fontSize: "14px", color: "var(--text-secondary)", lineHeight: 1.5 }}
           >
             {message}
           </DialogContentText>
@@ -121,11 +90,9 @@ export function ConfirmDialog({
 
       <DialogActions
         sx={{
-          padding: "14px 20px 20px",
+          padding: "12px 20px 20px",
           gap: "8px",
-          borderTop: "1px solid rgba(255,255,255,0.07)",
-          background:
-            "linear-gradient(180deg, rgba(28,28,29,0) 0%, rgba(33,33,35,0.6) 100%)",
+          borderTop: "1px solid var(--border-subtle)",
         }}
       >
         <Button variant="ghost" fullWidth={false} onClick={onCancel}>
@@ -137,20 +104,21 @@ export function ConfirmDialog({
           disabled={isBusy}
           onClick={handleConfirm}
           sx={{
-            background: `linear-gradient(135deg, ${confirmColor} 0%, ${confirmColor}d9 50%, ${confirmColor}b3 100%)`,
+            backgroundColor: confirmColor,
             color: "#ffffff",
-            height: "44px",
-            borderRadius: "8px",
+            height: "40px",
+            borderRadius: "6px",
             textTransform: "none",
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: "14px",
-            padding: "0 20px",
-            boxShadow: `0 4px 14px -4px ${confirmColor}80, inset 0 1px 0 rgba(255,255,255,0.18)`,
+            padding: "0 16px",
+            boxShadow: "none",
             "&:hover": {
-              background: `linear-gradient(135deg, ${confirmColor} 0%, ${confirmColor} 50%, ${confirmColor}cc 100%)`,
-              filter: "brightness(0.96)",
-              boxShadow: `0 6px 18px -4px ${confirmColor}99, inset 0 1px 0 rgba(255,255,255,0.22)`,
+              backgroundColor: confirmColor,
+              filter: "brightness(0.9)",
+              boxShadow: "none",
             },
+            "&.Mui-disabled": { opacity: 0.4 },
           }}
         >
           {isBusy ? "Working..." : confirmLabel}

@@ -40,24 +40,7 @@ import {
   FRANCHISEES_STUB,
   type FranchiseeStub,
 } from "./_data";
-
-const HEADER_CELL_SX = {
-  background: "#1a1a1c",
-  fontSize: "11px",
-  fontWeight: 600,
-  color: "#9a8c7a",
-  letterSpacing: "0.5px",
-  textTransform: "uppercase",
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
-  padding: "12px 16px",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#e8e6e3",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
-  padding: "14px 16px",
-};
+import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 // TODO: replace with real summary data from lib/api/franchisees.ts
 const FRANCHISEE_STATS = [
@@ -162,6 +145,8 @@ export default function FranchiseesPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <PageHeader
+        breadcrumb="Network / Franchisees"
+        icon={<StoreIcon sx={{ fontSize: 24 }} />}
         title="Franchisees"
         subtitle="Manage and monitor all registered franchise partners."
         action={
@@ -212,17 +197,23 @@ export default function FranchiseesPage() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon sx={{ fontSize: 18, color: "#9a8c7a" }} />
+                    <SearchIcon sx={{ fontSize: 18, color: "var(--text-muted)" }} />
                   </InputAdornment>
                 ),
               }}
               sx={{
                 width: 220,
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  borderRadius: "6px",
                   fontSize: "13px",
                   height: "36px",
+                  color: "var(--text-primary)",
+                  backgroundColor: "var(--bg-surface)",
+                  "& .MuiOutlinedInput-notchedOutline": { borderColor: "var(--border-subtle)" },
+                  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "var(--border-focus)" },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "var(--primary-brand)", borderWidth: "1px" },
                 },
+                "& input::placeholder": { color: "var(--text-muted)", opacity: 1 },
               }}
             />
             <TextField
@@ -237,9 +228,14 @@ export default function FranchiseesPage() {
               sx={{
                 width: 150,
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "8px",
+                  borderRadius: "6px",
                   fontSize: "13px",
                   height: "36px",
+                  color: "var(--text-primary)",
+                  backgroundColor: "var(--bg-surface)",
+                  "& .MuiOutlinedInput-notchedOutline": { borderColor: "var(--border-subtle)" },
+                  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "var(--border-focus)" },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "var(--primary-brand)", borderWidth: "1px" },
                 },
               }}
             >
@@ -281,30 +277,31 @@ export default function FranchiseesPage() {
                   key={row.id}
                   hover
                   sx={{
-                    "&:hover": { background: "rgba(255,255,255,0.03)" },
+                    transition: "background-color var(--transition-fast)",
+                    "&:hover": { background: "var(--bg-surface-hover)" },
                     "&:last-child td": { borderBottom: 0 },
                   }}
                 >
                   <TableCell sx={BODY_CELL_SX}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: "#e8e6e3" }}>
+                    <div style={{ fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>
                       {row.name}
                     </div>
-                    <div style={{ fontSize: 12, color: "#9a8c7a", marginTop: 2 }}>
+                    <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 2 }}>
                       {row.email}
                     </div>
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>
-                    <div style={{ fontSize: 13, color: "#e8e6e3" }}>{row.username}</div>
-                    <div style={{ fontSize: 12, color: "#9a8c7a", marginTop: 2 }}>
+                    <div style={{ fontSize: 14, color: "var(--text-primary)" }}>{row.username}</div>
+                    <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 2 }}>
                       {row.phone}
                     </div>
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>{row.location}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">{row.customers}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">{row.drivers}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="center">{row.trucks}</TableCell>
-                  <TableCell sx={BODY_CELL_SX} align="right">{row.avgFuel}</TableCell>
-                  <TableCell sx={{ ...BODY_CELL_SX, fontSize: "12px", color: "#9a8c7a" }}>
+                  <TableCell sx={MONO_DATA_CELL_SX} align="center">{row.customers}</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX} align="center">{row.drivers}</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX} align="center">{row.trucks}</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX} align="right">{row.avgFuel}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, color: "var(--text-muted)" }}>
                     {row.joined}
                   </TableCell>
                   <TableCell sx={BODY_CELL_SX}>
@@ -314,7 +311,7 @@ export default function FranchiseesPage() {
                     <IconButton
                       size="small"
                       onClick={(e) => openMenu(e, row)}
-                      sx={{ color: "#9a8c7a" }}
+                      sx={{ color: "var(--text-muted)" }}
                     >
                       <MoreVertIcon sx={{ fontSize: 20 }} />
                     </IconButton>
@@ -326,12 +323,12 @@ export default function FranchiseesPage() {
                 <TableRow>
                   <TableCell
                     colSpan={10}
-                    sx={{
-                      ...BODY_CELL_SX,
-                      textAlign: "center",
-                      color: "#9a8c7a",
-                      padding: "32px 16px",
-                    }}
+                  sx={{
+                    ...BODY_CELL_SX,
+                    textAlign: "center",
+                    color: "var(--text-muted)",
+                    padding: "32px 16px",
+                  }}
                   >
                     No franchisees match the current filters.
                   </TableCell>
@@ -353,13 +350,14 @@ export default function FranchiseesPage() {
           }}
           rowsPerPageOptions={[8, 16, 24]}
           sx={{
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid var(--border-subtle)",
             fontSize: "12px",
-            color: "#9a8c7a",
+            color: "var(--text-muted)",
             padding: "8px 16px",
             "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
-              { fontSize: "12px", color: "#9a8c7a", margin: 0 },
-            "& .MuiTablePagination-select": { fontSize: "12px" },
+              { fontSize: "12px", color: "var(--text-muted)", margin: 0 },
+            "& .MuiTablePagination-select": { fontSize: "12px", color: "var(--text-primary)" },
+            "& .MuiIconButton-root": { color: "var(--text-muted)" },
           }}
         />
       </SectionCard>
@@ -373,10 +371,10 @@ export default function FranchiseesPage() {
         slotProps={{
           paper: {
             sx: {
-              borderRadius: "8px",
-              border: "1px solid rgba(255,255,255,0.1)",
-              background: "#242426",
-              boxShadow: "0 1px 4px rgba(0,0,0,0.4)",
+              borderRadius: "6px",
+              border: "1px solid var(--border-subtle)",
+              background: "var(--bg-surface)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
               minWidth: 180,
             },
           },
@@ -384,22 +382,22 @@ export default function FranchiseesPage() {
       >
         <MenuItem
           onClick={() => handleAction("edit")}
-          sx={{ fontSize: "13px", color: "#e8e6e3" }}
+          sx={{ fontSize: "14px", color: "var(--text-primary)" }}
         >
           Edit details
         </MenuItem>
-        <Divider sx={{ my: "4px" }} />
+        <Divider sx={{ my: "4px", borderColor: "var(--border-subtle)" }} />
         {activeRow?.status === "active" ? (
           <MenuItem
             onClick={() => handleAction("freeze")}
-            sx={{ fontSize: "13px", color: "#dc2626" }}
+            sx={{ fontSize: "14px", color: "var(--error-text)" }}
           >
             Freeze account
           </MenuItem>
         ) : (
           <MenuItem
             onClick={() => handleAction("unfreeze")}
-            sx={{ fontSize: "13px", color: "#15803d" }}
+            sx={{ fontSize: "14px", color: "var(--success-text)" }}
           >
             Unfreeze account
           </MenuItem>
@@ -419,7 +417,7 @@ export default function FranchiseesPage() {
             : "The franchisee will regain full access."
         }
         confirmLabel={confirm.action === "freeze" ? "Freeze" : "Unfreeze"}
-        confirmColor={confirm.action === "freeze" ? "#f0797a" : "#ce1c1a"}
+        confirmColor={confirm.action === "freeze" ? "var(--error-text)" : "var(--primary-brand)"}
         onConfirm={() => {
           // TODO: call freezeFranchisee / unfreezeFranchisee from lib/api/franchisees.ts
           closeConfirm();

@@ -17,13 +17,6 @@ interface ButtonProps {
   startIcon?: ReactNode;
 }
 
-const primaryGradient =
-  "linear-gradient(135deg, #cd171a 0%, #ce1c1a 35%, #bf2524 100%)";
-const primaryGradientHover =
-  "linear-gradient(135deg, #ce1c1a 0%, #bf2524 45%, #a61e1c 100%)";
-const primaryGradientActive =
-  "linear-gradient(135deg, #a61e1c 0%, #cd171a 50%, #8b1816 100%)";
-
 export function Button({
   children,
   onClick,
@@ -68,83 +61,53 @@ export function Button({
       disableElevation
       disabled={isDisabled}
       sx={{
-        height: "44px",
-        borderRadius: "10px",
+        height: "40px",
+        borderRadius: "6px",
         fontWeight: 600,
         fontSize: "14px",
         textTransform: "none",
-        letterSpacing: "0.2px",
+        letterSpacing: "0.1px",
         boxShadow: "none",
-        position: "relative",
-        overflow: "hidden",
-        transition: "all 250ms cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: "background-color var(--transition-fast), transform var(--transition-fast)",
         ...(variant === "primary"
           ? {
-              background: primaryGradient,
-              backgroundSize: "120% 120%",
-              backgroundPosition: "40% 50%",
+              backgroundColor: "var(--primary-brand)",
               color: "#ffffff",
               border: "none",
-              boxShadow: "0 4px 14px rgba(206,28,26,0.35), 0 2px 6px rgba(206,28,26,0.2), inset 0 1px 0 rgba(255,255,255,0.15)",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: "-100%",
-                width: "100%",
-                height: "100%",
-                background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
-                transition: "left 0.6s ease",
-              },
+              padding: "8px 16px",
               "&:hover": {
-                background: primaryGradientHover,
-                backgroundSize: "120% 120%",
-                backgroundPosition: "60% 50%",
-                boxShadow: "0 6px 20px rgba(206,28,26,0.45), 0 3px 8px rgba(206,28,26,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
-                transform: "translateY(-1px)",
-                "&::before": {
-                  left: "100%",
-                },
+                backgroundColor: "var(--primary-hover)",
+                boxShadow: "none",
               },
               "&:active": {
-                background: primaryGradientActive,
-                transform: "translateY(0px) scale(0.98)",
-                boxShadow: "0 2px 8px rgba(206,28,26,0.4), inset 0 2px 4px rgba(0,0,0,0.1)",
+                transform: "scale(0.98)",
               },
             }
           : {
-              color: "#ce1c1a",
-              backgroundColor: "#1c1c1d",
-              border: "1px solid transparent",
-              backgroundImage:
-                "linear-gradient(#1c1c1d, #1e1e20), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
-              backgroundOrigin: "border-box",
-              backgroundClip: "padding-box, border-box",
+              backgroundColor: "var(--bg-surface)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border-subtle)",
+              padding: "8px 16px",
               "&:hover": {
-                backgroundImage:
-                  "linear-gradient(#241414, #221212), linear-gradient(135deg, #ce1c1a 0%, #f0797a 45%, #bf2524 100%)",
-                boxShadow: "0 4px 12px rgba(206,28,26,0.2)",
-                transform: "translateY(-1px)",
+                backgroundColor: "var(--bg-surface-hover)",
+                boxShadow: "none",
               },
               "&:active": {
-                backgroundImage:
-                  "linear-gradient(#200f0f, #1e0e0e), linear-gradient(135deg, #bf2524 0%, #ce1c1a 50%, #cd171a 100%)",
-                transform: "translateY(0px)",
+                transform: "scale(0.98)",
               },
             }),
         "&.Mui-disabled": {
-          opacity: 0.5,
+          opacity: 0.4,
           cursor: "not-allowed",
-          color: variant === "primary" ? "#ffffff" : "#ce1c1a",
-          background: variant === "primary" ? "#ce1c1a" : "transparent",
-          backgroundImage: variant === "ghost" ? "none" : undefined,
+          color: variant === "primary" ? "#ffffff" : "var(--text-primary)",
+          backgroundColor: variant === "primary" ? "var(--primary-brand)" : "var(--bg-surface)",
           transform: "none",
           boxShadow: "none",
         },
       }}
     >
       {loading || pending ? (
-        <CircularProgress size={18} sx={{ color: "inherit" }} />
+        <CircularProgress size={16} sx={{ color: "inherit" }} />
       ) : (
         children
       )}

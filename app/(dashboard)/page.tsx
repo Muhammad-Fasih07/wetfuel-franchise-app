@@ -3,6 +3,7 @@
 import { Grid } from "@mui/material";
 import {
   CheckCircleOutline as CheckCircleOutlineIcon,
+  Dashboard as DashboardIcon,
   DirectionsCar as DirectionsCarIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
   LocalShipping as LocalShippingIcon,
@@ -30,41 +31,11 @@ import { FranchiseeTable } from "@/components/franchisees/FranchiseeTable";
 
 // TODO: replace with real API data from lib/api/reporting.ts
 const NETWORK_HEALTH_METRICS = [
-  { 
-    label: "Active Drivers", 
-    value: "89", 
-    icon: <DirectionsCarIcon />,
-    color: "#60a5fa",
-    bgColor: "linear-gradient(135deg, #0f1520 0%, #152035 100%)",
-  },
-  { 
-    label: "Trucks Enrolled", 
-    value: "64", 
-    icon: <LocalShippingIcon />,
-    color: "#a78bfa",
-    bgColor: "linear-gradient(135deg, #140f20 0%, #1f1535 100%)",
-  },
-  { 
-    label: "Jobs Today", 
-    value: "34", 
-    icon: <CheckCircleOutlineIcon />,
-    color: "#34d399",
-    bgColor: "linear-gradient(135deg, #0a1c10 0%, #0f2a18 100%)",
-  },
-  { 
-    label: "Pending Reviews", 
-    value: "7", 
-    icon: <AssessmentIcon />,
-    color: "#fbbf24",
-    bgColor: "linear-gradient(135deg, #1c1508 0%, #25190a 100%)",
-  },
-  { 
-    label: "Low Stock Alerts", 
-    value: "2", 
-    icon: <WarningIcon />,
-    color: "#f87171",
-    bgColor: "linear-gradient(135deg, #1c0a0a 0%, #280e0e 100%)",
-  },
+  { label: "Active Drivers",   value: "89", icon: <DirectionsCarIcon />,        color: "var(--info-text)" },
+  { label: "Trucks Enrolled",  value: "64", icon: <LocalShippingIcon />,         color: "var(--accent-purple)" },
+  { label: "Jobs Today",       value: "34", icon: <CheckCircleOutlineIcon />,    color: "var(--success-text)" },
+  { label: "Pending Reviews",  value: "7",  icon: <AssessmentIcon />,            color: "var(--warning-text)" },
+  { label: "Low Stock Alerts", value: "2",  icon: <WarningIcon />,               color: "var(--error-text)" },
 ];
 
 // TODO: replace with real fuel volume rankings
@@ -78,20 +49,18 @@ const TOP_FRANCHISEES_CHART_DATA = [
 
 
 const CARD_BASE: React.CSSProperties = {
-  background: "linear-gradient(180deg, #1c1c1d 0%, #1e1e20 90%, #212123 100%)",
-  border: "1.5px solid rgba(255,255,255,0.08)",
-  borderRadius: "14px",
-  padding: "26px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
-  transition: "all 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+  background: "var(--bg-surface)",
+  border: "1px solid var(--border-subtle)",
+  borderRadius: "8px",
+  padding: "24px",
 };
 
 const CARD_TITLE: React.CSSProperties = {
-  fontSize: "17px",
+  fontSize: "16px",
   fontWeight: 600,
-  color: "#e8e6e3",
+  color: "var(--text-primary)",
   margin: 0,
-  letterSpacing: "-0.2px",
+  lineHeight: 1.5,
 };
 
 export default function DashboardOverviewPage() {
@@ -105,6 +74,8 @@ export default function DashboardOverviewPage() {
       }}
     >
       <PageHeader
+        breadcrumb="Overview / Dashboard"
+        icon={<DashboardIcon sx={{ fontSize: 24 }} />}
         title="Dashboard"
         subtitle="Welcome back. Here's what's happening across your network."
         action={
@@ -171,67 +142,39 @@ export default function DashboardOverviewPage() {
 
         <Grid item xs={12} lg={4}>
           <section style={CARD_BASE}>
-            <h2 style={{ ...CARD_TITLE, marginBottom: "20px", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span
-                style={{
-                  width: "4px",
-                  height: "18px",
-                  borderRadius: "2px",
-                  background: "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-                  boxShadow: "0 0 8px rgba(206,28,26,0.4)",
-                }}
-              />
-              Network Health
-            </h2>
+            <h2 style={{ ...CARD_TITLE, marginBottom: "16px" }}>Network Health</h2>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
               {NETWORK_HEALTH_METRICS.map((metric) => (
                 <div
                   key={metric.label}
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "14px",
-                    padding: "14px",
-                    borderRadius: "10px",
-                    background: metric.bgColor,
-                    border: `1.5px solid ${metric.color}20`,
-                    transition: "all 200ms ease",
+                    justifyContent: "space-between",
+                    padding: "10px 12px",
+                    borderRadius: "6px",
+                    transition: "background-color var(--transition-fast)",
                     cursor: "default",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateX(4px)";
-                    e.currentTarget.style.boxShadow = `0 4px 12px ${metric.color}30`;
+                    e.currentTarget.style.backgroundColor = "var(--bg-surface-hover)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateX(0)";
-                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.backgroundColor = "transparent";
                   }}
                 >
-                  <div
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "10px",
-                      background: `${metric.color}15`,
-                      color: metric.color,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                      border: `1.5px solid ${metric.color}30`,
-                    }}
-                  >
-                    {metric.icon}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: "12px", color: "#9a8c7a", fontWeight: 500 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <span style={{ color: metric.color, display: "inline-flex", fontSize: "18px" }}>
+                      {metric.icon}
+                    </span>
+                    <span style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
                       {metric.label}
-                    </div>
-                    <div style={{ fontSize: "20px", fontWeight: 700, color: metric.color, marginTop: "2px" }}>
-                      {metric.value}
-                    </div>
+                    </span>
                   </div>
+                  <span style={{ fontSize: "16px", fontWeight: 600, color: "var(--text-primary)" }}>
+                    {metric.value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -241,83 +184,36 @@ export default function DashboardOverviewPage() {
 
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <section
-            style={{
-              ...CARD_BASE,
-              position: "relative",
-              overflow: "visible",
-            }}
-          >
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                top: "-20px",
-                right: "-20px",
-                width: "140px",
-                height: "140px",
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(206,28,26,0.08) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }}
-            />
-
+          <section style={CARD_BASE}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                marginBottom: "32px",
+                marginBottom: "24px",
                 flexWrap: "wrap",
                 gap: "12px",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    borderRadius: "14px",
-                    background:
-                      "linear-gradient(135deg, rgba(206,28,26,0.18) 0%, rgba(206,28,26,0.28) 60%, rgba(206,28,26,0.32) 100%)",
-                    color: "#f0797a",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow:
-                      "0 6px 16px rgba(206,28,26,0.22), inset 0 1px 0 rgba(255,255,255,0.05)",
-                  }}
-                >
-                  <LocalGasStationOutlinedIcon sx={{ fontSize: 26 }} />
-                </span>
-                <div>
-                  <h2 style={{ ...CARD_TITLE, marginBottom: "4px" }}>
-                    Top Franchisees by Fuel Volume
-                  </h2>
-                  <p
-                    style={{
-                      fontSize: "12px",
-                      color: "#9a8c7a",
-                      margin: 0,
-                    }}
-                  >
-                    Monthly performance comparison across network
-                  </p>
-                </div>
+              <div>
+                <h2 style={{ ...CARD_TITLE, marginBottom: "4px" }}>
+                  Top Franchisees by Fuel Volume
+                </h2>
+                <p style={{ fontSize: "14px", color: "var(--text-secondary)", margin: 0 }}>
+                  Monthly performance comparison across network
+                </p>
               </div>
               <span
                 style={{
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  color: "#ce1c1a",
-                  background:
-                    "linear-gradient(135deg, rgba(206,28,26,0.12) 0%, rgba(240,121,122,0.12) 100%)",
-                  padding: "6px 14px",
-                  borderRadius: "24px",
-                  border: "1.5px solid rgba(206,28,26,0.25)",
-                  letterSpacing: "0.3px",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  color: "var(--text-muted)",
+                  background: "var(--bg-surface-hover)",
+                  padding: "4px 10px",
+                  borderRadius: "9999px",
+                  border: "1px solid var(--border-subtle)",
                   textTransform: "uppercase",
+                  letterSpacing: "0.04em",
                 }}
               >
                 This Month
@@ -329,42 +225,34 @@ export default function DashboardOverviewPage() {
                 data={TOP_FRANCHISEES_CHART_DATA}
                 margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
               >
-                <defs>
-                  <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#f0797a" stopOpacity={1} />
-                    <stop offset="50%" stopColor="#ce1c1a" stopOpacity={1} />
-                    <stop offset="100%" stopColor="#8b1816" stopOpacity={1} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.07)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#27272A" />
                 <XAxis
                   dataKey="name"
                   angle={-15}
                   textAnchor="end"
                   height={80}
-                  tick={{ fill: "#9a8c7a", fontSize: 12, fontWeight: 500 }}
-                  stroke="rgba(255,255,255,0.08)"
+                  tick={{ fill: "#71717A", fontSize: 12 }}
+                  stroke="#27272A"
                 />
                 <YAxis
-                  tick={{ fill: "#9a8c7a", fontSize: 12 }}
-                  stroke="rgba(255,255,255,0.08)"
+                  tick={{ fill: "#71717A", fontSize: 12 }}
+                  stroke="#27272A"
                   label={{
                     value: "Fuel Volume (gallons)",
                     angle: -90,
                     position: "insideLeft",
-                    style: { fill: "#9a8c7a", fontSize: 12, fontWeight: 600 },
+                    style: { fill: "#71717A", fontSize: 12 },
                   }}
                 />
                 <Tooltip
                   contentStyle={{
-                    background: "#242426",
-                    border: "1.5px solid rgba(255,255,255,0.1)",
-                    borderRadius: "10px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
-                    padding: "12px 14px",
+                    background: "#18181B",
+                    border: "1px solid #27272A",
+                    borderRadius: "6px",
+                    padding: "10px 14px",
                   }}
-                  labelStyle={{ color: "#e8e6e3", fontWeight: 600, marginBottom: "6px" }}
-                  itemStyle={{ color: "#ce1c1a", fontWeight: 500 }}
+                  labelStyle={{ color: "#ffffff", fontWeight: 500, marginBottom: "4px" }}
+                  itemStyle={{ color: "#A1A1AA" }}
                   formatter={(value: number, name: string, props: any) => [
                     props.payload.displayVolume,
                     "Fuel Volume",
@@ -372,13 +260,13 @@ export default function DashboardOverviewPage() {
                 />
                 <Bar
                   dataKey="volume"
-                  radius={[8, 8, 0, 0]}
+                  radius={[4, 4, 0, 0]}
                   maxBarSize={80}
                 >
                   {TOP_FRANCHISEES_CHART_DATA.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={index === 0 ? "url(#barGradient)" : index < 3 ? "#f87171" : "#d4d4d4"}
+                      fill={index === 0 ? "#DC2626" : index < 3 ? "#EF4444" : "#3F3F46"}
                     />
                   ))}
                 </Bar>

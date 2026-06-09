@@ -1,16 +1,16 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { AppLink } from "../navigation/AppLink";
 import { useAppRouter } from "../../lib/hooks/useAppRouter";
 import { Avatar, IconButton, Tooltip } from "@mui/material";
 import {
   AssessmentOutlined,
-  ChevronRight as ChevronRightIcon,
   Dashboard as DashboardIcon,
-  HelpOutline as HelpOutlineIcon,
   Logout as LogoutIcon,
+  MenuOpen as MenuOpenIcon,
+  Menu as MenuIcon,
   SettingsOutlined,
   Store as StoreIcon,
 } from "@mui/icons-material";
@@ -19,20 +19,61 @@ type SidebarNavItem = {
   label: string;
   href: string;
   icon: ReactNode;
-  badge?: { value: string | number; color: string };
+  badge?: { value: string | number };
 };
 
-export const sidebarNavItems: SidebarNavItem[] = [
-  { label: "Dashboard", href: "/", icon: <DashboardIcon sx={{ fontSize: 20 }} /> },
-  { label: "Franchisees", href: "/franchisees", icon: <StoreIcon sx={{ fontSize: 20 }} /> },
+type SidebarSection = {
+  label: string;
+  items: SidebarNavItem[];
+};
+
+export const sidebarSections: SidebarSection[] = [
   {
-    label: "Reporting",
-    href: "/reporting",
-    icon: <AssessmentOutlined sx={{ fontSize: 20 }} />,
-    badge: { value: 7, color: "#ce1c1a" },
+    label: "Overview",
+    items: [
+      {
+        label: "Dashboard",
+        href: "/",
+        icon: <DashboardIcon sx={{ fontSize: 18 }} />,
+      },
+    ],
   },
-  { label: "Settings", href: "/settings", icon: <SettingsOutlined sx={{ fontSize: 20 }} /> },
+  {
+    label: "Network",
+    items: [
+      {
+        label: "Franchisees",
+        href: "/franchisees",
+        icon: <StoreIcon sx={{ fontSize: 18 }} />,
+      },
+      {
+        label: "Reporting",
+        href: "/reporting",
+        icon: <AssessmentOutlined sx={{ fontSize: 18 }} />,
+        badge: { value: 7 },
+      },
+    ],
+  },
+  {
+    label: "System",
+    items: [
+      {
+        label: "Settings",
+        href: "/settings",
+        icon: <SettingsOutlined sx={{ fontSize: 18 }} />,
+      },
+    ],
+  },
 ];
+
+/** @deprecated Use sidebarSections for grouped navigation */
+export const sidebarNavItems: SidebarNavItem[] = sidebarSections.flatMap(
+  (section) => section.items,
+);
+
+const STORAGE_KEY = "wf-sidebar-collapsed";
+const EXPANDED_WIDTH = "260px";
+const COLLAPSED_WIDTH = "72px";
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -42,349 +83,371 @@ function isActivePath(pathname: string, href: string) {
 export function Sidebar() {
   const pathname = usePathname() ?? "/";
   const router = useAppRouter();
+  const [collapsed, setCollapsed] = useState(false);
+
+  // Rehydrate persisted state on mount (default expanded to avoid hydration mismatch).
+  useEffect(() => {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "true") {
+      setCollapsed(true);
+    }
+  }, []);
+
+  // Keep the content column margin in sync via a CSS variable.
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--sidebar-width",
+      collapsed ? COLLAPSED_WIDTH : EXPANDED_WIDTH,
+    );
+  }, [collapsed]);
+
+  const toggleCollapsed = () => {
+    setCollapsed((prev) => {
+      const next = !prev;
+      window.localStorage.setItem(STORAGE_KEY, String(next));
+      return next;
+    });
+  };
 
   const handleSignOut = () => {
     document.cookie =
       "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    // TODO: call signOut() from next-auth and clear authStore before redirecting
     router.push("/login");
   };
 
   return (
     <aside
       style={{
-        width: "240px",
+        width: collapsed ? COLLAPSED_WIDTH : EXPANDED_WIDTH,
         height: "100vh",
         position: "fixed",
         left: 0,
         top: 0,
         display: "flex",
         flexDirection: "column",
-        padding: 0,
         zIndex: 100,
-        background:
-          "radial-gradient(120% 60% at 0% 0%, rgba(206,28,26,0.18) 0%, transparent 55%), radial-gradient(120% 60% at 100% 100%, rgba(206,28,26,0.10) 0%, transparent 50%), linear-gradient(180deg, #1c1c1d 0%, #232324 50%, #1a1a1b 100%)",
-        borderRight: "1px solid rgba(206,28,26,0.18)",
-        boxShadow:
-          "1px 0 0 rgba(255,255,255,0.04) inset, 12px 0 32px -24px rgba(0,0,0,0.6)",
+        background: "var(--bg-main)",
+        borderRight: "1px solid var(--border-subtle)",
+        transition: "width var(--transition-base)",
+        overflow: "hidden",
       }}
     >
+      {/* Logo / Brand */}
       <div
         style={{
-          padding: "20px 18px 18px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          padding: collapsed ? "20px 10px" : "20px 10px",
+          borderBottom: "1px solid var(--border-subtle)",
           display: "flex",
           alignItems: "center",
+          justifyContent: collapsed ? "center" : "space-between",
           gap: "12px",
-          position: "relative",
+          maxHeight: "64px",
         }}
       >
-        <span
-          aria-hidden
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "2px",
-            background:
-              "linear-gradient(90deg, transparent 0%, #ce1c1a 50%, transparent 100%)",
-            opacity: 0.7,
-          }}
-        />
-        <div
-          aria-hidden
-          style={{
-            width: "44px",
-            height: "44px",
-            borderRadius: "12px",
-            background:
-              "linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 55%, #000000 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow:
-              "0 6px 16px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset, 0 0 16px -2px rgba(206,28,26,0.4)",
-            flexShrink: 0,
-            position: "relative",
-          }}
+        {!collapsed && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              minWidth: 0,
+            }}
+          >
+            <div
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "8px",
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border-subtle)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/wetfeullogo.png"
+                alt="WetFuel"
+                style={{
+                  height: "22px",
+                  width: "auto",
+                  objectFit: "contain",
+                  display: "block",
+                }}
+              />
+            </div>
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <p
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  margin: 0,
+                  color: "var(--text-primary)",
+                }}
+              >
+                WetFuel
+              </p>
+              <p
+                className="type-category-label"
+                style={{ margin: "2px 0 0 0" }}
+              >
+                Franchise Admin
+              </p>
+            </div>
+          </div>
+        )}
+
+        <Tooltip
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          placement="right"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/wetfeullogo.png"
-            alt="WetFuel"
-            style={{
-              height: "28px",
-              width: "auto",
-              objectFit: "contain",
-              display: "block",
-            }}
-          />
-        </div>
-        <div style={{ minWidth: 0, flex: 1 }}>
-          <p
-            style={{
-              fontSize: "16px",
-              fontWeight: 700,
-              margin: 0,
-              letterSpacing: "-0.3px",
-              background:
-                "linear-gradient(135deg, #ffffff 0%, #f0797a 60%, #ce1c1a 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
+          <IconButton
+            size="small"
+            onClick={toggleCollapsed}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            sx={{
+              color: "var(--text-muted)",
+              borderRadius: "6px",
+              flexShrink: 0,
+              transition: "all var(--transition-fast)",
+              "&:hover": {
+                color: "var(--text-primary)",
+                background: "var(--bg-surface-hover)",
+              },
             }}
           >
-            WetFuel
-          </p>
-          <p
-            style={{
-              fontSize: "10px",
-              color: "rgba(255,255,255,0.45)",
-              margin: "2px 0 0 0",
-              letterSpacing: "0.6px",
-              textTransform: "uppercase",
-              fontWeight: 500,
-            }}
-          >
-            Franchise Admin
-          </p>
-        </div>
+            {collapsed ? (
+              <MenuIcon sx={{ fontSize: 20 }} />
+            ) : (
+              <MenuOpenIcon sx={{ fontSize: 20 }} />
+            )}
+          </IconButton>
+        </Tooltip>
       </div>
 
+      {/* Navigation */}
       <nav
         style={{
           flex: 1,
           overflowY: "auto",
-          padding: "10px 0",
+          overflowX: "hidden",
+          padding: "8px 12px 12px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "16px 20px 8px",
-          }}
-        >
-          <span
-            aria-hidden
+        {sidebarSections.map((section, sectionIndex) => (
+          <div
+            key={section.label}
             style={{
-              width: "10px",
-              height: "1px",
-              background: "rgba(255,255,255,0.2)",
-            }}
-          />
-          <p
-            style={{
-              fontSize: "10px",
-              color: "rgba(255,255,255,0.35)",
-              letterSpacing: "1.4px",
-              margin: 0,
-              textTransform: "uppercase",
-              fontWeight: 600,
+              paddingTop:
+                sectionIndex === 0 ? "4px" : collapsed ? "12px" : "20px",
             }}
           >
-            Main Menu
-          </p>
-        </div>
+            {!collapsed && (
+              <p
+                className="type-category-label"
+                style={{
+                  fontSize: "11px",
+                  margin: "0 0 8px 8px",
+                }}
+              >
+                {section.label}
+              </p>
+            )}
 
-        <ul style={{ listStyle: "none", padding: "0 10px", margin: 0 }}>
-          {sidebarNavItems.map((item) => {
-            const active = isActivePath(pathname, item.href);
-            return (
-              <li key={item.href} style={{ margin: "2px 0" }}>
-                <AppLink
-                  href={item.href}
-                  style={{
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "10px 12px",
-                    borderRadius: "10px",
-                    background: active
-                      ? "linear-gradient(90deg, rgba(206,28,26,0.28) 0%, rgba(206,28,26,0.10) 50%, rgba(206,28,26,0.04) 100%)"
-                      : "transparent",
-                    color: active ? "#ffffff" : "rgba(255,255,255,0.65)",
-                    fontSize: "14px",
-                    fontWeight: active ? 500 : 400,
-                    transition: "all 140ms ease",
-                    position: "relative",
-                    border: active
-                      ? "1px solid rgba(206,28,26,0.35)"
-                      : "1px solid transparent",
-                    boxShadow: active
-                      ? "0 6px 18px -10px rgba(206,28,26,0.6), inset 0 1px 0 rgba(255,255,255,0.06)"
-                      : "none",
-                  }}
-                  className="sidebar-nav-item"
-                  data-active={active ? "true" : "false"}
-                >
-                  {active && (
-                    <span
-                      aria-hidden
-                      style={{
-                        position: "absolute",
-                        left: "-10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        width: "3px",
-                        height: "20px",
-                        borderRadius: "0 3px 3px 0",
-                        background:
-                          "linear-gradient(180deg, #f0797a 0%, #ce1c1a 50%, #8b1816 100%)",
-                        boxShadow: "0 0 12px rgba(206,28,26,0.6)",
-                      }}
-                    />
-                  )}
-                  <span
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {section.items.map((item) => {
+                const active = isActivePath(pathname, item.href);
+                const link = (
+                  <AppLink
+                    href={item.href}
                     style={{
-                      display: "inline-flex",
+                      textDecoration: "none",
+                      display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "8px",
+                      justifyContent: collapsed ? "center" : "flex-start",
+                      gap: collapsed ? 0 : "10px",
+                      padding: collapsed ? "10px 0" : "8px 12px",
+                      borderRadius: "6px",
+                      margin: "0 4px",
+                      position: "relative",
                       background: active
-                        ? "linear-gradient(135deg, rgba(206,28,26,0.25) 0%, rgba(206,28,26,0.10) 100%)"
+                        ? "var(--primary-brand-muted)"
                         : "transparent",
-                      color: active ? "#f0797a" : "rgba(255,255,255,0.55)",
-                      transition: "all 140ms ease",
-                      flexShrink: 0,
+                      color: active
+                        ? "var(--primary-brand)"
+                        : "var(--text-secondary)",
+                      borderLeft: active
+                        ? "3px solid var(--primary-brand)"
+                        : "3px solid transparent",
+                      fontSize: "14px",
+                      fontWeight: active ? 500 : 400,
+                      transition:
+                        "background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast)",
                     }}
+                    className="sidebar-nav-item"
+                    data-active={active ? "true" : "false"}
                   >
-                    {item.icon}
-                  </span>
-                  <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
-
-                  {item.badge && (
                     <span
                       style={{
-                        fontSize: "10px",
-                        fontWeight: 600,
-                        color: "#ffffff",
-                        background: item.badge.color,
-                        padding: "2px 7px",
-                        borderRadius: "20px",
-                        minWidth: "20px",
-                        textAlign: "center",
-                        boxShadow: `0 0 0 2px rgba(206,28,26,0.15), 0 4px 10px -2px ${item.badge.color}66`,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        color: "inherit",
+                        position: "relative",
                       }}
                     >
-                      {item.badge.value}
+                      {item.icon}
+                      {collapsed && item.badge && (
+                        <span
+                          aria-hidden
+                          style={{
+                            position: "absolute",
+                            top: "-3px",
+                            right: "-4px",
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: "var(--primary-brand)",
+                            border: "2px solid var(--bg-main)",
+                          }}
+                        />
+                      )}
                     </span>
-                  )}
 
-                  {active && (
-                    <ChevronRightIcon
-                      sx={{
-                        fontSize: 16,
-                        color: "rgba(255,255,255,0.4)",
-                      }}
-                    />
-                  )}
-                </AppLink>
-              </li>
-            );
-          })}
-        </ul>
+                    {!collapsed && (
+                      <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
+                    )}
 
-        
+                    {!collapsed && item.badge && (
+                      <span
+                        className="font-mono"
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: 600,
+                          color: active
+                            ? "var(--primary-brand)"
+                            : "var(--text-muted)",
+                          background: active
+                            ? "var(--primary-brand-muted)"
+                            : "var(--bg-surface-hover)",
+                          padding: "1px 6px",
+                          borderRadius: "9999px",
+                          minWidth: "20px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {item.badge.value}
+                      </span>
+                    )}
+                  </AppLink>
+                );
+
+                return (
+                  <li key={item.href} style={{ margin: "2px 0" }}>
+                    {collapsed ? (
+                      <Tooltip title={item.label} placement="right">
+                        {link}
+                      </Tooltip>
+                    ) : (
+                      link
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </nav>
 
+      {/* Footer / User */}
       <div
         style={{
-          padding: "14px 16px",
-          borderTop: "1px solid rgba(255,255,255,0.07)",
-          background: "rgba(0,0,0,0.2)",
+          padding: collapsed ? "12px 0" : "12px 16px",
+          borderTop: "1px solid var(--border-subtle)",
+          background: "var(--bg-surface)",
           display: "flex",
+          flexDirection: collapsed ? "column" : "row",
           alignItems: "center",
-          gap: "12px",
+          justifyContent: collapsed ? "center" : "flex-start",
+          gap: "10px",
         }}
       >
         <div style={{ position: "relative", flexShrink: 0 }}>
-          <Avatar
-            sx={{
-              width: 36,
-              height: 36,
-              background:
-                "linear-gradient(135deg, #cd171a 0%, #ce1c1a 45%, #8b1816 100%)",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: "#ffffff",
-              boxShadow:
-                "0 4px 10px rgba(206,28,26,0.35), inset 0 1px 0 rgba(255,255,255,0.18)",
-            }}
-          >
-            SA
-          </Avatar>
-          <span
-            aria-hidden
-            style={{
-              position: "absolute",
-              bottom: 0,
-              right: 0,
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              background: "#22c55e",
-              border: "2px solid #1a1a1b",
-              boxShadow: "0 0 8px rgba(34,197,94,0.6)",
-            }}
-          />
+          {!collapsed && (
+            <>
+              <Avatar
+                sx={{
+                  width: 34,
+                  height: 34,
+                  background: "var(--primary-brand)",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "#ffffff",
+                }}
+              >
+                SA
+              </Avatar>
+              <span
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  width: "9px",
+                  height: "9px",
+                  borderRadius: "50%",
+                  background: "var(--success-text)",
+                  border: "2px solid var(--bg-surface)",
+                }}
+              />
+            </>
+          )}
         </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p
-            style={{
-              fontSize: "13px",
-              fontWeight: 500,
-              color: "#ffffff",
-              margin: 0,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Super Admin
-          </p>
-          <p
-            style={{
-              fontSize: "11px",
-              color: "rgba(255,255,255,0.5)",
-              margin: "2px 0 0 0",
-              display: "flex",
-              alignItems: "center",
-              gap: "4px",
-            }}
-          >
-            <span
+        {!collapsed && (
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p
               style={{
-                width: "5px",
-                height: "5px",
-                borderRadius: "50%",
-                background: "#22c55e",
-                display: "inline-block",
+                fontSize: "13px",
+                fontWeight: 500,
+                color: "var(--text-primary)",
+                margin: 0,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
               }}
-            />
-            Online
-          </p>
-        </div>
-        <Tooltip title="Sign out" placement="top">
+            >
+              Super Admin
+            </p>
+            <p
+              className="font-mono"
+              style={{
+                fontSize: "11px",
+                color: "var(--text-muted)",
+                margin: "1px 0 0 0",
+              }}
+            >
+              Online
+            </p>
+          </div>
+        )}
+        <Tooltip title="Sign out" placement={collapsed ? "right" : "top"}>
           <IconButton
             size="small"
             onClick={handleSignOut}
             sx={{
-              color: "rgba(255,255,255,0.4)",
-              borderRadius: "8px",
-              transition: "all 140ms ease",
+              color: "var(--text-muted)",
+              borderRadius: "6px",
+              transition: "all var(--transition-fast)",
               "&:hover": {
-                color: "#f0797a",
-                background: "rgba(206,28,26,0.12)",
+                color: "var(--text-primary)",
+                background: "var(--bg-surface-hover)",
               },
             }}
           >
-            <LogoutIcon sx={{ fontSize: 18 }} />
+            <LogoutIcon sx={{ fontSize: 17 }} />
           </IconButton>
         </Tooltip>
       </div>
@@ -392,16 +455,11 @@ export function Sidebar() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .sidebar-nav-item[data-active="false"]:hover {
-          background: rgba(255,255,255,0.04) !important;
-          color: rgba(255,255,255,0.95) !important;
-          border-color: rgba(255,255,255,0.06) !important;
-        }
-        .sidebar-nav-item[data-active="false"]:hover > span:first-of-type {
-          color: #ffffff !important;
-          background: rgba(255,255,255,0.06) !important;
-        }
-      `,
+            .sidebar-nav-item[data-active="false"]:hover {
+              background: var(--bg-surface-hover) !important;
+              color: var(--text-primary) !important;
+            }
+          `,
         }}
       />
     </aside>

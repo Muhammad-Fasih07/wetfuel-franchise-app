@@ -11,8 +11,8 @@ const INTEGRATIONS = [
     id: "quickbooks",
     name: "QuickBooks",
     icon: "QB",
-    iconBg: "#0a2015",
-    iconColor: "#34d399",
+    iconBg: "var(--success-bg)",
+    iconColor: "var(--success-text)",
     description: "Sync invoicing, timeclocks and inventory data.",
     connected: true,
     lastSync: "2 hours ago",
@@ -21,8 +21,8 @@ const INTEGRATIONS = [
     id: "opis",
     name: "OPIS Pricing",
     icon: "OP",
-    iconBg: "#1c1508",
-    iconColor: "#fbbf24",
+    iconBg: "var(--warning-bg)",
+    iconColor: "var(--warning-text)",
     description: "Fetch daily fuel pricing for admin approval.",
     connected: true,
     lastSync: "6 hours ago",
@@ -31,8 +31,8 @@ const INTEGRATIONS = [
     id: "mail",
     name: "Email Service",
     icon: "MB",
-    iconBg: "#0f1520",
-    iconColor: "#60a5fa",
+    iconBg: "rgba(59,130,246,0.1)",
+    iconColor: "var(--info-text)",
     description: "Send credential emails to new drivers and customers.",
     connected: false,
     lastSync: null,
@@ -45,7 +45,7 @@ export function IntegrationsPanel() {
       <p
         style={{
           fontSize: "13px",
-          color: "#9a8c7a",
+          color: "var(--text-muted)",
           margin: "0 0 24px",
         }}
       >
@@ -57,7 +57,7 @@ export function IntegrationsPanel() {
           <div
             key={i.id}
             style={{
-              border: "1px solid rgba(255,255,255,0.09)",
+              border: "1px solid var(--border-subtle)",
               borderRadius: "8px",
               padding: "20px 24px",
               display: "flex",
@@ -91,7 +91,7 @@ export function IntegrationsPanel() {
                 style={{
                   fontSize: "14px",
                   fontWeight: 600,
-                  color: "#e8e6e3",
+                  color: "var(--text-primary)",
                   margin: 0,
                 }}
               >
@@ -100,7 +100,7 @@ export function IntegrationsPanel() {
               <p
                 style={{
                   fontSize: "12px",
-                  color: "#9a8c7a",
+                  color: "var(--text-muted)",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -109,7 +109,7 @@ export function IntegrationsPanel() {
               <p
                 style={{
                   fontSize: "11px",
-                  color: i.connected ? "#34d399" : "#f0797a",
+                  color: i.connected ? "var(--success-text)" : "var(--error-text)",
                   margin: "6px 0 0 0",
                   fontWeight: 500,
                 }}

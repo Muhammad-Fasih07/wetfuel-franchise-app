@@ -37,7 +37,7 @@ export function Input({
       inputRef={register?.ref}
       FormHelperTextProps={{
         sx: {
-          color: "#f0797a",
+          color: "var(--error-text)",
           fontSize: "13px",
           marginTop: "6px",
           marginLeft: 0,
@@ -48,44 +48,39 @@ export function Input({
         notched: true,
         sx: {
           height: "46px",
-          borderRadius: "10px",
-          backgroundColor: "#161618",
-          color: "#e8e6e3",
-          fontSize: "15px",
+          borderRadius: "6px",
+          backgroundColor: "var(--bg-surface)",
+          color: "var(--text-primary)",
+          fontSize: "14px",
           outline: "none",
-          transition: "all 200ms cubic-bezier(0.4, 0, 0.2, 1)",
-          position: "relative",
+          transition: "border-color var(--transition-fast)",
           "& input": {
             padding: "10px 14px",
           },
           "& input:-webkit-autofill": {
-            WebkitBoxShadow: "0 0 0 1000px #161618 inset",
-            WebkitTextFillColor: "#e8e6e3",
-            caretColor: "#ce1c1a",
-            borderRadius: "10px",
+            WebkitBoxShadow: "0 0 0 1000px #18181B inset",
+            WebkitTextFillColor: "#ffffff",
+            caretColor: "var(--primary-brand)",
+            borderRadius: "6px",
           },
           "& input::placeholder": {
-            color: "#9a8c7a",
-            opacity: 0.7,
+            color: "var(--text-muted)",
+            opacity: 1,
           },
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "rgba(255,255,255,0.12)",
-            borderWidth: "1.5px",
-            transition: "all 200ms ease",
+            borderColor: error ? "var(--error-text)" : "var(--border-subtle)",
+            borderWidth: "1px",
+            transition: "border-color var(--transition-fast)",
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: error ? "#f0797a" : "rgba(255,255,255,0.2)",
+            borderColor: error ? "var(--error-text)" : "var(--border-focus)",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#ce1c1a",
-            borderWidth: "1.5px",
+            borderColor: error ? "var(--error-text)" : "var(--primary-brand)",
+            borderWidth: "1px",
           },
           "&.Mui-focused": {
-            boxShadow: "0 0 0 4px rgba(206, 28, 26, 0.1), 0 4px 12px rgba(206, 28, 26, 0.08)",
-            transform: "translateY(-1px)",
-          },
-          "&.Mui-error.Mui-focused": {
-            boxShadow: "0 0 0 4px rgba(240, 121, 122, 0.15), 0 4px 12px rgba(240, 121, 122, 0.12)",
+            boxShadow: "none",
           },
         },
       }}
@@ -94,13 +89,13 @@ export function Input({
         sx: {
           fontSize: "14px",
           fontWeight: 500,
-          color: "#e8e6e3",
+          color: "var(--text-secondary)",
           backgroundColor: "transparent",
           "&.Mui-focused": {
-            color: "#ce1c1a",
+            color: "var(--primary-brand)",
           },
           "&.Mui-error": {
-            color: "#f0797a",
+            color: "var(--error-text)",
           },
         },
       }}

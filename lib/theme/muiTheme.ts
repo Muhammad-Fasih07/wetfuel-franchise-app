@@ -3,26 +3,26 @@ import { createTheme } from "@mui/material/styles";
 export const muiTheme = createTheme({
   palette: {
     primary: {
-      main: "#ce1c1a",
-      dark: "#bf2524",
+      main: "#DC2626",
+      dark: "#B91C1C",
     },
     error: {
-      main: "#f0797a",
+      main: "#EF4444",
     },
     text: {
-      primary: "#e8e6e3",
-      secondary: "#9a8c7a",
+      primary: "#FFFFFF",
+      secondary: "#A1A1AA",
     },
     background: {
-      default: "#111113",
-      paper: "#1c1c1d",
+      default: "#09090B",
+      paper: "#18181B",
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 6,
   },
   typography: {
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "var(--font-display)",
   },
   components: {
     MuiButton: {
@@ -32,7 +32,7 @@ export const muiTheme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
-          fontWeight: 500,
+          fontWeight: 600,
           boxShadow: "none",
         },
       },
@@ -41,10 +41,10 @@ export const muiTheme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "rgba(255,255,255,0.12)",
+            borderColor: "#27272A",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#ce1c1a",
+            borderColor: "#DC2626",
             borderWidth: 1,
           },
         },
@@ -54,8 +54,33 @@ export const muiTheme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-focused": {
-            color: "#ce1c1a",
+            color: "#DC2626",
           },
+        },
+      },
+    },
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          background: "#18181B",
+          border: "1px solid #27272A",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
+          "&:hover": {
+            background: "#27272A",
+          },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        icon: {
+          color: "#71717A",
         },
       },
     },

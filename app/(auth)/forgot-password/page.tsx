@@ -58,12 +58,10 @@ export default function ForgotPasswordPage() {
           </div>
 
           <div
-            className="animate-fade-in"
             style={{
               display: "flex",
               justifyContent: "center",
               marginBottom: "20px",
-              animationDelay: "0.1s",
             }}
           >
             <AppLink
@@ -72,80 +70,35 @@ export default function ForgotPasswordPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "6px",
-                color: "#ce1c1a",
-                fontSize: "13px",
-                fontWeight: 600,
+                color: "var(--primary-brand)",
+                fontSize: "14px",
+                fontWeight: 500,
                 textDecoration: "none",
-                transition: "all 200ms ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#bf2524";
-                e.currentTarget.style.gap = "8px";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "#ce1c1a";
-                e.currentTarget.style.gap = "6px";
               }}
             >
-              <ArrowBack sx={{ fontSize: "17px" }} />
+              <ArrowBack sx={{ fontSize: "16px" }} />
               Back to sign in
             </AppLink>
           </div>
 
           <div
-            className="animate-slide-up"
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "12px",
+              gap: "8px",
               marginBottom: "32px",
-              animationDelay: "0.2s",
             }}
           >
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "7px",
-                fontSize: "10px",
-                fontWeight: 700,
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                color: "#ce1c1a",
-                padding: "5px 12px",
-                borderRadius: "24px",
-                background:
-                  "linear-gradient(135deg, rgba(206,28,26,0.12) 0%, rgba(240,121,122,0.12) 100%)",
-                border: "1px solid rgba(206,28,26,0.25)",
-                boxShadow: "0 2px 8px rgba(206,28,26,0.1), inset 0 1px 0 rgba(255,255,255,0.5)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-              }}
-            >
-              <span
-                aria-hidden
-                className="animate-glow"
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  background: "#ce1c1a",
-                  boxShadow: "0 0 10px rgba(206,28,26,0.7), 0 0 4px rgba(206,28,26,0.5)",
-                }}
-              />
-              Password reset
-            </span>
-
             <h1
-              className="text-gradient-primary"
               style={{
-                fontSize: "30px",
-                fontWeight: 700,
+                fontSize: "24px",
+                fontWeight: 600,
                 margin: 0,
-                letterSpacing: "-0.8px",
+                letterSpacing: "-0.02em",
                 textAlign: "center",
-                lineHeight: 1.15,
+                lineHeight: 1.2,
+                color: "var(--text-primary)",
               }}
             >
               Reset your password
@@ -153,9 +106,9 @@ export default function ForgotPasswordPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#9a8c7a",
+                color: "var(--text-secondary)",
                 margin: 0,
-                lineHeight: 1.6,
+                lineHeight: 1.5,
                 textAlign: "center",
                 maxWidth: "340px",
                 fontWeight: 400,
@@ -166,15 +119,7 @@ export default function ForgotPasswordPage() {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div
-              className="animate-slide-up"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "18px",
-                animationDelay: "0.3s",
-              }}
-            >
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <Input
                 name="email"
                 label="Email address"
@@ -191,99 +136,69 @@ export default function ForgotPasswordPage() {
         </>
       ) : (
         <div
-          className="animate-fade-in"
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "18px",
+            gap: "16px",
           }}
         >
           <span
             aria-hidden
-            className="animate-scale-in"
             style={{
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "80px",
-              height: "80px",
-              borderRadius: "20px",
-              background:
-                "linear-gradient(135deg, #fff5f5 0%, #ffe5e5 60%, #ffd0d0 100%)",
-              color: "#ce1c1a",
-              border: "1.5px solid rgba(206,28,26,0.2)",
-              boxShadow:
-                "0 10px 28px -8px rgba(206,28,26,0.5), 0 4px 12px rgba(206,28,26,0.2), inset 0 1px 0 rgba(255,255,255,0.7)",
+              width: "64px",
+              height: "64px",
+              borderRadius: "8px",
+              background: "var(--success-bg)",
+              color: "var(--success-text)",
               marginBottom: "8px",
-              position: "relative",
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "20px",
-                background:
-                  "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)",
-              }}
-            />
-            <CheckCircleOutline sx={{ fontSize: "40px" }} />
+            <CheckCircleOutline sx={{ fontSize: "36px" }} />
           </span>
 
           <h1
-            className="text-gradient-primary animate-slide-up"
             style={{
-              fontSize: "28px",
-              fontWeight: 700,
+              fontSize: "24px",
+              fontWeight: 600,
               margin: 0,
-              letterSpacing: "-0.6px",
-              lineHeight: 1.15,
-              animationDelay: "0.1s",
+              letterSpacing: "-0.02em",
+              lineHeight: 1.2,
+              color: "var(--text-primary)",
             }}
           >
             Check your email
           </h1>
           <p
-            className="animate-fade-in"
             style={{
               fontSize: "14px",
-              color: "#9a8c7a",
+              color: "var(--text-secondary)",
               margin: 0,
-              lineHeight: 1.6,
+              lineHeight: 1.5,
               maxWidth: "360px",
               fontWeight: 400,
-              animationDelay: "0.2s",
             }}
           >
             If that address is registered, you&apos;ll receive a reset link shortly.
           </p>
           <AppLink
             href="/login"
-            className="animate-fade-in"
             style={{
-              color: "#ce1c1a",
+              color: "var(--primary-brand)",
               fontSize: "14px",
-              fontWeight: 600,
+              fontWeight: 500,
               textDecoration: "none",
-              marginTop: "8px",
+              marginTop: "4px",
               display: "inline-flex",
               alignItems: "center",
               gap: "6px",
-              transition: "all 200ms ease",
-              animationDelay: "0.3s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "#bf2524";
-              e.currentTarget.style.gap = "8px";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "#ce1c1a";
-              e.currentTarget.style.gap = "6px";
             }}
           >
-            <ArrowBack sx={{ fontSize: "17px" }} />
+            <ArrowBack sx={{ fontSize: "16px" }} />
             Back to sign in
           </AppLink>
         </div>

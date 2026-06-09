@@ -8,20 +8,47 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["var(--font-display)"],
+        mono: ["var(--font-mono)"],
+      },
       colors: {
-        brand: {
-          red: "#ce1c1a",
-          redHover: "#bf2524",
-          redActive: "#cd171a",
-          black: "#2b2b2b",
-          blackDeep: "#17140b",
-          charcoal: "#282a2c",
-          taupe: "#887b6a",
-          lightGray: "#242426",
-          softPink: "#f0797a",
-          rose: "#ca5f68",
-          white: "#e8e6e3",
+        background: "var(--bg-main)",
+        surface: "var(--bg-surface)",
+        "surface-hover": "var(--bg-surface-hover)",
+        primary: {
+          DEFAULT: "var(--primary-brand)",
+          muted: "var(--primary-brand-muted)",
+          hover: "var(--primary-hover)",
         },
+        border: {
+          subtle: "var(--border-subtle)",
+          focus: "var(--border-focus)",
+        },
+        text: {
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
+        },
+        success: {
+          DEFAULT: "var(--success-text)",
+          bg: "var(--success-bg)",
+        },
+        warning: {
+          DEFAULT: "var(--warning-text)",
+          bg: "var(--warning-bg)",
+        },
+        error: {
+          DEFAULT: "var(--error-text)",
+          bg: "var(--error-bg)",
+        },
+        info: "var(--info-text)",
+        accent: "var(--accent-purple)",
+      },
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        full: "var(--radius-full)",
       },
     },
   },

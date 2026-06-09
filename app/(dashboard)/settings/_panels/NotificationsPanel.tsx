@@ -23,9 +23,9 @@ const EMAIL_ROWS: NotifRow[] = [
 ];
 
 const SWITCH_SX = {
-  "& .MuiSwitch-switchBase.Mui-checked": { color: "#ce1c1a" },
+  "& .MuiSwitch-switchBase.Mui-checked": { color: "var(--primary-brand)" },
   "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: "#ce1c1a",
+    backgroundColor: "var(--primary-brand)",
     opacity: 0.5,
   },
 };
@@ -47,7 +47,7 @@ function ToggleColumn({
         style={{
           fontSize: "13px",
           fontWeight: 600,
-          color: "#e8e6e3",
+          color: "var(--text-primary)",
           margin: "0 0 16px",
         }}
       >
@@ -63,7 +63,7 @@ function ToggleColumn({
               alignItems: "center",
               padding: "12px 0",
               borderBottom:
-                idx === rows.length - 1 ? "none" : "1px solid rgba(255,255,255,0.07)",
+                idx === rows.length - 1 ? "none" : "1px solid var(--border-subtle)",
               gap: "16px",
             }}
           >
@@ -72,7 +72,7 @@ function ToggleColumn({
                 style={{
                   fontSize: "13px",
                   fontWeight: 500,
-                  color: "#e8e6e3",
+                  color: "var(--text-primary)",
                   margin: 0,
                 }}
               >
@@ -81,7 +81,7 @@ function ToggleColumn({
               <p
                 style={{
                   fontSize: "11px",
-                  color: "#9a8c7a",
+                  color: "var(--text-muted)",
                   margin: "2px 0 0 0",
                 }}
               >
@@ -128,7 +128,7 @@ export function NotificationsPanel() {
       <p
         style={{
           fontSize: "13px",
-          color: "#9a8c7a",
+          color: "var(--text-muted)",
           margin: "0 0 24px",
         }}
       >
@@ -154,11 +154,11 @@ export function NotificationsPanel() {
           severity="success"
           onClose={() => setToastOpen(false)}
           sx={{
-            background: "#f0fdf4",
-            color: "#15803d",
-            border: "1px solid #bbf7d0",
+            background: "var(--success-bg)",
+            color: "var(--success-text)",
+            border: "1px solid var(--border-subtle)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#15803d" },
+            "& .MuiAlert-icon": { color: "var(--success-text)" },
           }}
         >
           Preferences saved.

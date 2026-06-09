@@ -38,10 +38,7 @@ export function GlobalLoadingOverlay() {
       <CircularProgress
         size={48}
         thickness={3.5}
-        sx={{
-          color: "#ce1c1a",
-          filter: "drop-shadow(0 0 12px rgba(206,28,26,0.45))",
-        }}
+        sx={{ color: "var(--primary-brand)" }}
       />
     </Backdrop>
   );

@@ -15,6 +15,7 @@ import {
   Phone as PhoneIcon,
 } from "@mui/icons-material";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 interface Customer {
   id: string;
@@ -41,24 +42,6 @@ const CUSTOMERS: Customer[] = [
   { id: "C008", name: "Skyline Construction", franchisee: "WestEnd Fuel", contact: "(555) 888-9999", email: "admin@skylineconstruct.com", equipment: 3, avgFuelPerMonth: "280 gal", totalDeliveries: 14, registrationType: "self", status: "pending" },
 ];
 
-const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
-  fontSize: "11px",
-  fontWeight: 700,
-  color: "#9a8c7a",
-  letterSpacing: "0.7px",
-  textTransform: "uppercase",
-  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
-  padding: "14px 18px",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#e8e6e3",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
-  padding: "16px 18px",
-};
-
 export function CustomerDataTable() {
   return (
     <TableContainer>
@@ -82,21 +65,18 @@ export function CustomerDataTable() {
               hover
               sx={{
                 cursor: "pointer",
-                transition: "all 200ms ease",
-                "&:hover": {
-                  background: "linear-gradient(90deg, rgba(59,130,246,0.02) 0%, rgba(255,255,255,0) 100%)",
-                  transform: "scale(1.002)",
-                },
+                transition: "background-color var(--transition-fast)",
+                "&:hover": { background: "var(--bg-surface-hover)" },
               }}
             >
               <TableCell sx={BODY_CELL_SX}>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <Avatar
                     sx={{
-                      width: 36,
-                      height: 36,
-                      background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
-                      color: "#3b82f6",
+                      width: 34,
+                      height: 34,
+                      background: "var(--info-text)",
+                      color: "#ffffff",
                       fontSize: "14px",
                       fontWeight: 600,
                     }}
@@ -104,87 +84,65 @@ export function CustomerDataTable() {
                     <BusinessIcon sx={{ fontSize: 20 }} />
                   </Avatar>
                   <div style={{ minWidth: 0 }}>
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#e8e6e3", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <p style={{ fontSize: "14px", fontWeight: 500, color: "var(--text-primary)", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {customer.name}
                     </p>
-                    <p style={{ fontSize: "11px", color: "#9a8c7a", margin: "2px 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      {customer.email}
+                    <p className="type-table-data" style={{ fontSize: "11px", color: "var(--text-muted)", margin: "2px 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {customer.id} · {customer.email}
                     </p>
                   </div>
                 </div>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#e8e6e3", fontWeight: 500 }}>
+                <span style={{ fontSize: "14px", color: "var(--text-primary)", fontWeight: 400 }}>
                   {customer.franchisee}
                 </span>
               </TableCell>
-              <TableCell sx={BODY_CELL_SX}>
+              <TableCell sx={MONO_DATA_CELL_SX}>
                 <span
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "4px",
-                    fontSize: "13px",
-                    color: "#9a8c7a",
+                    color: "var(--text-secondary)",
                   }}
                 >
                   <PhoneIcon sx={{ fontSize: 14 }} />
                   {customer.contact}
                 </span>
               </TableCell>
-              <TableCell sx={BODY_CELL_SX} align="center">
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minWidth: "32px",
-                    height: "32px",
-                    fontSize: "14px",
-                    fontWeight: 600,
-                    color: "#3b82f6",
-                    background: "rgba(59,130,246,0.1)",
-                    borderRadius: "8px",
-                    padding: "0 8px",
-                  }}
-                >
-                  {customer.equipment}
-                </span>
+              <TableCell sx={MONO_DATA_CELL_SX} align="center">
+                {customer.equipment}
               </TableCell>
-              <TableCell sx={BODY_CELL_SX}>
+              <TableCell sx={MONO_DATA_CELL_SX}>
                 <span
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "6px",
-                    fontSize: "13px",
-                    fontWeight: 500,
-                    color: "#e8e6e3",
                   }}
                 >
-                  <FuelIcon sx={{ fontSize: 16, color: "#ce1c1a" }} />
+                  <FuelIcon sx={{ fontSize: 15, color: "var(--text-muted)" }} />
                   {customer.avgFuelPerMonth}
                 </span>
               </TableCell>
-              <TableCell sx={BODY_CELL_SX} align="center">
-                <span style={{ fontSize: "14px", fontWeight: 600, color: "#15803d" }}>
-                  {customer.totalDeliveries}
-                </span>
+              <TableCell sx={MONO_DATA_CELL_SX} align="center">
+                {customer.totalDeliveries}
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
                 <span
                   style={{
                     display: "inline-block",
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    color: customer.registrationType === "admin" ? "#8b5cf6" : "#3b82f6",
-                    background: customer.registrationType === "admin" 
+                    fontSize: "12px",
+                    fontWeight: 500,
+                    color: customer.registrationType === "admin" ? "var(--accent-purple)" : "var(--info-text)",
+                    background: customer.registrationType === "admin"
                       ? "rgba(139,92,246,0.1)"
                       : "rgba(59,130,246,0.1)",
-                    padding: "4px 10px",
-                    borderRadius: "12px",
+                    padding: "2px 8px",
+                    borderRadius: "9999px",
                     textTransform: "uppercase",
-                    letterSpacing: "0.5px",
+                    letterSpacing: "0.04em",
                   }}
                 >
                   {customer.registrationType}

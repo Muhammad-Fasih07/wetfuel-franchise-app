@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import {
   CheckCircle as CheckCircleIcon,
-  DirectionsCar as CarIcon,
   Warning as WarningIcon,
 } from "@mui/icons-material";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 interface Driver {
   id: string;
@@ -41,24 +41,6 @@ const DRIVERS: Driver[] = [
   { id: "D008", name: "Maria Garcia", franchisee: "WestEnd Fuel", phone: "(555) 901-2345", jobsCompleted: 76, hoursWorked: "196 hrs", avgJobTime: "55m", lastActive: "3 hours ago", status: "active", preInspection: false },
 ];
 
-const HEADER_CELL_SX = {
-  background: "linear-gradient(180deg, #1a1a1c 0%, #1c1c1e 100%)",
-  fontSize: "11px",
-  fontWeight: 700,
-  color: "#9a8c7a",
-  letterSpacing: "0.7px",
-  textTransform: "uppercase",
-  borderBottom: "1.5px solid rgba(255,255,255,0.08)",
-  padding: "14px 18px",
-};
-
-const BODY_CELL_SX = {
-  fontSize: "13px",
-  color: "#e8e6e3",
-  borderBottom: "1px solid rgba(255,255,255,0.05)",
-  padding: "16px 18px",
-};
-
 export function DriverDataTable() {
   return (
     <TableContainer>
@@ -83,71 +65,52 @@ export function DriverDataTable() {
               hover
               sx={{
                 cursor: "pointer",
-                transition: "all 200ms ease",
-                "&:hover": {
-                  background: "linear-gradient(90deg, rgba(245,158,11,0.02) 0%, rgba(255,255,255,0) 100%)",
-                  transform: "scale(1.002)",
-                },
+                transition: "background-color var(--transition-fast)",
+                "&:hover": { background: "var(--bg-surface-hover)" },
               }}
             >
               <TableCell sx={BODY_CELL_SX}>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <Avatar
                     sx={{
-                      width: 36,
-                      height: 36,
-                      background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-                      color: "#f59e0b",
-                      fontSize: "14px",
+                      width: 34,
+                      height: 34,
+                      background: "var(--bg-surface-hover)",
+                      color: "var(--text-secondary)",
+                      fontSize: "13px",
                       fontWeight: 600,
                     }}
                   >
                     {driver.name.split(" ").map(n => n[0]).join("")}
                   </Avatar>
                   <div>
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#e8e6e3", margin: 0 }}>
+                    <p style={{ fontSize: "14px", fontWeight: 500, color: "var(--text-primary)", margin: 0 }}>
                       {driver.name}
                     </p>
-                    <p style={{ fontSize: "11px", color: "#9a8c7a", margin: "2px 0 0" }}>
-                      ID: {driver.id}
+                    <p className="type-table-data" style={{ fontSize: "11px", color: "var(--text-muted)", margin: "2px 0 0" }}>
+                      {driver.id}
                     </p>
                   </div>
                 </div>
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#e8e6e3", fontWeight: 500 }}>
+                <span style={{ fontSize: "14px", color: "var(--text-primary)" }}>
                   {driver.franchisee}
                 </span>
               </TableCell>
-              <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#9a8c7a" }}>
+              <TableCell sx={MONO_DATA_CELL_SX}>
+                <span style={{ color: "var(--text-secondary)" }}>
                   {driver.phone}
                 </span>
               </TableCell>
-              <TableCell sx={BODY_CELL_SX} align="center">
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    fontSize: "14px",
-                    fontWeight: 600,
-                    color: "#e8e6e3",
-                  }}
-                >
-                  <CarIcon sx={{ fontSize: 16, color: "#f59e0b" }} />
-                  {driver.jobsCompleted}
-                </span>
+              <TableCell sx={MONO_DATA_CELL_SX} align="center">
+                {driver.jobsCompleted}
               </TableCell>
-              <TableCell sx={BODY_CELL_SX} align="center">
-                <span style={{ fontSize: "13px", fontWeight: 500, color: "#e8e6e3" }}>
-                  {driver.hoursWorked}
-                </span>
+              <TableCell sx={MONO_DATA_CELL_SX} align="center">
+                {driver.hoursWorked}
               </TableCell>
-              <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "13px", color: "#9a8c7a" }}>
-                  {driver.avgJobTime}
-                </span>
+              <TableCell sx={MONO_DATA_CELL_SX}>
+                {driver.avgJobTime}
               </TableCell>
               <TableCell sx={BODY_CELL_SX}>
                 {driver.preInspection ? (
@@ -157,11 +120,11 @@ export function DriverDataTable() {
                       alignItems: "center",
                       gap: "4px",
                       fontSize: "12px",
-                      color: "#15803d",
+                      color: "var(--success-text)",
                       fontWeight: 500,
                     }}
                   >
-                    <CheckCircleIcon sx={{ fontSize: 16 }} />
+                    <CheckCircleIcon sx={{ fontSize: 15 }} />
                     Complete
                   </span>
                 ) : (
@@ -171,17 +134,17 @@ export function DriverDataTable() {
                       alignItems: "center",
                       gap: "4px",
                       fontSize: "12px",
-                      color: "#f59e0b",
+                      color: "var(--warning-text)",
                       fontWeight: 500,
                     }}
                   >
-                    <WarningIcon sx={{ fontSize: 16 }} />
+                    <WarningIcon sx={{ fontSize: 15 }} />
                     Pending
                   </span>
                 )}
               </TableCell>
-              <TableCell sx={BODY_CELL_SX}>
-                <span style={{ fontSize: "12px", color: "#9a8c7a" }}>
+              <TableCell sx={MONO_DATA_CELL_SX}>
+                <span style={{ color: "var(--text-muted)" }}>
                   {driver.lastActive}
                 </span>
               </TableCell>

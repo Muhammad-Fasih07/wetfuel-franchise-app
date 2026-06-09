@@ -30,11 +30,11 @@ const schema = z.object({
 type ProfileValues = z.infer<typeof schema>;
 
 const DANGER_GHOST_SX: React.CSSProperties = {
-  background: "#1c1c1d",
-  border: "1px solid #f0797a",
-  color: "#f0797a",
+  background: "var(--bg-surface-hover)",
+  border: "1px solid var(--error-text)",
+  color: "var(--error-text)",
   height: "36px",
-  borderRadius: "8px",
+  borderRadius: "6px",
   padding: "0 14px",
   fontSize: "13px",
   fontWeight: 500,
@@ -44,7 +44,7 @@ const DANGER_GHOST_SX: React.CSSProperties = {
   justifyContent: "center",
   gap: "6px",
   cursor: "pointer",
-  transition: "background 150ms ease",
+  transition: "background var(--transition-fast)",
 };
 
 export function ProfilePanel() {
@@ -94,14 +94,14 @@ export function ProfilePanel() {
             gap: "20px",
             marginBottom: "28px",
             paddingBottom: "24px",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
+            borderBottom: "1px solid var(--border-subtle)",
           }}
         >
           <Avatar
             sx={{
               width: 72,
               height: 72,
-              background: "#ce1c1a",
+              background: "var(--primary-brand)",
               color: "#ffffff",
               fontSize: 24,
               fontWeight: 600,
@@ -110,23 +110,10 @@ export function ProfilePanel() {
             SA
           </Avatar>
           <div style={{ minWidth: 0, flex: 1 }}>
-            <p
-              style={{
-                fontSize: "16px",
-                fontWeight: 600,
-              color: "#e8e6e3",
-              margin: 0,
-            }}
-          >
-            Super Admin
+            <p style={{ fontSize: "16px", fontWeight: 600, color: "var(--text-primary)", margin: 0 }}>
+              Super Admin
             </p>
-            <p
-              style={{
-                fontSize: "13px",
-                color: "#9a8c7a",
-                margin: "2px 0 12px",
-              }}
-            >
+            <p style={{ fontSize: "13px", color: "var(--text-muted)", margin: "2px 0 12px" }}>
               Franchise Super Admin
             </p>
             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
@@ -141,12 +128,10 @@ export function ProfilePanel() {
                 type="button"
                 style={DANGER_GHOST_SX}
                 onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "rgba(240,121,122,0.12)")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--error-bg)")
                 }
                 onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLButtonElement).style.background =
-                    "#1c1c1d")
+                  ((e.currentTarget as HTMLButtonElement).style.background = "var(--bg-surface-hover)")
                 }
               >
                 <DeleteOutlineIcon sx={{ fontSize: 16 }} />
@@ -235,11 +220,11 @@ export function ProfilePanel() {
           severity="success"
           onClose={() => setToastOpen(false)}
           sx={{
-            background: "#0a2015",
-            color: "#34d399",
-            border: "1px solid rgba(52,211,153,0.3)",
+            background: "var(--success-bg)",
+            color: "var(--success-text)",
+            border: "1px solid var(--border-subtle)",
             fontSize: "13px",
-            "& .MuiAlert-icon": { color: "#34d399" },
+            "& .MuiAlert-icon": { color: "var(--success-text)" },
           }}
         >
           Profile updated successfully.
