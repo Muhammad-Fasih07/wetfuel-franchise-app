@@ -2,16 +2,19 @@
 
 import { Grid } from "@mui/material";
 import {
+  Assessment as AssessmentIcon,
+  AttachMoney as AttachMoneyIcon,
+  BadgeOutlined as BadgeOutlinedIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
   Dashboard as DashboardIcon,
   DirectionsCar as DirectionsCarIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
   LocalShipping as LocalShippingIcon,
+  LocalShippingOutlined as LocalShippingOutlinedIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
   Refresh as RefreshIcon,
   Store as StoreIcon,
   Warning as WarningIcon,
-  Assessment as AssessmentIcon,
 } from "@mui/icons-material";
 import {
   BarChart,
@@ -31,11 +34,11 @@ import { FranchiseeTable } from "@/components/franchisees/FranchiseeTable";
 
 // TODO: replace with real API data from lib/api/reporting.ts
 const NETWORK_HEALTH_METRICS = [
-  { label: "Active Drivers",   value: "89", icon: <DirectionsCarIcon />,        color: "var(--info-text)" },
-  { label: "Trucks Enrolled",  value: "64", icon: <LocalShippingIcon />,         color: "var(--accent-purple)" },
-  { label: "Jobs Today",       value: "34", icon: <CheckCircleOutlineIcon />,    color: "var(--success-text)" },
-  { label: "Pending Reviews",  value: "7",  icon: <AssessmentIcon />,            color: "var(--warning-text)" },
-  { label: "Low Stock Alerts", value: "2",  icon: <WarningIcon />,               color: "var(--error-text)" },
+  { label: "Active Drivers", value: "89", icon: <DirectionsCarIcon />, color: "var(--info-text)" },
+  { label: "Trucks Enrolled", value: "64", icon: <LocalShippingIcon />, color: "var(--accent-purple)" },
+  { label: "Jobs Today", value: "34", icon: <CheckCircleOutlineIcon />, color: "var(--success-text)" },
+  { label: "Pending Reviews", value: "7", icon: <AssessmentIcon />, color: "var(--warning-text)" },
+  { label: "Low Stock Alerts", value: "2", icon: <WarningIcon />, color: "var(--error-text)" },
 ];
 
 // TODO: replace with real fuel volume rankings
@@ -111,6 +114,31 @@ export default function DashboardOverviewPage() {
             href="/reporting"
           />
         </Grid>
+
+
+        <Grid item xs={12} sm={6} lg={3}>
+          <StatCard
+            label="ACTIVE DRIVERS"
+            value="142"
+            subtext="Network-wide workforce"
+            trend="up"
+            trendValue="+12 this quarter"
+            icon={<BadgeOutlinedIcon sx={{ fontSize: 20 }} />}
+            href="/personnel"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
+          <StatCard
+            label="TOTAL NETWORK TRUCKS"
+            value="86"
+            subtext="Active fleet size"
+            trend="up"
+            trendValue="+5 new this quarter"
+            icon={<LocalShippingOutlinedIcon sx={{ fontSize: 20 }} />}
+            href="/fleet-logistics"
+          />
+        </Grid>
+
         <Grid item xs={12} sm={6} lg={3}>
           <StatCard
             label="NETWORK CUSTOMERS"
@@ -133,6 +161,33 @@ export default function DashboardOverviewPage() {
             href="/reporting"
           />
         </Grid>
+
+        <Grid item xs={12} sm={6} lg={3}>
+          <StatCard
+            label="GLOBAL REVENUE (YTD)"
+            value="$4,250,800"
+               subtext="Aggregated network total"
+            trend="up"
+            trendValue="+12% "
+            icon={<AttachMoneyIcon sx={{ fontSize: 20 }} />}
+            href="/financials"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
+          <StatCard
+            label="TOTAL FUEL DELIVERED"
+            value="112,040 gal"
+            subtext="Across all franchisees"
+            trend="up"
+            trendValue="+8% "
+            icon={<LocalGasStationOutlinedIcon sx={{ fontSize: 20 }} />}
+            href="/reporting"
+          />
+        </Grid>
+
+
+
+
       </Grid>
 
       <Grid container spacing={3}>

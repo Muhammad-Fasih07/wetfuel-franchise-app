@@ -13,20 +13,24 @@ import {
 } from "@mui/material";
 import {
   AccessTimeOutlined as AccessTimeOutlinedIcon,
+  AcUnit as FreezeIcon,
   ArrowBack as ArrowBackIcon,
+  AttachMoney as AttachMoneyIcon,
+  CalendarToday as CalendarIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
+  CloudSyncOutlined as CloudSyncOutlinedIcon,
   Edit as EditIcon,
   Email as EmailIcon,
   Inventory as InventoryIcon,
-  AcUnit as FreezeIcon,
   LocalGasStationOutlined as LocalGasStationOutlinedIcon,
+  LocalShippingOutlined as LocalShippingOutlinedIcon,
   LocationOn as LocationIcon,
-  Person as PersonIcon,
   PeopleAltOutlined as PeopleAltOutlinedIcon,
+  Person as PersonIcon,
   Phone as PhoneIcon,
   Store as StoreIcon,
-  CalendarToday as CalendarIcon,
   Warning as WarningIcon,
+  WarningAmberOutlined as WarningAmberOutlinedIcon,
 } from "@mui/icons-material";
 
 import { Button } from "@/components/ui/Button";
@@ -39,24 +43,39 @@ import { getPerformanceRowById } from "../_data";
 import { BODY_CELL_SX, HEADER_CELL_SX, MONO_DATA_CELL_SX } from "@/lib/styles/tableStyles";
 
 // TODO: replace with real customer data scoped to the franchisee
-const CUSTOMER_ROWS = [
-  { name: "Lone Star Logistics", location: "Houston, TX", margin: "12%", equipment: 6, avgFuel: "1,200 gal" },
-  { name: "Bayou Transport", location: "Houston, TX", margin: "9%", equipment: 4, avgFuel: "880 gal" },
-  { name: "Gulfside Hauling", location: "Galveston, TX", margin: "10%", equipment: 3, avgFuel: "640 gal" },
-  { name: "Texan Movers", location: "Houston, TX", margin: "11%", equipment: 5, avgFuel: "1,020 gal" },
+const CUSTOMER_ROWS: Array<{
+  name: string;
+  location: string;
+  margin: string;
+  equipment: number;
+  avgFuel: string;
+  status: "active" | "frozen" | "flagged";
+  outstandingBalance: number;
+  lastDeliveryDate: string;
+  pricingTier: string;
+  alertType?: string;
+}> = [
+  { name: "Lone Star Logistics", location: "Houston, TX", margin: "12%", equipment: 6, avgFuel: "1,200 gal", status: "active", outstandingBalance: 0, lastDeliveryDate: "2026-06-11", pricingTier: "Tier 1 (High Volume)" },
+  { name: "Bayou Transport", location: "Houston, TX", margin: "9%", equipment: 4, avgFuel: "880 gal", status: "active", outstandingBalance: 450.00, lastDeliveryDate: "2026-06-10", pricingTier: "Tier 2 (Standard)" },
+  { name: "Gulfside Hauling", location: "Galveston, TX", margin: "10%", equipment: 3, avgFuel: "640 gal", status: "flagged", outstandingBalance: 14500.00, lastDeliveryDate: "2026-05-15", pricingTier: "Tier 2 (Standard)", alertType: "Net-30 Past Due" },
+  { name: "Texan Movers", location: "Houston, TX", margin: "11%", equipment: 5, avgFuel: "1,020 gal", status: "frozen", outstandingBalance: 22100.50, lastDeliveryDate: "2026-04-02", pricingTier: "Tier 3 (Low Volume)", alertType: "Account Sent to Collections" },
 ];
 
-// TODO: replace with real driver data scoped to the franchisee
 const DRIVER_ROWS: Array<{
   name: string;
   jobs: number;
   hours: string;
   status: "active" | "frozen" | "flagged";
+  assignedTruck: string;
+  gallonsDelivered: number;
+  onTimeRate: number;
+  complianceExpiry: string;
+  alertType?: string;
 }> = [
-  { name: "Marcus Reed", jobs: 64, hours: "210 hrs", status: "active" },
-  { name: "Avery Chen", jobs: 58, hours: "192 hrs", status: "active" },
-  { name: "Liam Patel", jobs: 41, hours: "138 hrs", status: "active" },
-  { name: "Sofia Ortiz", jobs: 22, hours: "78 hrs", status: "flagged" },
+  { name: "Marcus Reed", jobs: 64, hours: "210 hrs", status: "active", assignedTruck: "Truck-02", gallonsDelivered: 42500, onTimeRate: 98, complianceExpiry: "2027-04-15" },
+  { name: "Avery Chen", jobs: 58, hours: "192 hrs", status: "active", assignedTruck: "Truck-05", gallonsDelivered: 38200, onTimeRate: 95, complianceExpiry: "2026-11-20" },
+  { name: "Liam Patel", jobs: 41, hours: "138 hrs", status: "active", assignedTruck: "Truck-01", gallonsDelivered: 29100, onTimeRate: 88, complianceExpiry: "2028-01-10" },
+  { name: "Sofia Ortiz", jobs: 22, hours: "78 hrs", status: "flagged", assignedTruck: "Unassigned", gallonsDelivered: 14500, onTimeRate: 92, complianceExpiry: "2026-06-25", alertType: "Hazmat Cert Expiring Soon" },
 ];
 
 // TODO: replace with real inventory data scoped to the franchisee
@@ -145,47 +164,96 @@ export default function FranchiseeReportPage() {
         }
       />
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} lg={3}>
-          <StatCard
-            label="FUEL DELIVERED"
-            value={row.fuel}
-            subtext="This period"
-            trend="up"
-            trendValue="+9%"
-            icon={<LocalGasStationOutlinedIcon sx={{ fontSize: 20 }} />}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <StatCard
-            label="CUSTOMERS"
-            value={String(row.customers)}
-            subtext="Active accounts"
-            trend="up"
-            trendValue="+4%"
-            icon={<PeopleAltOutlinedIcon sx={{ fontSize: 20 }} />}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <StatCard
-            label="JOBS DONE"
-            value={String(row.jobs)}
-            subtext={`Avg ${row.avgJobTime} per job`}
-            trend="up"
-            trendValue="+12%"
-            icon={<CheckCircleOutlineIcon sx={{ fontSize: 20 }} />}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <StatCard
-            label="DRIVER HOURS"
-            value={row.driverHrs}
-            subtext={`${row.drivers} active drivers`}
-            trend="neutral"
-            icon={<AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />}
-          />
-        </Grid>
-      </Grid>
+<Grid container spacing={3}>
+  {/* --- ROW 1: Operational Metrics --- */}
+  
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="FUEL DELIVERED"
+      value="215,400 gal"
+      subtext="This period"
+      trend="up"
+      trendValue="+9%"
+      icon={<LocalGasStationOutlinedIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+  
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="CUSTOMERS"
+      value="450"
+      subtext="Active accounts"
+      trend="up"
+      trendValue="+4%"
+      icon={<PeopleAltOutlinedIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+  
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="JOBS DONE"
+      value="1,842"
+      subtext="Avg 42m per job"
+      trend="up"
+      trendValue="+12%"
+      icon={<CheckCircleOutlineIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+  
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="DRIVER HOURS"
+      value="2,140 hrs"
+      subtext="14 active drivers"
+      trend="neutral"
+      icon={<AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+
+  {/* --- ROW 2: Financial, Fleet, & System Health Metrics --- */}
+
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="REVENUE"
+      value="$845,200"
+      subtext="Estimated this period"
+      trend="up"
+      trendValue="+11%"
+      icon={<AttachMoneyIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="ACTIVE FLEET"
+      value="8"
+      subtext="Trucks currently on-duty"
+      trend="neutral"
+      icon={<LocalShippingOutlinedIcon sx={{ fontSize: 20 }} />}
+    />
+  </Grid>
+
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="AUDIT PENDING"
+      value="14"
+      subtext="Awaiting delivery fees"
+      trend="down" 
+      icon={<WarningAmberOutlinedIcon sx={{ fontSize: 20, color: 'error.main' }} />}
+    />
+  </Grid>
+
+  <Grid item xs={12} sm={6} lg={3}>
+    <StatCard
+      label="PENDING SYNCS"
+      value="3"
+      subtext="Offline logs waiting for QB"
+      trend="down"
+      trendValue="Action Required"
+      icon={<CloudSyncOutlinedIcon sx={{ fontSize: 20, color: 'warning.main' }} />}
+    />
+  </Grid>
+</Grid>
 
       <Grid container spacing={2} sx={{ alignItems: "stretch" }}>
         <Grid item xs={12} md={8} lg={8}>
@@ -330,15 +398,20 @@ export default function FranchiseeReportPage() {
       </Grid>
 
       <SectionCard title="Customers" bodyPadding={0}>
-        <TableContainer>
-          <Table sx={{ tableLayout: "fixed", width: "100%" }}>
+        <TableContainer sx={{ overflowX: "auto" }}>
+          <Table sx={{ minWidth: 1200 }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "30%" }}>Customer Name</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%" }}>Location</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%" }}>Margin</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%", textAlign: "center" }}>Equipment Count</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "16%", textAlign: "right" }}>Avg Fuel/Month</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Customer Name</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Location</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Margin</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "center" }}>Equipment Count</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "right" }}>Avg Fuel/Month</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "right" }}>Outstanding Balance</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Last Delivery</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Pricing Tier</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Alert</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -356,6 +429,36 @@ export default function FranchiseeReportPage() {
                   <TableCell sx={MONO_DATA_CELL_SX}>{c.margin}</TableCell>
                   <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>{c.equipment}</TableCell>
                   <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>{c.avgFuel}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>
+                    {c.outstandingBalance.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX}>{c.lastDeliveryDate}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>{c.pricingTier}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>
+                    {c.alertType ? (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "4px",
+                          fontSize: "12px",
+                          color: "var(--warning-text)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        <WarningIcon sx={{ fontSize: 15 }} />
+                        {c.alertType}
+                      </span>
+                    ) : (
+                      <span style={{ color: "var(--text-muted)", fontSize: "13px" }}>—</span>
+                    )}
+                  </TableCell>
+                  <TableCell sx={BODY_CELL_SX}>
+                    <StatusChip status={c.status} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -364,14 +467,19 @@ export default function FranchiseeReportPage() {
       </SectionCard>
 
       <SectionCard title="Drivers" bodyPadding={0}>
-        <TableContainer>
-          <Table sx={{ tableLayout: "fixed", width: "100%" }}>
+        <TableContainer sx={{ overflowX: "auto" }}>
+          <Table sx={{ minWidth: 1100 }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "30%" }}>Driver Name</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%", textAlign: "center" }}>Jobs Completed</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "22%", textAlign: "right" }}>Total Hours</TableCell>
-                <TableCell sx={{ ...HEADER_CELL_SX, width: "26%" }}>Status</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Driver Name</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "center" }}>Jobs Completed</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "right" }}>Total Hours</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Assigned Truck</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "right" }}>Gallons Delivered</TableCell>
+                <TableCell sx={{ ...HEADER_CELL_SX, textAlign: "center" }}>On-Time Rate</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Compliance Expiry</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Alert</TableCell>
+                <TableCell sx={HEADER_CELL_SX}>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -387,6 +495,31 @@ export default function FranchiseeReportPage() {
                   <TableCell sx={{ ...BODY_CELL_SX, fontWeight: 500 }}>{d.name}</TableCell>
                   <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>{d.jobs}</TableCell>
                   <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>{d.hours}</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX}>{d.assignedTruck}</TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "right" }}>
+                    {d.gallonsDelivered.toLocaleString()} gal
+                  </TableCell>
+                  <TableCell sx={{ ...MONO_DATA_CELL_SX, textAlign: "center" }}>{d.onTimeRate}%</TableCell>
+                  <TableCell sx={MONO_DATA_CELL_SX}>{d.complianceExpiry}</TableCell>
+                  <TableCell sx={BODY_CELL_SX}>
+                    {d.alertType ? (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "4px",
+                          fontSize: "12px",
+                          color: "var(--warning-text)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        <WarningIcon sx={{ fontSize: 15 }} />
+                        {d.alertType}
+                      </span>
+                    ) : (
+                      <span style={{ color: "var(--text-muted)", fontSize: "13px" }}>—</span>
+                    )}
+                  </TableCell>
                   <TableCell sx={BODY_CELL_SX}>
                     <StatusChip status={d.status} />
                   </TableCell>
